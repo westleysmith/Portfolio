@@ -1,4 +1,4 @@
-Westley Benton Smith — Personal Portfolio
+Westley Smith — Personal Portfolio
 
 This is the source code for my personal portfolio and resume, hosted at https://westleybsmith.com. 
 
