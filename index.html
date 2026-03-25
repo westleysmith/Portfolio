@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <style>
   :root {
+    /* Deep forest green / rugged outdoorsy */
     --soil:      #0F1A12;
     --bark:      #182318;
     --leather:   #2A3D2A;
@@ -31,6 +32,7 @@
     overflow-x: hidden;
   }
 
+  /* ── NOISE TEXTURE ── */
   body::before {
     content: '';
     position: fixed; inset: 0;
@@ -38,6 +40,7 @@
     pointer-events: none; z-index: 1000; opacity: 0.38;
   }
 
+  /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 900;
     display: flex; align-items: center; justify-content: space-between;
@@ -117,19 +120,21 @@
     color: var(--charcoal);
     box-shadow: 4px 4px 0px var(--clay);
   }
+
   .hero-right {
-    position: relative;
-    overflow: hidden;
-    min-height: 100vh;
+    position: relative; background: var(--soil); overflow: hidden;
   }
-  .hero-right img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
+  .hero-img-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 1rem;
+    background: linear-gradient(160deg, #0d1a0f 0%, #08100a 100%);
+  }
+  .hero-img-placeholder .ph-icon { font-size: 4rem; opacity: 0.2; }
+  .hero-img-placeholder p {
+    font-family: 'Space Mono', monospace; font-size: 0.62rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--flint); opacity: 0.55;
   }
   .hero-right::before {
     content: '';
@@ -292,6 +297,8 @@
     transform: translateX(-6px);
   }
   .hobby-item:hover .hobby-arrow { opacity: 1; transform: translateX(0); }
+
+  /* Sports sub-list */
   .hobby-sports-sub {
     display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.35rem;
   }
@@ -302,6 +309,7 @@
     border: 1px solid rgba(74,124,89,0.35);
     color: var(--flint);
   }
+
   .hobbies-img-stack {
     display: grid; grid-template-rows: 1fr 1fr; gap: 1rem; height: 520px;
   }
@@ -432,7 +440,10 @@
     <a href="#contact" class="hero-cta"><span>⬇</span> Get in Touch</a>
   </div>
   <div class="hero-right">
-    <img src="Headshot - Westley Smith.PNG" alt="Westley Smith">
+    <div class="hero-img-placeholder">
+      <div class="ph-icon">📷</div>
+      <p>Your photo here</p>
+    </div>
   </div>
   <div class="scroll-hint">
     <div class="scroll-line"></div>
@@ -695,7 +706,7 @@
 
 </div><!-- end #main-site -->
 
-<!-- BLOG PAGE -->
+<!-- BLOG PAGE (hidden by default) -->
 <div id="blog-page" style="display:none; padding-top: 5rem;">
   <section style="background: var(--bark); min-height: 100vh; padding: 7rem 5rem;">
     <p class="section-label" style="display:flex; align-items:center; gap:1rem;">Blog</p>
@@ -723,12 +734,14 @@
 </div>
 
 <script>
+  // Fade-up observer
   const observer = new IntersectionObserver(
     entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
     { threshold: 0.12 }
   );
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+  // Blog in-site routing
   function showBlog() {
     document.getElementById('main-site').style.display = 'none';
     document.getElementById('blog-page').style.display = 'block';
@@ -744,5 +757,3 @@
     showBlog();
   });
 </script>
-</body>
-</html>
