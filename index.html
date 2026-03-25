@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Westley Smith — Builder. Operator. Maker.</title>
+<title>Westley Smith — Builder. Tinkerer. Maker.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -31,7 +31,6 @@
     overflow-x: hidden;
   }
 
-  /* ── NOISE TEXTURE ── */
   body::before {
     content: '';
     position: fixed; inset: 0;
@@ -79,11 +78,7 @@
   .hero-left::after {
     content: '';
     position: absolute; inset: 0;
-    background: repeating-linear-gradient(
-      -45deg,
-      transparent, transparent 2px,
-      rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px
-    );
+    background: repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
     pointer-events: none;
   }
   .hero-tag {
@@ -105,24 +100,20 @@
   }
   .hero-cta {
     display: inline-flex; align-items: center; gap: 0.75rem;
-    padding: 0.9rem 2.2rem;
-    border: 1px solid var(--clay);
+    padding: 0.85rem 0;
+    background: transparent; border: none;
+    border-bottom: 2px solid var(--clay);
     font-family: 'Space Mono', monospace; font-size: 0.7rem;
     letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--linen); text-decoration: none;
-    transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+    transition: border-color 0.25s, padding-left 0.25s;
     width: fit-content;
-    box-shadow: 4px 4px 0px var(--leather);
   }
-  .hero-cta:hover {
-    background: var(--clay);
-    color: var(--charcoal);
-    box-shadow: 4px 4px 0px var(--clay);
-  }
+  .hero-cta:hover { border-color: var(--linen); padding-left: 0.5rem; }
+  .hero-cta .cta-arrow { transition: transform 0.25s; }
+  .hero-cta:hover .cta-arrow { transform: translateX(4px); }
 
-  .hero-right {
-    position: relative; background: var(--soil); overflow: hidden;
-  }
+  .hero-right { position: relative; background: var(--soil); overflow: hidden; }
   .hero-img-placeholder {
     width: 100%; height: 100%;
     display: flex; flex-direction: column;
@@ -144,8 +135,8 @@
   .scroll-hint {
     position: absolute; bottom: 2.5rem; left: 25%; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-    color: var(--sand); opacity: 0.7;
-    font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em;
+    color: var(--straw); opacity: 0.8;
+    font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em;
   }
   .scroll-line {
     width: 1px; height: 40px;
@@ -157,14 +148,14 @@
   /* ── SECTIONS ── */
   section { padding: 7rem 5rem; }
   .section-label {
-    font-family: 'Space Mono', monospace; font-size: 0.62rem;
-    letter-spacing: 0.35em; text-transform: uppercase;
-    color: var(--clay); margin-bottom: 0.75rem;
+    font-family: 'Space Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--sand); margin-bottom: 0.75rem;
     display: flex; align-items: center; gap: 1rem;
   }
   .section-label::after {
     content: ''; flex: 1; height: 1px;
-    background: linear-gradient(to right, var(--leather), transparent);
+    background: linear-gradient(to right, var(--clay), transparent);
   }
   .section-title {
     font-family: 'Playfair Display', serif;
@@ -179,23 +170,19 @@
     display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem;
     align-items: center;
   }
-  .about-text p {
-    font-size: 1.02rem; line-height: 1.9; color: var(--sand);
-    margin-bottom: 1.5rem;
-  }
+  .about-text p { font-size: 1.02rem; line-height: 1.9; color: var(--sand); margin-bottom: 1.5rem; }
   .about-text p strong { color: var(--straw); }
   .stat-row {
     display: flex; gap: 3rem; margin-top: 2.5rem;
     padding-top: 2rem; border-top: 1px solid rgba(74,124,89,0.25);
   }
-  .stat { display: flex; flex-direction: column; gap: 0.25rem; }
+  .stat { display: flex; flex-direction: column; gap: 0.35rem; }
   .stat-num {
-    font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 900;
-    color: var(--clay);
+    font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 900; color: var(--clay);
   }
   .stat-desc {
-    font-family: 'Space Mono', monospace; font-size: 0.58rem;
-    letter-spacing: 0.14em; text-transform: uppercase; color: var(--flint);
+    font-family: 'Space Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--sand);
   }
   .about-img {
     aspect-ratio: 3/4;
@@ -207,10 +194,7 @@
   .about-img::after {
     content: '';
     position: absolute; inset: 0;
-    background: repeating-linear-gradient(
-      0deg, transparent, transparent 3px,
-      rgba(74,124,89,0.03) 3px, rgba(74,124,89,0.03) 4px
-    );
+    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(74,124,89,0.03) 3px, rgba(74,124,89,0.03) 4px);
   }
   .about-img .ph-icon { font-size: 3rem; opacity: 0.18; }
   .about-img p {
@@ -218,14 +202,10 @@
     letter-spacing: 0.2em; color: var(--flint); opacity: 0.45;
   }
 
-  /* ── PHILOSOPHY (new section) ── */
-  #philosophy {
-    background: var(--charcoal);
-    padding: 7rem 5rem;
-  }
+  /* ── PHILOSOPHY ── */
+  #philosophy { background: var(--charcoal); padding: 7rem 5rem; }
   .philosophy-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem;
-    margin-top: 1rem;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 1rem;
   }
   .philosophy-card {
     padding: 2.5rem 2rem;
@@ -233,10 +213,7 @@
     background: rgba(15,26,18,0.5);
     transition: border-color 0.3s, transform 0.3s;
   }
-  .philosophy-card:hover {
-    border-color: var(--clay);
-    transform: translateY(-4px);
-  }
+  .philosophy-card:hover { border-color: var(--clay); transform: translateY(-4px); }
   .philosophy-num {
     font-family: 'Playfair Display', serif; font-size: 2.8rem;
     font-weight: 900; color: var(--leather); line-height: 1;
@@ -246,15 +223,11 @@
     font-family: 'Playfair Display', serif; font-size: 1.15rem;
     font-weight: 700; color: var(--straw); margin-bottom: 0.75rem;
   }
-  .philosophy-card p {
-    font-size: 0.85rem; line-height: 1.75; color: var(--flint);
-  }
+  .philosophy-card p { font-size: 0.85rem; line-height: 1.75; color: var(--sand); }
 
   /* ── PROJECTS ── */
   #projects { background: var(--bark); }
-  .projects-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
-  }
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; }
   .project-card {
     position: relative; overflow: hidden;
     aspect-ratio: 4/3; cursor: pointer; background: var(--soil);
@@ -284,8 +257,7 @@
   }
   .project-cat {
     font-family: 'Space Mono', monospace; font-size: 0.58rem;
-    letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay);
-    margin-bottom: 0.4rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.4rem;
   }
   .project-name {
     font-family: 'Playfair Display', serif; font-size: 1.35rem;
@@ -296,19 +268,68 @@
     max-height: 0; overflow: hidden; transition: max-height 0.35s ease;
   }
   .project-card:hover .project-desc { max-height: 100px; }
+  .project-view-link {
+    font-family: 'Space Mono', monospace; font-size: 0.58rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--clay); margin-top: 0.5rem;
+    max-height: 0; overflow: hidden; transition: max-height 0.35s ease;
+  }
+  .project-card:hover .project-view-link { max-height: 30px; }
+
+  /* ── PROJECT DETAIL ── */
+  .project-detail-page { display: none; padding-top: 5rem; }
+  .project-detail-page.active { display: block; }
+  .project-detail-inner { background: var(--bark); min-height: 100vh; padding: 7rem 5rem; }
+  .project-detail-hero {
+    aspect-ratio: 16/7;
+    background: linear-gradient(135deg, var(--soil), #060f08);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 0.75rem;
+    border: 1px solid rgba(74,124,89,0.14); margin-bottom: 3.5rem;
+  }
+  .project-detail-hero .ph-icon { font-size: 3.5rem; opacity: 0.18; }
+  .project-detail-hero p {
+    font-family: 'Space Mono', monospace; font-size: 0.58rem;
+    letter-spacing: 0.14em; color: var(--flint); opacity: 0.4;
+  }
+  .project-detail-content { max-width: 720px; }
+  .project-detail-content h2 {
+    font-family: 'Playfair Display', serif; font-size: 2.2rem;
+    font-weight: 900; color: var(--linen); margin-bottom: 0.5rem;
+  }
+  .project-detail-cat {
+    font-family: 'Space Mono', monospace; font-size: 0.62rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 2rem;
+  }
+  .project-detail-body p { font-size: 1rem; line-height: 1.9; color: var(--sand); margin-bottom: 1.5rem; }
+  .project-detail-body h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.3rem;
+    font-weight: 700; color: var(--straw); margin-bottom: 1rem; margin-top: 2.5rem;
+  }
+  .project-detail-body ul { list-style: none; padding: 0; margin-bottom: 1.5rem; }
+  .project-detail-body ul li {
+    font-size: 0.9rem; line-height: 1.75; color: var(--sand);
+    padding: 0.3rem 0 0.3rem 1.2rem; position: relative;
+  }
+  .project-detail-body ul li::before { content: '—'; position: absolute; left: 0; color: var(--clay); }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-family: 'Space Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--sand); text-decoration: none;
+    border-bottom: 1px solid rgba(74,124,89,0.35);
+    padding-bottom: 0.2rem; transition: color 0.25s; margin-top: 3rem;
+  }
+  .back-link:hover { color: var(--linen); }
 
   /* ── HOBBIES ── */
-  #hobbies {
-    background: linear-gradient(160deg, var(--charcoal) 0%, var(--soil) 100%);
-  }
-  .hobbies-layout {
-    display: grid; grid-template-columns: 1.4fr 1fr; gap: 5rem; align-items: start;
-  }
+  #hobbies { background: linear-gradient(160deg, var(--charcoal) 0%, var(--soil) 100%); }
+  .hobbies-layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 5rem; align-items: start; }
   .hobby-list { display: flex; flex-direction: column; gap: 0; }
   .hobby-item {
     display: flex; align-items: center; gap: 2rem;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid rgba(74,124,89,0.18);
+    padding: 1.5rem 0; border-bottom: 1px solid rgba(74,124,89,0.18);
     cursor: default; transition: padding-left 0.3s;
   }
   .hobby-item:hover { padding-left: 0.75rem; }
@@ -324,25 +345,16 @@
   .hobby-blurb { font-size: 0.8rem; color: var(--flint); line-height: 1.55; }
   .hobby-arrow {
     margin-left: auto; color: var(--leather); font-size: 1.1rem;
-    opacity: 0; transition: opacity 0.3s, transform 0.3s;
-    transform: translateX(-6px);
+    opacity: 0; transition: opacity 0.3s, transform 0.3s; transform: translateX(-6px);
   }
   .hobby-item:hover .hobby-arrow { opacity: 1; transform: translateX(0); }
-
-  .hobby-sports-sub {
-    display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.35rem;
-  }
+  .hobby-sports-sub { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.35rem; }
   .sport-tag {
-    font-family: 'Space Mono', monospace; font-size: 0.55rem;
+    font-family: 'Space Mono', monospace; font-size: 0.58rem;
     letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.18rem 0.55rem;
-    border: 1px solid rgba(74,124,89,0.35);
-    color: var(--flint);
+    padding: 0.2rem 0.6rem; border: 1px solid rgba(74,124,89,0.35); color: var(--sand);
   }
-
-  .hobbies-img-stack {
-    display: grid; grid-template-rows: 1fr 1fr; gap: 1rem; height: 520px;
-  }
+  .hobbies-img-stack { display: grid; grid-template-rows: 1fr 1fr; gap: 1rem; height: 520px; }
   .hobby-img {
     background: linear-gradient(135deg, var(--soil), #060f08);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -352,6 +364,16 @@
   .hobby-img p {
     font-family: 'Space Mono', monospace; font-size: 0.52rem;
     letter-spacing: 0.14em; color: var(--flint); opacity: 0.38;
+  }
+
+  /* ── BLOG ── */
+  #blog { background: var(--charcoal); }
+  .blog-empty {
+    padding: 2.5rem 2rem; border: 1px dashed rgba(74,124,89,0.3);
+    max-width: 600px;
+  }
+  .blog-empty p {
+    font-size: 0.88rem; line-height: 1.7; color: var(--sand);
   }
 
   /* ── RESUME ── */
@@ -371,25 +393,22 @@
   }
   .entry-date {
     font-family: 'Space Mono', monospace; font-size: 0.58rem;
-    letter-spacing: 0.1em; color: var(--flint);
-    white-space: nowrap; padding-top: 0.2rem;
+    letter-spacing: 0.1em; color: var(--flint); white-space: nowrap; padding-top: 0.2rem;
   }
   .entry-company { font-size: 0.78rem; color: var(--clay); margin-bottom: 0.5rem; font-style: italic; }
   .entry-body { font-size: 0.83rem; line-height: 1.75; color: var(--sand); }
   .skills-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.75rem; }
   .chip {
-    padding: 0.3rem 0.8rem;
-    border: 1px solid rgba(74,124,89,0.35);
-    font-family: 'Space Mono', monospace; font-size: 0.58rem;
-    letter-spacing: 0.1em; color: var(--flint);
-    transition: border-color 0.25s, color 0.25s;
+    padding: 0.38rem 0.9rem;
+    border: 1px solid rgba(74,124,89,0.45);
+    font-family: 'Space Mono', monospace; font-size: 0.64rem;
+    letter-spacing: 0.06em; color: var(--straw);
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
   }
-  .chip:hover { border-color: var(--clay); color: var(--sand); }
+  .chip:hover { border-color: var(--clay); color: var(--linen); background: rgba(74,124,89,0.1); }
 
   /* ── CONTACT ── */
-  #contact {
-    background: var(--charcoal); text-align: center; padding: 8rem 5rem;
-  }
+  #contact { background: var(--charcoal); text-align: center; padding: 8rem 5rem; }
   .contact-inner { max-width: 600px; margin: 0 auto; }
   .contact-inner p { font-size: 0.98rem; line-height: 1.85; color: var(--sand); margin-bottom: 3rem; }
   .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
@@ -400,13 +419,9 @@
     letter-spacing: 0.14em; text-transform: uppercase;
     text-decoration: none; transition: all 0.25s;
   }
-  .contact-link.primary {
-    background: var(--clay); color: var(--charcoal); border: 1px solid var(--clay);
-  }
+  .contact-link.primary { background: var(--clay); color: var(--charcoal); border: 1px solid var(--clay); }
   .contact-link.primary:hover { background: var(--accent); border-color: var(--accent); }
-  .contact-link.secondary {
-    border: 1px solid rgba(74,124,89,0.45); color: var(--sand);
-  }
+  .contact-link.secondary { border: 1px solid rgba(74,124,89,0.45); color: var(--sand); }
   .contact-link.secondary:hover { border-color: var(--clay); color: var(--linen); }
 
   /* ── FOOTER ── */
@@ -415,58 +430,41 @@
     display: flex; justify-content: space-between; align-items: center;
     border-top: 1px solid rgba(74,124,89,0.15);
   }
-  footer p {
-    font-family: 'Space Mono', monospace; font-size: 0.6rem;
-    letter-spacing: 0.12em; color: var(--sand);
-  }
+  footer p { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; color: var(--sand); }
 
   /* ── ANIMATIONS ── */
-  .fade-up {
-    opacity: 0; transform: translateY(28px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
+  .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  .hamburger { display: none; }
+  .nav-overlay { display: none; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    /* Mobile nav - hamburger */
     .nav-links {
       position: fixed; top: 0; right: -100%; width: 75vw; max-width: 300px;
       height: 100vh; flex-direction: column; gap: 0;
       background: rgba(12,18,16,0.98); backdrop-filter: blur(16px);
-      padding: 5rem 2rem 2rem;
-      transition: right 0.35s ease;
-      border-left: 1px solid rgba(74,124,89,0.2);
-      z-index: 1000;
+      padding: 5rem 2rem 2rem; transition: right 0.35s ease;
+      border-left: 1px solid rgba(74,124,89,0.2); z-index: 1000;
     }
     .nav-links.open { right: 0; }
     .nav-links li { border-bottom: 1px solid rgba(74,124,89,0.12); }
-    .nav-links a {
-      display: block; padding: 1rem 0; font-size: 0.75rem;
-    }
+    .nav-links a { display: block; padding: 1rem 0; font-size: 0.75rem; }
     .hamburger {
       display: flex; flex-direction: column; gap: 5px;
       cursor: pointer; z-index: 1001; padding: 4px;
     }
-    .hamburger span {
-      display: block; width: 22px; height: 1.5px;
-      background: var(--sand); transition: all 0.3s;
-    }
-    .hamburger.active span:nth-child(1) {
-      transform: translateY(6.5px) rotate(45deg);
-    }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--sand); transition: all 0.3s; }
+    .hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .hamburger.active span:nth-child(2) { opacity: 0; }
-    .hamburger.active span:nth-child(3) {
-      transform: translateY(-6.5px) rotate(-45deg);
-    }
+    .hamburger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
     .nav-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
-      opacity: 0; pointer-events: none; transition: opacity 0.3s;
-      z-index: 999;
+      display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 999;
     }
     .nav-overlay.open { opacity: 1; pointer-events: auto; }
 
-    /* Hero */
     #hero { grid-template-columns: 1fr; }
     .hero-left { padding: 7rem 2rem 3rem; }
     .hero-name { font-size: clamp(2.4rem, 10vw, 3.5rem); }
@@ -474,8 +472,6 @@
     .hero-right { min-height: 260px; }
     .hero-right::before { display: none; }
     .scroll-hint { left: 50%; }
-
-    /* Sections */
     section { padding: 4.5rem 1.5rem; }
     #about { grid-template-columns: 1fr; gap: 2.5rem; }
     .stat-row { gap: 1.5rem; flex-wrap: wrap; }
@@ -483,56 +479,42 @@
     .projects-grid { grid-template-columns: 1fr; }
     .project-card:first-child { grid-column: span 1; }
     .project-card { aspect-ratio: 3/2; }
-    .project-desc { max-height: 80px; } /* always show on mobile */
+    .project-desc { max-height: 80px; }
+    .project-view-link { max-height: 30px; }
     .hobbies-layout { grid-template-columns: 1fr; gap: 2.5rem; }
     .hobbies-img-stack { height: 360px; }
     .resume-layout { grid-template-columns: 1fr; gap: 3rem; }
-
-    /* Nav & footer */
+    .project-detail-inner { padding: 6rem 1.5rem; }
+    .project-detail-hero { aspect-ratio: 16/9; }
     nav { padding: 1rem 1.5rem; }
-    footer {
-      flex-direction: column; gap: 0.75rem; text-align: center;
-      padding: 2rem 1.5rem;
-    }
-  }
-
-  /* Hide hamburger on desktop */
-  .hamburger { display: none; }
-  .nav-overlay { display: none; }
-  @media (max-width: 900px) {
-    .hamburger { display: flex; }
-    .nav-overlay { display: block; }
+    footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 2rem 1.5rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="#hero" class="nav-brand" onclick="showHome(); return false;">Westley Smith</a>
-  <div class="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   <ul class="nav-links">
-    <li><a href="#about" onclick="showHome(); closeMenu();">About</a></li>
-    <li><a href="#projects" onclick="showHome(); closeMenu();">Projects</a></li>
-    <li><a href="#hobbies" onclick="showHome(); closeMenu();">Hobbies</a></li>
-    <li><a href="#resume" onclick="showHome(); closeMenu();">Experience</a></li>
-    <li><a href="/blog" class="blog-link">Blog</a></li>
-    <li><a href="#contact" onclick="showHome(); closeMenu();">Contact</a></li>
+    <li><a href="#about" onclick="navTo(this)">About</a></li>
+    <li><a href="#projects" onclick="navTo(this)">Projects</a></li>
+    <li><a href="#hobbies" onclick="navTo(this)">Hobbies</a></li>
+    <li><a href="#resume" onclick="navTo(this)">Experience</a></li>
+    <li><a href="#blog" onclick="navTo(this)">Blog</a></li>
+    <li><a href="#contact" onclick="navTo(this)">Contact</a></li>
   </ul>
 </nav>
 <div class="nav-overlay" onclick="closeMenu()"></div>
 
 <div id="main-site">
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-left">
     <p class="hero-tag">Builder. Tinkerer. Maker.</p>
-    <h1 class="hero-name">Westley<br>Smith.<br><em>I build what<br>doesn't exist yet.</em></h1>
-    <p class="hero-tagline">I architect data systems that replace entire legacy workflows, then I make sure leadership actually uses them to make better decisions. Nine months in, the reporting app I built is the first thing our sales team opens every morning. I am 22 and just getting started.</p>
-    <a href="#contact" class="hero-cta"><span>⬇</span> Let's Talk</a>
+    <h1 class="hero-name">Westley<br>Smith.<br><em>Built from<br>the ground up.</em></h1>
+    <p class="hero-tagline">I have never believed in the box people try to put you in. I build things — data pipelines, drones, workshops, whatever the problem needs. That approach has yet to fail me.</p>
+    <a href="#contact" class="hero-cta">Get in Touch <span class="cta-arrow">→</span></a>
   </div>
   <div class="hero-right">
     <div class="hero-img-placeholder">
@@ -540,32 +522,28 @@
       <p>Your photo here</p>
     </div>
   </div>
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    SCROLL
-  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>SCROLL</div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="about-text fade-up">
     <p class="section-label">01 — About</p>
     <h2 class="section-title">Not a job title.<br><em>A way of operating.</em></h2>
-    <p>My title says Data Analyst. What I actually do is build the infrastructure a company runs on and put it in front of the people making decisions. Within six months of being hired at First Tactical, I was selected to co-lead their entire data modernization initiative. I did not wait for permission. I saw a gap, built the solution, and the organization moved onto it.</p>
-    <p>But that is only the professional side. I am the same person at a workbench. I built a full workshop from the slab up with my father — people walk in and stop talking. I hand-tufted a rug that hangs in my living room because I liked an artist's work, could not justify the price, so I bought the tools, built the frame, designed the pattern in Adobe, and made it myself. That instinct — <strong>see a problem, figure out how to build the solution, do it</strong> — is the throughline across everything I touch.</p>
-    <p>As a kid I used to sit on the toilet and pitch my latest invention to anyone within earshot. One family favorite: a hat that brushed your teeth, fixed your hair, and cleaned your ears. I was five. I had never seen The Jetsons. Some things do not change — they just get more useful.</p>
+    <p>I have never been someone who stays in one lane. I have worked property maintenance and excelled at it. I built a full workshop from the concrete slab to the roof with my father, and people walk in and genuinely stop talking mid-sentence. I hold a Data and BI role at a company I am proud of, designing data infrastructure that did not exist before I arrived.</p>
+    <p>The throughline is not the industry. It is the mindset. As a kid I was the one sitting on the toilet explaining my latest invention to anyone who would listen. One family classic: a hat that brushed your teeth, fixed your hair, and cleaned your ears. This was before I had ever seen The Jetsons. Some things do not change.</p>
+    <p>My most recent project is a hand-tufted rug that now hangs in my living room. I found an artist whose work I loved, decided the price tag was not happening, bought the gear, built the frame out of 2x4s, designed the pattern in Adobe, and went to work. Everyone who walks in asks about it. That feeling — <strong>building something and getting to say you made it</strong> — is what drives everything.</p>
     <div class="stat-row">
       <div class="stat">
         <span class="stat-num">41+</span>
-        <span class="stat-desc">Production Reports Built</span>
+        <span class="stat-desc">Production BI Reports</span>
       </div>
       <div class="stat">
-        <span class="stat-num">10K+</span>
-        <span class="stat-desc">SKUs Under Governance</span>
+        <span class="stat-num">∞</span>
+        <span class="stat-desc">Things Built</span>
       </div>
       <div class="stat">
-        <span class="stat-num">$118K</span>
-        <span class="stat-desc">Annual Savings Delivered</span>
+        <span class="stat-num">0</span>
+        <span class="stat-desc">Boxes I Fit In</span>
       </div>
     </div>
   </div>
@@ -575,7 +553,6 @@
   </div>
 </section>
 
-<!-- PHILOSOPHY -->
 <section id="philosophy">
   <p class="section-label fade-up">02 — How I Think</p>
   <h2 class="section-title fade-up">Three principles I <em>operate by.</em></h2>
@@ -598,70 +575,54 @@
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
   <p class="section-label fade-up">03 — Projects</p>
-  <h2 class="section-title fade-up">Things I have <em>shipped.</em></h2>
+  <h2 class="section-title fade-up">Things I've <em>Built.</em></h2>
   <div class="projects-grid">
-
-    <div class="project-card fade-up">
-      <div class="project-img">
-        <div class="ph-icon">📊</div>
-        <p>Dashboard screenshot</p>
-      </div>
+    <div class="project-card fade-up" onclick="showProject('lakehouse')">
+      <div class="project-img"><div class="ph-icon">📊</div><p>Dashboard screenshot</p></div>
       <div class="project-overlay">
         <p class="project-cat">Data Infrastructure</p>
         <p class="project-name">Enterprise Data Lakehouse</p>
-        <p class="project-desc">Solo-architected a full Medallion-framework Data Lakehouse in Microsoft Fabric, replacing legacy ODBC-to-Excel workflows with a scalable warehouse powering 41+ production reports across the organization.</p>
+        <p class="project-desc">Full Medallion-framework Data Lakehouse in Microsoft Fabric — from legacy Excel exports to a scalable warehouse powering 41+ production reports.</p>
+        <p class="project-view-link">View Project →</p>
       </div>
     </div>
-
-    <div class="project-card fade-up">
-      <div class="project-img">
-        <div class="ph-icon">⚡</div>
-        <p>App screenshot</p>
-      </div>
+    <div class="project-card fade-up" onclick="showProject('biapp')">
+      <div class="project-img"><div class="ph-icon">⚡</div><p>App screenshot</p></div>
       <div class="project-overlay">
         <p class="project-cat">Business Intelligence</p>
         <p class="project-name">Sales Leadership BI App</p>
-        <p class="project-desc">Built the unified Power BI app that the entire sales leadership team opens daily. Standardized metrics, DAX measures, and UX from the ground up — the single source of truth for revenue decisions.</p>
+        <p class="project-desc">The unified Power BI app that sales leadership opens every morning. Standardized metrics and UX from the ground up.</p>
+        <p class="project-view-link">View Project →</p>
       </div>
     </div>
-
-    <div class="project-card fade-up">
-      <div class="project-img">
-        <div class="ph-icon">🚁</div>
-        <p>Drone build photo</p>
-      </div>
+    <div class="project-card fade-up" onclick="showProject('drone')">
+      <div class="project-img"><div class="ph-icon">🚁</div><p>Drone build photo</p></div>
       <div class="project-overlay">
         <p class="project-cat">Hands-On Build</p>
         <p class="project-name">Custom FPV Racing Drone</p>
-        <p class="project-desc">5-inch freestyle quad built from bare frame to first flight. Custom motor mounts, flight controller tuning, VTX stack assembly, and PID configuration. Crashed, rebuilt, flew again.</p>
+        <p class="project-desc">5-inch freestyle quad built from bare frame to first flight. Crashed, rebuilt, flew again.</p>
+        <p class="project-view-link">View Project →</p>
       </div>
     </div>
-
-    <div class="project-card fade-up">
-      <div class="project-img">
-        <div class="ph-icon">🔧</div>
-        <p>Workshop photo</p>
-      </div>
+    <div class="project-card fade-up" onclick="showProject('workshop')">
+      <div class="project-img"><div class="ph-icon">🔧</div><p>Workshop photo</p></div>
       <div class="project-overlay">
         <p class="project-cat">Fabrication</p>
         <p class="project-name">Ground-Up Workshop Build</p>
-        <p class="project-desc">Built a full workshop from concrete slab to finished roof alongside my father. Framing, electrical, finishing — every decision made by hand. People walk in and forget what they were saying.</p>
+        <p class="project-desc">Full workshop from concrete slab to finished roof. Every decision made by hand.</p>
+        <p class="project-view-link">View Project →</p>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- HOBBIES -->
 <section id="hobbies">
-  <p class="section-label fade-up">04 — Off the Clock</p>
-  <h2 class="section-title fade-up">Same instincts,<br><em>different materials.</em></h2>
+  <p class="section-label fade-up">04 — Hobbies</p>
+  <h2 class="section-title fade-up">Beyond the <em>Screen.</em></h2>
   <div class="hobbies-layout">
     <div class="hobby-list fade-up">
-
       <div class="hobby-item">
         <span class="hobby-num">01</span>
         <div class="hobby-info">
@@ -670,7 +631,6 @@
         </div>
         <span class="hobby-arrow">→</span>
       </div>
-
       <div class="hobby-item">
         <span class="hobby-num">02</span>
         <div class="hobby-info">
@@ -679,7 +639,6 @@
         </div>
         <span class="hobby-arrow">→</span>
       </div>
-
       <div class="hobby-item">
         <span class="hobby-num">03</span>
         <div class="hobby-info">
@@ -688,7 +647,6 @@
         </div>
         <span class="hobby-arrow">→</span>
       </div>
-
       <div class="hobby-item">
         <span class="hobby-num">04</span>
         <div class="hobby-info">
@@ -702,40 +660,28 @@
         </div>
         <span class="hobby-arrow">→</span>
       </div>
-
-      <div class="hobby-item">
-        <span class="hobby-num">05</span>
-        <div class="hobby-info">
-          <p class="hobby-name">Folk-Country &amp; Outdoors</p>
-          <p class="hobby-blurb">Colter Wall, Tyler Childers, Willie Nelson on the speaker. Usually in the workshop, sometimes on a trail, always with my wife nearby. Slow, heavy, honest music for slow, heavy, honest work.</p>
-        </div>
-        <span class="hobby-arrow">→</span>
-      </div>
-
     </div>
-
     <div class="hobbies-img-stack fade-up">
-      <div class="hobby-img">
-        <div class="ph-icon">🎯</div>
-        <p>Airsoft / field photo</p>
-      </div>
-      <div class="hobby-img">
-        <div class="ph-icon">🚁</div>
-        <p>Drone or build photo</p>
-      </div>
+      <div class="hobby-img"><div class="ph-icon">🎯</div><p>Airsoft / field photo</p></div>
+      <div class="hobby-img"><div class="ph-icon">🚁</div><p>Drone or build photo</p></div>
     </div>
   </div>
 </section>
 
-<!-- RESUME -->
-<section id="resume">
-  <p class="section-label fade-up">05 — Experience</p>
-  <h2 class="section-title fade-up">Where I have <em>delivered.</em></h2>
-  <div class="resume-layout">
+<section id="blog">
+  <p class="section-label fade-up">05 — Blog</p>
+  <h2 class="section-title fade-up">Thoughts. <em>Builds. Lessons.</em></h2>
+  <div class="blog-empty fade-up">
+    <p>Writing about things I am building, decisions I am making, and problems I am working through. The kind of stuff I wish someone had written down when they were at this stage. First post coming soon.</p>
+  </div>
+</section>
 
+<section id="resume">
+  <p class="section-label fade-up">06 — Experience</p>
+  <h2 class="section-title fade-up">Where I've <em>Worked.</em></h2>
+  <div class="resume-layout">
     <div class="fade-up">
       <p class="resume-col-title">Work History</p>
-
       <div class="resume-entry">
         <div class="entry-header">
           <p class="entry-title">Data Analyst / Report Developer</p>
@@ -744,7 +690,6 @@
         <p class="entry-company">First Tactical · Ceres, CA</p>
         <p class="entry-body">Selected to co-lead a company-wide data modernization initiative within six months. Solo-architected a full Data Lakehouse (Medallion framework) in Microsoft Fabric, replacing legacy ODBC-to-Excel workflows. Co-designed and built 41+ production Power BI reports, packaged as a unified app now used daily by sales leadership. Managed platform administration across Shipwise, Elastic, and Shopify with governance over 10,000+ SKUs.</p>
       </div>
-
       <div class="resume-entry">
         <div class="entry-header">
           <p class="entry-title">Data Analyst Intern</p>
@@ -753,7 +698,6 @@
         <p class="entry-company">Stanislaus County Behavioral Health · Modesto, CA</p>
         <p class="entry-body">Wrote and optimized SQL queries in SSMS and designed Power BI dashboards that gave leadership direct visibility into client demographics and program performance for the first time.</p>
       </div>
-
       <div class="resume-entry">
         <div class="entry-header">
           <p class="entry-title">Business Systems Analyst Intern</p>
@@ -762,68 +706,46 @@
         <p class="entry-company">E&amp;J Gallo Winery · Modesto, CA</p>
         <p class="entry-body">Developed and deployed a ServiceNow ticketing workflow through acceptance, QA, and production environments. Presented findings to IT leadership. Documented a legacy Finance Access database, mapping dependencies and creating a matrix diagram for developer handoff.</p>
       </div>
-
       <div class="resume-entry">
         <div class="entry-header">
           <p class="entry-title">IT Analyst Intern</p>
           <p class="entry-date">Feb 2022 – Apr 2023</p>
         </div>
         <p class="entry-company">G3 Enterprises · Ceres, CA</p>
-        <p class="entry-body">Managed IT asset inventory for 300+ employees, delivering $118,548 in annual cost savings. Led company-wide migration from legacy phone software to Microsoft Teams Phone. Provided Tier 2 support including workstation imaging, onboarding, and hardware/software resolution.</p>
+        <p class="entry-body">Managed IT asset inventory for 300+ employees, delivering $118,548 in annual cost savings. Led company-wide migration from legacy phone software to Microsoft Teams Phone.</p>
       </div>
-
       <div class="resume-entry">
         <div class="entry-header">
           <p class="entry-title">Manufacturing Operations Intern</p>
           <p class="entry-date">Sep – Dec 2021</p>
         </div>
         <p class="entry-company">E&amp;J Gallo Winery · Modesto, CA</p>
-        <p class="entry-body">Rotational program across 12+ departments — supply chain, quality assurance, bottling, warehouse logistics. First real exposure to how large-scale operations actually run from end to end.</p>
+        <p class="entry-body">Rotational program across 12+ departments — supply chain, quality assurance, bottling, warehouse logistics.</p>
       </div>
     </div>
-
     <div class="fade-up">
       <p class="resume-col-title">Education</p>
-
       <div class="resume-entry">
         <div class="entry-header">
           <p class="entry-title">B.S. Business Administration</p>
           <p class="entry-date">Aug 2023 – May 2025</p>
         </div>
         <p class="entry-company">California State University, Stanislaus</p>
-        <p class="entry-body">Concentration in Computer Information Systems. Where the technical foundation met business thinking.</p>
+        <p class="entry-body">Concentration in Computer Information Systems.</p>
       </div>
-
-      <p class="resume-col-title" style="margin-top: 2.5rem;">Technical Stack</p>
+      <p class="resume-col-title" style="margin-top:2.5rem;">Technical Stack</p>
       <div class="resume-entry">
         <div class="skills-chips">
-          <span class="chip">Microsoft Fabric</span>
-          <span class="chip">Power BI</span>
-          <span class="chip">DAX</span>
-          <span class="chip">SQL / SSMS</span>
-          <span class="chip">ETL Pipelines</span>
-          <span class="chip">Medallion Architecture</span>
-          <span class="chip">Data Modeling</span>
-          <span class="chip">Power Automate</span>
-          <span class="chip">Azure Cloud Services</span>
-          <span class="chip">ServiceNow ITSM</span>
-          <span class="chip">Shopify</span>
-          <span class="chip">Elastic</span>
+          <span class="chip">Microsoft Fabric</span><span class="chip">Power BI</span><span class="chip">DAX</span><span class="chip">SQL / SSMS</span><span class="chip">ETL Pipelines</span><span class="chip">Medallion Architecture</span><span class="chip">Data Modeling</span><span class="chip">Power Automate</span><span class="chip">Azure Cloud Services</span><span class="chip">ServiceNow ITSM</span><span class="chip">Shopify</span><span class="chip">Elastic</span>
         </div>
       </div>
-
-      <p class="resume-col-title" style="margin-top: 2.5rem;">Hands-On Skills</p>
+      <p class="resume-col-title" style="margin-top:2.5rem;">Hands-On Skills</p>
       <div class="resume-entry">
         <div class="skills-chips">
-          <span class="chip">FPV Build &amp; Tune</span>
-          <span class="chip">Soldering &amp; PCB</span>
-          <span class="chip">3D Modeling &amp; Printing</span>
-          <span class="chip">Smart Home Systems</span>
-          <span class="chip">Woodworking &amp; Fabrication</span>
+          <span class="chip">FPV Build &amp; Tune</span><span class="chip">Soldering &amp; PCB</span><span class="chip">3D Modeling &amp; Printing</span><span class="chip">Smart Home Systems</span><span class="chip">Woodworking &amp; Fabrication</span>
         </div>
       </div>
-
-      <p class="resume-col-title" style="margin-top: 2.5rem;">Volunteering</p>
+      <p class="resume-col-title" style="margin-top:2.5rem;">Volunteering</p>
       <div class="resume-entry">
         <div class="entry-header">
           <p class="entry-title">Service &amp; Support Volunteer</p>
@@ -833,16 +755,14 @@
         <p class="entry-body">Served students from remote villages overcoming addiction, abuse, and trauma. Contributed to campus construction and built relationships that reshaped how I think about showing up for people.</p>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="contact-inner fade-up">
-    <p class="section-label" style="justify-content:center;">06 — Contact</p>
-    <h2 class="section-title">Let's build <em>something.</em></h2>
-    <p>I am always interested in conversations about data infrastructure, business operations, or anything that involves building something from scratch. If you have a problem worth solving, I want to hear about it.</p>
+    <p class="section-label" style="justify-content:center;">07 — Contact</p>
+    <h2 class="section-title">Let's <em>Connect.</em></h2>
+    <p>Whether it is a data problem, a build project, or just a conversation — I am always up for it.</p>
     <div class="contact-links">
       <a href="https://www.linkedin.com/in/westleys" target="_blank" class="contact-link primary">LinkedIn</a>
       <a href="mailto:westley.business@gmail.com" class="contact-link secondary">Email</a>
@@ -850,39 +770,98 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <p>&copy; 2026 Westley Smith. Built by hand.</p>
   <p>Central Valley, CA · Open to remote &amp; relocation</p>
 </footer>
 
-</div><!-- end #main-site -->
+</div>
 
-<!-- BLOG PAGE -->
-<div id="blog-page" style="display:none; padding-top: 5rem;">
-  <section style="background: var(--bark); min-height: 100vh; padding: 7rem 5rem;">
-    <p class="section-label" style="display:flex; align-items:center; gap:1rem;">Blog</p>
-    <h2 class="section-title">Thoughts. <em>Builds. Lessons.</em></h2>
-    <div style="max-width: 680px;">
-      <p style="font-size: 1rem; line-height: 1.9; color: var(--sand); margin-bottom: 3rem;">
-        Writing about things I am building, decisions I am making, and problems I am working through. The kind of stuff I wish someone had written down when they were at this stage.
-      </p>
-      <div style="border-top: 1px solid rgba(74,124,89,0.2); padding-top: 2.5rem;">
-        <p style="font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--flint);">First post coming soon.</p>
+<!-- PROJECT DETAIL PAGES -->
+<div class="project-detail-page" id="project-lakehouse">
+  <div class="project-detail-inner">
+    <div class="project-detail-hero"><div class="ph-icon" style="font-size:3.5rem;opacity:0.18;">📊</div><p style="font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;color:var(--flint);opacity:0.4;">Dashboard screenshots here</p></div>
+    <div class="project-detail-content">
+      <p class="project-detail-cat">Data Infrastructure</p>
+      <h2>Enterprise Data Lakehouse</h2>
+      <div class="project-detail-body">
+        <p>When I joined First Tactical, the company's reporting infrastructure was built on ODBC connections piped into Excel spreadsheets. Data lived in silos, metrics were inconsistent across teams, and getting a reliable number meant asking three people and hoping they agreed.</p>
+        <p>Within six months, I was selected to co-lead the data modernization initiative. I solo-architected a full Data Lakehouse using the Medallion framework in Microsoft Fabric — building the entire ETL pipeline from ERP and auxiliary sources into a scalable, high-performance warehouse.</p>
+        <h3>What Got Built</h3>
+        <ul>
+          <li>End-to-end ETL pipeline from bronze through silver to gold layers</li>
+          <li>41+ production Power BI reports standardizing metrics across the org</li>
+          <li>Unified Power BI App used daily by sales leadership</li>
+          <li>Master data governance for 10,000+ SKUs across Shopify, Elastic, and Shipwise</li>
+        </ul>
+        <h3>Why It Matters</h3>
+        <p>This was not a technical exercise. The goal was to give decision-makers reliable data without requiring them to understand data infrastructure. The sales leadership team now opens the BI app every morning. That is the outcome that matters — not the architecture underneath.</p>
+        <p>More details, screenshots, and technical deep-dive coming soon.</p>
       </div>
+      <a href="#" class="back-link" onclick="hideProject(); return false;">← Back to Projects</a>
     </div>
-    <div style="margin-top: 4rem;">
-      <a href="#" onclick="showHome(); return false;" style="
-        display: inline-flex; align-items: center; gap: 0.6rem;
-        font-family: 'Space Mono', monospace; font-size: 0.68rem;
-        letter-spacing: 0.14em; text-transform: uppercase;
-        color: var(--sand); text-decoration: none;
-        border-bottom: 1px solid rgba(74,124,89,0.35);
-        padding-bottom: 0.2rem;
-        transition: color 0.25s;
-      ">&larr; Back to Home</a>
+  </div>
+</div>
+
+<div class="project-detail-page" id="project-biapp">
+  <div class="project-detail-inner">
+    <div class="project-detail-hero"><div class="ph-icon" style="font-size:3.5rem;opacity:0.18;">⚡</div><p style="font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;color:var(--flint);opacity:0.4;">App screenshots here</p></div>
+    <div class="project-detail-content">
+      <p class="project-detail-cat">Business Intelligence</p>
+      <h2>Sales Leadership BI App</h2>
+      <div class="project-detail-body">
+        <p>The sales team at First Tactical had data scattered across spreadsheets, email threads, and memory. What they did not have was a single place to look at performance and make decisions based on consistent numbers.</p>
+        <p>I co-designed and built a unified Power BI app from the ground up — standardizing every metric, DAX measure, and piece of UX. It became the first thing the Chief of Sales opens every morning.</p>
+        <h3>The Impact</h3>
+        <p>Leadership stopped debating what the numbers were and started debating what to do about them. That shift — from "what is the data" to "what does the data mean" — is the kind of outcome worth building toward.</p>
+        <p>Full case study and screenshots coming soon.</p>
+      </div>
+      <a href="#" class="back-link" onclick="hideProject(); return false;">← Back to Projects</a>
     </div>
-  </section>
+  </div>
+</div>
+
+<div class="project-detail-page" id="project-drone">
+  <div class="project-detail-inner">
+    <div class="project-detail-hero"><div class="ph-icon" style="font-size:3.5rem;opacity:0.18;">🚁</div><p style="font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;color:var(--flint);opacity:0.4;">Build photos here</p></div>
+    <div class="project-detail-content">
+      <p class="project-detail-cat">Hands-On Build</p>
+      <h2>Custom FPV Racing Drone</h2>
+      <div class="project-detail-body">
+        <p>A 5-inch freestyle quad built from bare carbon fiber frame to first flight. No kit, no shortcuts — every component selected, every connection soldered, every setting tuned by hand.</p>
+        <h3>The Build</h3>
+        <ul>
+          <li>Custom motor mounts and frame assembly</li>
+          <li>Flight controller flashing and configuration</li>
+          <li>VTX stack assembly and antenna tuning</li>
+          <li>PID tuning for freestyle flight characteristics</li>
+          <li>Multiple crash-rebuild cycles (part of the process)</li>
+        </ul>
+        <h3>Why This Matters</h3>
+        <p>FPV building is the purest version of how I think about problems. You start with a pile of parts and a goal. There is no instruction manual that covers your exact setup. You figure it out, test it, crash, figure out what broke, and go again. That loop — build, test, break, learn, rebuild — is the same loop everywhere.</p>
+        <p>Build log with photos and parts list coming soon.</p>
+      </div>
+      <a href="#" class="back-link" onclick="hideProject(); return false;">← Back to Projects</a>
+    </div>
+  </div>
+</div>
+
+<div class="project-detail-page" id="project-workshop">
+  <div class="project-detail-inner">
+    <div class="project-detail-hero"><div class="ph-icon" style="font-size:3.5rem;opacity:0.18;">🔧</div><p style="font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;color:var(--flint);opacity:0.4;">Workshop photos here</p></div>
+    <div class="project-detail-content">
+      <p class="project-detail-cat">Fabrication</p>
+      <h2>Ground-Up Workshop Build</h2>
+      <div class="project-detail-body">
+        <p>Built a full workshop from concrete slab to finished roof alongside my father. Framing, electrical, insulation, finishing — every decision made by hand, every problem solved on site.</p>
+        <p>People walk in and forget what they were saying. That is not an exaggeration — it has happened more than once. There is something about a space built with that level of intention that people feel immediately.</p>
+        <h3>What It Taught Me</h3>
+        <p>This was the project that taught me how to manage scope, work within constraints, and make real-time tradeoffs between "perfect" and "done right." The same skills show up everywhere — just with different materials.</p>
+        <p>Photo gallery and build story coming soon.</p>
+      </div>
+      <a href="#" class="back-link" onclick="hideProject(); return false;">← Back to Projects</a>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -892,7 +871,6 @@
   );
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // Mobile menu
   function toggleMenu() {
     document.querySelector('.nav-links').classList.toggle('open');
     document.querySelector('.hamburger').classList.toggle('active');
@@ -904,21 +882,27 @@
     document.querySelector('.nav-overlay').classList.remove('open');
   }
 
-  // Blog in-site routing
-  function showBlog() {
+  function showProject(id) {
     document.getElementById('main-site').style.display = 'none';
-    document.getElementById('blog-page').style.display = 'block';
+    document.querySelectorAll('.project-detail-page').forEach(p => p.classList.remove('active'));
+    document.getElementById('project-' + id).classList.add('active');
     window.scrollTo(0, 0);
-    closeMenu();
   }
+  function hideProject() {
+    document.querySelectorAll('.project-detail-page').forEach(p => p.classList.remove('active'));
+    document.getElementById('main-site').style.display = 'block';
+    setTimeout(() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' }), 50);
+  }
+
   function showHome() {
-    document.getElementById('blog-page').style.display = 'none';
+    document.querySelectorAll('.project-detail-page').forEach(p => p.classList.remove('active'));
     document.getElementById('main-site').style.display = 'block';
   }
-  document.querySelector('a.blog-link').addEventListener('click', function(e) {
-    e.preventDefault();
-    showBlog();
-  });
+
+  function navTo(el) {
+    showHome();
+    closeMenu();
+  }
 </script>
 </body>
 </html>
