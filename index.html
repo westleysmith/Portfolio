@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Westley Smith — Builder. Maker.</title>
+<title>Westley Smith — Builder. Operator. Maker.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <style>
   :root {
-    /* Deep forest green / rugged outdoorsy */
     --soil:      #0F1A12;
     --bark:      #182318;
     --leather:   #2A3D2A;
@@ -101,7 +100,7 @@
   .hero-name em { color: var(--clay); font-style: italic; }
   .hero-tagline {
     font-size: 0.98rem; line-height: 1.75;
-    color: var(--sand); max-width: 40ch;
+    color: var(--sand); max-width: 44ch;
     margin-bottom: 3rem;
   }
   .hero-cta {
@@ -219,8 +218,40 @@
     letter-spacing: 0.2em; color: var(--flint); opacity: 0.45;
   }
 
+  /* ── PHILOSOPHY (new section) ── */
+  #philosophy {
+    background: var(--charcoal);
+    padding: 7rem 5rem;
+  }
+  .philosophy-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem;
+    margin-top: 1rem;
+  }
+  .philosophy-card {
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(74,124,89,0.18);
+    background: rgba(15,26,18,0.5);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .philosophy-card:hover {
+    border-color: var(--clay);
+    transform: translateY(-4px);
+  }
+  .philosophy-num {
+    font-family: 'Playfair Display', serif; font-size: 2.8rem;
+    font-weight: 900; color: var(--leather); line-height: 1;
+    margin-bottom: 1.2rem; font-style: italic;
+  }
+  .philosophy-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem;
+    font-weight: 700; color: var(--straw); margin-bottom: 0.75rem;
+  }
+  .philosophy-card p {
+    font-size: 0.85rem; line-height: 1.75; color: var(--flint);
+  }
+
   /* ── PROJECTS ── */
-  #projects { background: var(--charcoal); }
+  #projects { background: var(--bark); }
   .projects-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
   }
@@ -264,11 +295,11 @@
     font-size: 0.8rem; color: var(--sand); line-height: 1.6;
     max-height: 0; overflow: hidden; transition: max-height 0.35s ease;
   }
-  .project-card:hover .project-desc { max-height: 80px; }
+  .project-card:hover .project-desc { max-height: 100px; }
 
   /* ── HOBBIES ── */
   #hobbies {
-    background: linear-gradient(160deg, var(--bark) 0%, var(--soil) 100%);
+    background: linear-gradient(160deg, var(--charcoal) 0%, var(--soil) 100%);
   }
   .hobbies-layout {
     display: grid; grid-template-columns: 1.4fr 1fr; gap: 5rem; align-items: start;
@@ -298,7 +329,6 @@
   }
   .hobby-item:hover .hobby-arrow { opacity: 1; transform: translateX(0); }
 
-  /* Sports sub-list */
   .hobby-sports-sub {
     display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.35rem;
   }
@@ -325,7 +355,7 @@
   }
 
   /* ── RESUME ── */
-  #resume { background: var(--charcoal); }
+  #resume { background: var(--bark); }
   .resume-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
   .resume-col-title {
     font-family: 'Space Mono', monospace; font-size: 0.62rem;
@@ -358,7 +388,7 @@
 
   /* ── CONTACT ── */
   #contact {
-    background: var(--bark); text-align: center; padding: 8rem 5rem;
+    background: var(--charcoal); text-align: center; padding: 8rem 5rem;
   }
   .contact-inner { max-width: 600px; margin: 0 auto; }
   .contact-inner p { font-size: 0.98rem; line-height: 1.85; color: var(--sand); margin-bottom: 3rem; }
@@ -403,6 +433,7 @@
     .hero-right { min-height: 300px; }
     .hero-right::before { display: none; }
     #about { grid-template-columns: 1fr; gap: 3rem; }
+    .philosophy-grid { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr 1fr; }
     .project-card:first-child { grid-column: span 2; }
     .hobbies-layout { grid-template-columns: 1fr; }
@@ -422,8 +453,8 @@
   <ul class="nav-links">
     <li><a href="#about" onclick="showHome();">About</a></li>
     <li><a href="#projects" onclick="showHome();">Projects</a></li>
-    <li><a href="#hobbies" onclick="showHome();">Hobbies</a></li>
-    <li><a href="#resume" onclick="showHome();">Resume</a></li>
+    <li><a href="#hobbies" onclick="showHome();">Off the Clock</a></li>
+    <li><a href="#resume" onclick="showHome();">Experience</a></li>
     <li><a href="#contact" onclick="showHome();">Contact</a></li>
     <li><a href="/blog">Blog</a></li>
   </ul>
@@ -434,10 +465,10 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-left">
-    <p class="hero-tag">Builder. Tinkerer. Problem Solver.</p>
-    <h1 class="hero-name">Westley<br>Smith.<br><em>Built from<br>the ground up.</em></h1>
-    <p class="hero-tagline">I have never believed in the box people try to put you in. I build things, I learn things, I figure it out. That approach has yet to fail me.</p>
-    <a href="#contact" class="hero-cta"><span>⬇</span> Get in Touch</a>
+    <p class="hero-tag">Data Infrastructure · Operations · Leadership</p>
+    <h1 class="hero-name">Westley<br>Smith.<br><em>I build what<br>doesn't exist yet.</em></h1>
+    <p class="hero-tagline">I architect data systems that replace entire legacy workflows, then I make sure leadership actually uses them to make better decisions. Nine months in, the reporting app I built is the first thing our sales team opens every morning. I am 22 and just getting started.</p>
+    <a href="#contact" class="hero-cta"><span>⬇</span> Let's Talk</a>
   </div>
   <div class="hero-right">
     <div class="hero-img-placeholder">
@@ -454,23 +485,23 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="about-text fade-up">
-    <p class="section-label">01 — About Me</p>
-    <h2 class="section-title">Maker.<br><em>Thinker. Doer.</em></h2>
-    <p>I have never been someone who stays in one lane. I have worked property maintenance and excelled at it. I built a full workshop from the concrete slab to the roof with my father, and people walk in and genuinely stop talking mid-sentence. I hold a Data and BI role at a company I am proud of, designing data infrastructure that did not exist before I arrived.</p>
-    <p>The throughline is not the industry. It is the mindset. As a kid I was the one sitting on the toilet explaining my latest invention to anyone who would listen. One family classic: a hat that brushed your teeth, fixed your hair, and cleaned your ears. This was before I had ever seen The Jetsons. Some things do not change.</p>
-    <p>My most recent project is a hand-tufted rug that now hangs in my living room. I found an artist whose work I loved, decided the price tag was not happening, bought the gear, built the frame out of 2x4s, designed the pattern in Adobe, and went to work. Everyone who walks in asks about it. I built it, and I get to say that. That feeling is what drives everything I do, whether it is a <strong>Power BI data pipeline</strong> or a stained glass mirror I have not started yet.</p>
+    <p class="section-label">01 — About</p>
+    <h2 class="section-title">Not a job title.<br><em>A way of operating.</em></h2>
+    <p>My title says Data Analyst. What I actually do is build the infrastructure a company runs on and put it in front of the people making decisions. Within six months of being hired at First Tactical, I was selected to co-lead their entire data modernization initiative. I did not wait for permission. I saw a gap, built the solution, and the organization moved onto it.</p>
+    <p>But that is only the professional side. I am the same person at a workbench. I built a full workshop from the slab up with my father — people walk in and stop talking. I hand-tufted a rug that hangs in my living room because I liked an artist's work, could not justify the price, so I bought the tools, built the frame, designed the pattern in Adobe, and made it myself. That instinct — <strong>see a problem, figure out how to build the solution, do it</strong> — is the throughline across everything I touch.</p>
+    <p>As a kid I used to sit on the toilet and pitch my latest invention to anyone within earshot. One family favorite: a hat that brushed your teeth, fixed your hair, and cleaned your ears. I was five. I had never seen The Jetsons. Some things do not change — they just get more useful.</p>
     <div class="stat-row">
       <div class="stat">
         <span class="stat-num">41+</span>
-        <span class="stat-desc">Production BI Reports</span>
+        <span class="stat-desc">Production Reports Built</span>
       </div>
       <div class="stat">
-        <span class="stat-num">∞</span>
-        <span class="stat-desc">Things Built</span>
+        <span class="stat-num">10K+</span>
+        <span class="stat-desc">SKUs Under Governance</span>
       </div>
       <div class="stat">
-        <span class="stat-num">0</span>
-        <span class="stat-desc">Boxes I fit in</span>
+        <span class="stat-num">$118K</span>
+        <span class="stat-desc">Annual Savings Delivered</span>
       </div>
     </div>
   </div>
@@ -480,35 +511,34 @@
   </div>
 </section>
 
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <p class="section-label fade-up">02 — How I Think</p>
+  <h2 class="section-title fade-up">Three principles I <em>operate by.</em></h2>
+  <div class="philosophy-grid">
+    <div class="philosophy-card fade-up">
+      <div class="philosophy-num">01</div>
+      <h3>Build It, Then Prove It Matters</h3>
+      <p>Technical skill without business impact is just a hobby. Every system I build comes with a clear reason it exists — tied to revenue, margin, or a decision someone needed to make faster.</p>
+    </div>
+    <div class="philosophy-card fade-up">
+      <div class="philosophy-num">02</div>
+      <h3>Own the Outcome, Not Just the Output</h3>
+      <p>I do not hand off a dashboard and walk away. I sit with the people who use it, learn what they actually need, and iterate until it changes how they work. The report is not the product. The decision it drives is.</p>
+    </div>
+    <div class="philosophy-card fade-up">
+      <div class="philosophy-num">03</div>
+      <h3>Stay Uncomfortable</h3>
+      <p>The moment I stop learning is the moment I leave. I moved out of general IT into a newly created Systems &amp; Integrations role because standing still is not an option. Comfort is where ambition goes to die.</p>
+    </div>
+  </div>
+</section>
+
 <!-- PROJECTS -->
 <section id="projects">
-  <p class="section-label fade-up">02 — Projects</p>
-  <h2 class="section-title fade-up">Things I've <em>Built.</em></h2>
+  <p class="section-label fade-up">03 — Projects</p>
+  <h2 class="section-title fade-up">Things I have <em>shipped.</em></h2>
   <div class="projects-grid">
-
-    <div class="project-card fade-up">
-      <div class="project-img">
-        <div class="ph-icon">🚁</div>
-        <p>Drone build photo</p>
-      </div>
-      <div class="project-overlay">
-        <p class="project-cat">FPV Build</p>
-        <p class="project-name">Custom FPV Racing Build</p>
-        <p class="project-desc">5" freestyle quad built from the frame up. Custom motor mounts, flight controller tuning, VTX stack assembly, and PID configuration for freestyle flight.</p>
-      </div>
-    </div>
-
-    <div class="project-card fade-up">
-      <div class="project-img">
-        <div class="ph-icon">⚡</div>
-        <p>EE project photo</p>
-      </div>
-      <div class="project-overlay">
-        <p class="project-cat">Electronics</p>
-        <p class="project-name">Circuit Design Project</p>
-        <p class="project-desc">Custom PCB layout, soldering, and firmware integration for a real-world electronics project.</p>
-      </div>
-    </div>
 
     <div class="project-card fade-up">
       <div class="project-img">
@@ -516,9 +546,33 @@
         <p>Dashboard screenshot</p>
       </div>
       <div class="project-overlay">
-        <p class="project-cat">Data & BI</p>
-        <p class="project-name">Power BI Dashboard</p>
-        <p class="project-desc">End-to-end BI solution built on Microsoft Fabric with Medallion architecture. Bronze to Gold layer pipeline with live reporting across the organization.</p>
+        <p class="project-cat">Data Infrastructure</p>
+        <p class="project-name">Enterprise Data Lakehouse</p>
+        <p class="project-desc">Solo-architected a full Medallion-framework Data Lakehouse in Microsoft Fabric, replacing legacy ODBC-to-Excel workflows with a scalable warehouse powering 41+ production reports across the organization.</p>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-img">
+        <div class="ph-icon">⚡</div>
+        <p>App screenshot</p>
+      </div>
+      <div class="project-overlay">
+        <p class="project-cat">Business Intelligence</p>
+        <p class="project-name">Sales Leadership BI App</p>
+        <p class="project-desc">Built the unified Power BI app that the entire sales leadership team opens daily. Standardized metrics, DAX measures, and UX from the ground up — the single source of truth for revenue decisions.</p>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-img">
+        <div class="ph-icon">🚁</div>
+        <p>Drone build photo</p>
+      </div>
+      <div class="project-overlay">
+        <p class="project-cat">Hands-On Build</p>
+        <p class="project-name">Custom FPV Racing Drone</p>
+        <p class="project-desc">5-inch freestyle quad built from bare frame to first flight. Custom motor mounts, flight controller tuning, VTX stack assembly, and PID configuration. Crashed, rebuilt, flew again.</p>
       </div>
     </div>
 
@@ -528,9 +582,9 @@
         <p>Workshop photo</p>
       </div>
       <div class="project-overlay">
-        <p class="project-cat">Build & Fabrication</p>
-        <p class="project-name">Workshop Build</p>
-        <p class="project-desc">A project built with patience, good tools, and a healthy disrespect for "that's just how it's done."</p>
+        <p class="project-cat">Fabrication</p>
+        <p class="project-name">Ground-Up Workshop Build</p>
+        <p class="project-desc">Built a full workshop from concrete slab to finished roof alongside my father. Framing, electrical, finishing — every decision made by hand. People walk in and forget what they were saying.</p>
       </div>
     </div>
 
@@ -539,8 +593,8 @@
 
 <!-- HOBBIES -->
 <section id="hobbies">
-  <p class="section-label fade-up">03 — Hobbies</p>
-  <h2 class="section-title fade-up">Beyond the <em>Screen.</em></h2>
+  <p class="section-label fade-up">04 — Off the Clock</p>
+  <h2 class="section-title fade-up">Same instincts,<br><em>different materials.</em></h2>
   <div class="hobbies-layout">
     <div class="hobby-list fade-up">
 
@@ -548,7 +602,7 @@
         <span class="hobby-num">01</span>
         <div class="hobby-info">
           <p class="hobby-name">FPV &amp; Drone Building</p>
-          <p class="hobby-blurb">From bare frame to first flight. I build, crash, and rebuild. Always chasing cleaner lines and a better tune.</p>
+          <p class="hobby-blurb">Frame up. Solder the stack. Flash the firmware. Tune the PIDs. Crash. Rebuild. Fly cleaner. The loop never gets old.</p>
         </div>
         <span class="hobby-arrow">→</span>
       </div>
@@ -557,7 +611,7 @@
         <span class="hobby-num">02</span>
         <div class="hobby-info">
           <p class="hobby-name">Airsoft &amp; Paintball</p>
-          <p class="hobby-blurb">Half the fun is on the field, the other half is on the workbench. Tuning internals, swapping hopups, dialing in gear loadouts. The technical side is just as compelling as the game itself.</p>
+          <p class="hobby-blurb">Half the draw is the field. The other half is the workbench — tuning internals, swapping hop-ups, dialing in loadouts. The technical side is as compelling as the game.</p>
         </div>
         <span class="hobby-arrow">→</span>
       </div>
@@ -566,7 +620,7 @@
         <span class="hobby-num">03</span>
         <div class="hobby-info">
           <p class="hobby-name">Electronics &amp; Tinkering</p>
-          <p class="hobby-blurb">Circuits, solder fumes, and the satisfaction of a first power-on that doesn't smoke. Started as a curiosity, became a way of life.</p>
+          <p class="hobby-blurb">Circuits, solder fumes, and the satisfaction of a first power-on that does not smoke. What started as curiosity became a way of thinking about everything.</p>
         </div>
         <span class="hobby-arrow">→</span>
       </div>
@@ -575,7 +629,7 @@
         <span class="hobby-num">04</span>
         <div class="hobby-info">
           <p class="hobby-name">Rec Sports</p>
-          <p class="hobby-blurb">I play to have fun, not to go pro. Rotating cast of racquetball, pickleball, and softball depending on the season and who's asking.</p>
+          <p class="hobby-blurb">I play to compete and unwind, not to go pro. Whatever is in season and whoever is asking.</p>
           <div class="hobby-sports-sub">
             <span class="sport-tag">Racquetball</span>
             <span class="sport-tag">Pickleball</span>
@@ -588,8 +642,8 @@
       <div class="hobby-item">
         <span class="hobby-num">05</span>
         <div class="hobby-info">
-          <p class="hobby-name">Folk-Country Music</p>
-          <p class="hobby-blurb">Colter Wall, Tyler Childers, Willie Nelson. Slow, heavy, honest. The soundtrack to every build session.</p>
+          <p class="hobby-name">Folk-Country &amp; Outdoors</p>
+          <p class="hobby-blurb">Colter Wall, Tyler Childers, Willie Nelson on the speaker. Usually in the workshop, sometimes on a trail, always with my wife nearby. Slow, heavy, honest music for slow, heavy, honest work.</p>
         </div>
         <span class="hobby-arrow">→</span>
       </div>
@@ -611,8 +665,8 @@
 
 <!-- RESUME -->
 <section id="resume">
-  <p class="section-label fade-up">04 — Experience</p>
-  <h2 class="section-title fade-up">Where I've <em>Worked.</em></h2>
+  <p class="section-label fade-up">05 — Experience</p>
+  <h2 class="section-title fade-up">Where I have <em>delivered.</em></h2>
   <div class="resume-layout">
 
     <div class="fade-up">
@@ -621,28 +675,28 @@
       <div class="resume-entry">
         <div class="entry-header">
           <p class="entry-title">Data Analyst / Report Developer</p>
-          <p class="entry-date">July 2025 – Present</p>
+          <p class="entry-date">Jul 2025 – Present</p>
         </div>
-        <p class="entry-company">First Tactical</p>
-        <p class="entry-body">Selected to co-lead a company-wide data modernization initiative within six months of hire. Architected a full Data Lakehouse in Microsoft Fabric, built 41+ production Power BI reports used daily across the organization, and co-designed a unified reporting app standardizing metrics from the ground up.</p>
-      </div>
-
-      <div class="resume-entry">
-        <div class="entry-header">
-          <p class="entry-title">Business Systems Analyst Intern</p>
-          <p class="entry-date">June 2024 – Oct 2024</p>
-        </div>
-        <p class="entry-company">E&amp;J Gallo Winery</p>
-        <p class="entry-body">Developed and deployed a ServiceNow ticketing workflow through acceptance, QA, and production environments. Presented findings to IT leadership and documented a legacy Finance Access database for developer handoff.</p>
+        <p class="entry-company">First Tactical · Ceres, CA</p>
+        <p class="entry-body">Selected to co-lead a company-wide data modernization initiative within six months. Solo-architected a full Data Lakehouse (Medallion framework) in Microsoft Fabric, replacing legacy ODBC-to-Excel workflows. Co-designed and built 41+ production Power BI reports, packaged as a unified app now used daily by sales leadership. Managed platform administration across Shipwise, Elastic, and Shopify with governance over 10,000+ SKUs.</p>
       </div>
 
       <div class="resume-entry">
         <div class="entry-header">
           <p class="entry-title">Data Analyst Intern</p>
-          <p class="entry-date">Feb 2025 – May 2025</p>
+          <p class="entry-date">Feb – May 2025</p>
         </div>
-        <p class="entry-company">Stanislaus County Behavioral Health</p>
-        <p class="entry-body">Wrote and optimized SQL queries in SSMS and designed Power BI dashboards giving leadership visibility into client demographics and program performance.</p>
+        <p class="entry-company">Stanislaus County Behavioral Health · Modesto, CA</p>
+        <p class="entry-body">Wrote and optimized SQL queries in SSMS and designed Power BI dashboards that gave leadership direct visibility into client demographics and program performance for the first time.</p>
+      </div>
+
+      <div class="resume-entry">
+        <div class="entry-header">
+          <p class="entry-title">Business Systems Analyst Intern</p>
+          <p class="entry-date">Jun – Oct 2024</p>
+        </div>
+        <p class="entry-company">E&amp;J Gallo Winery · Modesto, CA</p>
+        <p class="entry-body">Developed and deployed a ServiceNow ticketing workflow through acceptance, QA, and production environments. Presented findings to IT leadership. Documented a legacy Finance Access database, mapping dependencies and creating a matrix diagram for developer handoff.</p>
       </div>
 
       <div class="resume-entry">
@@ -650,35 +704,69 @@
           <p class="entry-title">IT Analyst Intern</p>
           <p class="entry-date">Feb 2022 – Apr 2023</p>
         </div>
-        <p class="entry-company">G3 Enterprises</p>
-        <p class="entry-body">Managed IT asset inventory for 300+ employees, achieving $118,548 in annual cost savings. Led company-wide migration from legacy phone software to Microsoft Teams Phone.</p>
+        <p class="entry-company">G3 Enterprises · Ceres, CA</p>
+        <p class="entry-body">Managed IT asset inventory for 300+ employees, delivering $118,548 in annual cost savings. Led company-wide migration from legacy phone software to Microsoft Teams Phone. Provided Tier 2 support including workstation imaging, onboarding, and hardware/software resolution.</p>
+      </div>
+
+      <div class="resume-entry">
+        <div class="entry-header">
+          <p class="entry-title">Manufacturing Operations Intern</p>
+          <p class="entry-date">Sep – Dec 2021</p>
+        </div>
+        <p class="entry-company">E&amp;J Gallo Winery · Modesto, CA</p>
+        <p class="entry-body">Rotational program across 12+ departments — supply chain, quality assurance, bottling, warehouse logistics. First real exposure to how large-scale operations actually run from end to end.</p>
       </div>
     </div>
 
     <div class="fade-up">
-      <p class="resume-col-title">Skills &amp; Stack</p>
+      <p class="resume-col-title">Education</p>
+
       <div class="resume-entry">
-        <p class="entry-title" style="margin-bottom:1rem;">Technical</p>
+        <div class="entry-header">
+          <p class="entry-title">B.S. Business Administration</p>
+          <p class="entry-date">Aug 2023 – May 2025</p>
+        </div>
+        <p class="entry-company">California State University, Stanislaus</p>
+        <p class="entry-body">Concentration in Computer Information Systems. Where the technical foundation met business thinking.</p>
+      </div>
+
+      <p class="resume-col-title" style="margin-top: 2.5rem;">Technical Stack</p>
+      <div class="resume-entry">
         <div class="skills-chips">
           <span class="chip">Microsoft Fabric</span>
           <span class="chip">Power BI</span>
           <span class="chip">DAX</span>
-          <span class="chip">SQL</span>
+          <span class="chip">SQL / SSMS</span>
           <span class="chip">ETL Pipelines</span>
           <span class="chip">Medallion Architecture</span>
-          <span class="chip">Python</span>
           <span class="chip">Data Modeling</span>
+          <span class="chip">Power Automate</span>
+          <span class="chip">Azure Cloud Services</span>
+          <span class="chip">ServiceNow ITSM</span>
+          <span class="chip">Shopify</span>
+          <span class="chip">Elastic</span>
         </div>
       </div>
-      <div class="resume-entry" style="margin-top:2rem;">
-        <p class="entry-title" style="margin-bottom:1rem;">Hands-On</p>
+
+      <p class="resume-col-title" style="margin-top: 2.5rem;">Hands-On Skills</p>
+      <div class="resume-entry">
         <div class="skills-chips">
-          <span class="chip">FPV Build & Tune</span>
-          <span class="chip">Soldering</span>
-          <span class="chip">PCB Design</span>
-          <span class="chip">Flight Controller Config</span>
-          <span class="chip">Electronics Repair</span>
+          <span class="chip">FPV Build &amp; Tune</span>
+          <span class="chip">Soldering &amp; PCB</span>
+          <span class="chip">3D Modeling &amp; Printing</span>
+          <span class="chip">Smart Home Systems</span>
+          <span class="chip">Woodworking &amp; Fabrication</span>
         </div>
+      </div>
+
+      <p class="resume-col-title" style="margin-top: 2.5rem;">Volunteering</p>
+      <div class="resume-entry">
+        <div class="entry-header">
+          <p class="entry-title">Service &amp; Support Volunteer</p>
+          <p class="entry-date">2023 &amp; 2025</p>
+        </div>
+        <p class="entry-company">Alaskan Christian College · Soldotna, AK</p>
+        <p class="entry-body">Served students from remote villages overcoming addiction, abuse, and trauma. Contributed to campus construction and built relationships that reshaped how I think about showing up for people.</p>
       </div>
     </div>
 
@@ -688,35 +776,35 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-inner fade-up">
-    <p class="section-label" style="justify-content:center;">05 — Contact</p>
-    <h2 class="section-title">Let's <em>Connect.</em></h2>
-    <p>Whether it is a data problem, a build project, or just a conversation about folk music and FPV, I am always up for it. Reach out on LinkedIn or drop me an email.</p>
+    <p class="section-label" style="justify-content:center;">06 — Contact</p>
+    <h2 class="section-title">Let's build <em>something.</em></h2>
+    <p>I am always interested in conversations about data infrastructure, business operations, or anything that involves building something from scratch. If you have a problem worth solving, I want to hear about it.</p>
     <div class="contact-links">
-      <a href="https://www.linkedin.com/in/westleys" target="_blank" class="contact-link primary">🔗 LinkedIn</a>
-      <a href="mailto:westley.business@gmail.com" class="contact-link secondary">✉ Email Me</a>
+      <a href="https://www.linkedin.com/in/westleys" target="_blank" class="contact-link primary">LinkedIn</a>
+      <a href="mailto:westley.business@gmail.com" class="contact-link secondary">Email</a>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 Westley Smith. Built with intention.</p>
-  <p>Modesto, CA · Open to remote opportunities</p>
+  <p>&copy; 2026 Westley Smith. Built by hand.</p>
+  <p>Central Valley, CA · Open to remote &amp; relocation</p>
 </footer>
 
 </div><!-- end #main-site -->
 
-<!-- BLOG PAGE (hidden by default) -->
+<!-- BLOG PAGE -->
 <div id="blog-page" style="display:none; padding-top: 5rem;">
   <section style="background: var(--bark); min-height: 100vh; padding: 7rem 5rem;">
     <p class="section-label" style="display:flex; align-items:center; gap:1rem;">Blog</p>
-    <h2 class="section-title">Thoughts. <em>Notes. Builds.</em></h2>
+    <h2 class="section-title">Thoughts. <em>Builds. Lessons.</em></h2>
     <div style="max-width: 680px;">
       <p style="font-size: 1rem; line-height: 1.9; color: var(--sand); margin-bottom: 3rem;">
-        This is where I will write about things I am building, things I am learning, and things I cannot stop thinking about. Posts coming soon.
+        Writing about things I am building, decisions I am making, and problems I am working through. The kind of stuff I wish someone had written down when they were at this stage.
       </p>
-      <div style="border-top: 1px solid rgba(143,87,38,0.2); padding-top: 2.5rem;">
-        <p style="font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--flint);">No posts yet. Check back soon.</p>
+      <div style="border-top: 1px solid rgba(74,124,89,0.2); padding-top: 2.5rem;">
+        <p style="font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--flint);">First post coming soon.</p>
       </div>
     </div>
     <div style="margin-top: 4rem;">
@@ -725,23 +813,21 @@
         font-family: 'Space Mono', monospace; font-size: 0.68rem;
         letter-spacing: 0.14em; text-transform: uppercase;
         color: var(--sand); text-decoration: none;
-        border-bottom: 1px solid rgba(143,87,38,0.35);
+        border-bottom: 1px solid rgba(74,124,89,0.35);
         padding-bottom: 0.2rem;
         transition: color 0.25s;
-      ">← Back to Home</a>
+      ">&larr; Back to Home</a>
     </div>
   </section>
 </div>
 
 <script>
-  // Fade-up observer
   const observer = new IntersectionObserver(
     entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
     { threshold: 0.12 }
   );
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // Blog in-site routing
   function showBlog() {
     document.getElementById('main-site').style.display = 'none';
     document.getElementById('blog-page').style.display = 'block';
@@ -750,10 +836,11 @@
   function showHome() {
     document.getElementById('blog-page').style.display = 'none';
     document.getElementById('main-site').style.display = 'block';
-    window.scrollTo(0, 0);
   }
   document.querySelector('a[href="/blog"]').addEventListener('click', function(e) {
     e.preventDefault();
     showBlog();
   });
 </script>
+</body>
+</html>
