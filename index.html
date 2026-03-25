@@ -144,12 +144,12 @@
   .scroll-hint {
     position: absolute; bottom: 2.5rem; left: 25%; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-    color: var(--flint); opacity: 0.45;
+    color: var(--sand); opacity: 0.7;
     font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em;
   }
   .scroll-line {
     width: 1px; height: 40px;
-    background: linear-gradient(to bottom, var(--clay), transparent);
+    background: linear-gradient(to bottom, var(--straw), transparent);
     animation: scrollPulse 2s ease-in-out infinite;
   }
   @keyframes scrollPulse { 0%,100% { opacity: 0.3 } 50% { opacity: 1 } }
@@ -429,19 +429,79 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
+    /* Mobile nav - hamburger */
+    .nav-links {
+      position: fixed; top: 0; right: -100%; width: 75vw; max-width: 300px;
+      height: 100vh; flex-direction: column; gap: 0;
+      background: rgba(12,18,16,0.98); backdrop-filter: blur(16px);
+      padding: 5rem 2rem 2rem;
+      transition: right 0.35s ease;
+      border-left: 1px solid rgba(74,124,89,0.2);
+      z-index: 1000;
+    }
+    .nav-links.open { right: 0; }
+    .nav-links li { border-bottom: 1px solid rgba(74,124,89,0.12); }
+    .nav-links a {
+      display: block; padding: 1rem 0; font-size: 0.75rem;
+    }
+    .hamburger {
+      display: flex; flex-direction: column; gap: 5px;
+      cursor: pointer; z-index: 1001; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--sand); transition: all 0.3s;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+    .nav-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+      z-index: 999;
+    }
+    .nav-overlay.open { opacity: 1; pointer-events: auto; }
+
+    /* Hero */
     #hero { grid-template-columns: 1fr; }
-    .hero-right { min-height: 300px; }
+    .hero-left { padding: 7rem 2rem 3rem; }
+    .hero-name { font-size: clamp(2.4rem, 10vw, 3.5rem); }
+    .hero-tagline { font-size: 0.88rem; }
+    .hero-right { min-height: 260px; }
     .hero-right::before { display: none; }
-    #about { grid-template-columns: 1fr; gap: 3rem; }
-    .philosophy-grid { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr 1fr; }
-    .project-card:first-child { grid-column: span 2; }
-    .hobbies-layout { grid-template-columns: 1fr; }
+    .scroll-hint { left: 50%; }
+
+    /* Sections */
+    section { padding: 4.5rem 1.5rem; }
+    #about { grid-template-columns: 1fr; gap: 2.5rem; }
+    .stat-row { gap: 1.5rem; flex-wrap: wrap; }
+    .philosophy-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card:first-child { grid-column: span 1; }
+    .project-card { aspect-ratio: 3/2; }
+    .project-desc { max-height: 80px; } /* always show on mobile */
+    .hobbies-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hobbies-img-stack { height: 360px; }
     .resume-layout { grid-template-columns: 1fr; gap: 3rem; }
-    section { padding: 5rem 2rem; }
+
+    /* Nav & footer */
     nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1.5rem; }
-    footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    footer {
+      flex-direction: column; gap: 0.75rem; text-align: center;
+      padding: 2rem 1.5rem;
+    }
+  }
+
+  /* Hide hamburger on desktop */
+  .hamburger { display: none; }
+  .nav-overlay { display: none; }
+  @media (max-width: 900px) {
+    .hamburger { display: flex; }
+    .nav-overlay { display: block; }
   }
 </style>
 </head>
@@ -450,22 +510,26 @@
 <!-- NAV -->
 <nav>
   <a href="#hero" class="nav-brand" onclick="showHome(); return false;">Westley Smith</a>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
   <ul class="nav-links">
-    <li><a href="#about" onclick="showHome();">About</a></li>
-    <li><a href="#projects" onclick="showHome();">Projects</a></li>
-    <li><a href="#hobbies" onclick="showHome();">Off the Clock</a></li>
-    <li><a href="#resume" onclick="showHome();">Experience</a></li>
-    <li><a href="#contact" onclick="showHome();">Contact</a></li>
-    <li><a href="/blog">Blog</a></li>
+    <li><a href="#about" onclick="showHome(); closeMenu();">About</a></li>
+    <li><a href="#projects" onclick="showHome(); closeMenu();">Projects</a></li>
+    <li><a href="#hobbies" onclick="showHome(); closeMenu();">Hobbies</a></li>
+    <li><a href="#resume" onclick="showHome(); closeMenu();">Experience</a></li>
+    <li><a href="/blog" class="blog-link">Blog</a></li>
+    <li><a href="#contact" onclick="showHome(); closeMenu();">Contact</a></li>
   </ul>
 </nav>
+<div class="nav-overlay" onclick="closeMenu()"></div>
 
 <div id="main-site">
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-left">
-    <p class="hero-tag">Data Infrastructure · Operations · Leadership</p>
+    <p class="hero-tag">Builder. Tinkerer. Maker.</p>
     <h1 class="hero-name">Westley<br>Smith.<br><em>I build what<br>doesn't exist yet.</em></h1>
     <p class="hero-tagline">I architect data systems that replace entire legacy workflows, then I make sure leadership actually uses them to make better decisions. Nine months in, the reporting app I built is the first thing our sales team opens every morning. I am 22 and just getting started.</p>
     <a href="#contact" class="hero-cta"><span>⬇</span> Let's Talk</a>
@@ -828,16 +892,30 @@
   );
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+  // Mobile menu
+  function toggleMenu() {
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.querySelector('.hamburger').classList.toggle('active');
+    document.querySelector('.nav-overlay').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.querySelector('.nav-links').classList.remove('open');
+    document.querySelector('.hamburger').classList.remove('active');
+    document.querySelector('.nav-overlay').classList.remove('open');
+  }
+
+  // Blog in-site routing
   function showBlog() {
     document.getElementById('main-site').style.display = 'none';
     document.getElementById('blog-page').style.display = 'block';
     window.scrollTo(0, 0);
+    closeMenu();
   }
   function showHome() {
     document.getElementById('blog-page').style.display = 'none';
     document.getElementById('main-site').style.display = 'block';
   }
-  document.querySelector('a[href="/blog"]').addEventListener('click', function(e) {
+  document.querySelector('a.blog-link').addEventListener('click', function(e) {
     e.preventDefault();
     showBlog();
   });
