@@ -120,21 +120,13 @@
     color: var(--charcoal);
     box-shadow: 4px 4px 0px var(--clay);
   }
-
   .hero-right {
     position: relative; background: var(--soil); overflow: hidden;
   }
-  .hero-img-placeholder {
+  .hero-right img {
     width: 100%; height: 100%;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 1rem;
-    background: linear-gradient(160deg, #0d1a0f 0%, #08100a 100%);
-  }
-  .hero-img-placeholder .ph-icon { font-size: 4rem; opacity: 0.2; }
-  .hero-img-placeholder p {
-    font-family: 'Space Mono', monospace; font-size: 0.62rem;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--flint); opacity: 0.55;
+    object-fit: cover; object-position: center top;
+    display: block;
   }
   .hero-right::before {
     content: '';
@@ -154,25 +146,6 @@
     animation: scrollPulse 2s ease-in-out infinite;
   }
   @keyframes scrollPulse { 0%,100% { opacity: 0.3 } 50% { opacity: 1 } }
-
-  /* ── SECTIONS ── */
-  section { padding: 7rem 5rem; }
-  .section-label {
-    font-family: 'Space Mono', monospace; font-size: 0.62rem;
-    letter-spacing: 0.35em; text-transform: uppercase;
-    color: var(--clay); margin-bottom: 0.75rem;
-    display: flex; align-items: center; gap: 1rem;
-  }
-  .section-label::after {
-    content: ''; flex: 1; height: 1px;
-    background: linear-gradient(to right, var(--leather), transparent);
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.9rem, 3.2vw, 2.8rem); font-weight: 700;
-    line-height: 1.1; color: var(--straw); margin-bottom: 3rem;
-  }
-  .section-title em { color: var(--clay); font-style: italic; }
 
   /* ── ABOUT ── */
   #about {
