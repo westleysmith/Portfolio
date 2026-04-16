@@ -340,6 +340,33 @@ padding-bottom: 0.2rem; transition: color 0.25s; margin-top: 3rem;
   letter-spacing: 0.18em; text-transform: uppercase; color: var(--flint);
 }
 .map-embed-frame { flex: 1; border: none; width: 100%; background: #0a1a0d; }
+.map-embed-desc {
+  display: flex; align-items: center; justify-content: space-between; gap: 3rem;
+  padding: 1.1rem 2.5rem; background: var(--soil);
+  border-bottom: 1px solid rgba(74,124,89,0.15); flex-shrink: 0;
+}
+.map-embed-desc-text { display: flex; flex-direction: column; gap: 0.3rem; }
+.map-embed-desc-cat {
+  font-family: 'Space Mono', monospace; font-size: 0.55rem;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay);
+}
+.map-embed-desc-heading {
+  font-family: 'Playfair Display', serif; font-size: 1.1rem;
+  font-weight: 700; color: var(--linen);
+}
+.map-embed-desc-body {
+  font-size: 0.78rem; line-height: 1.65; color: var(--sand); max-width: 680px;
+}
+.map-embed-desc-tags {
+  display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem;
+  list-style: none; flex-shrink: 0; justify-content: flex-end;
+}
+.map-embed-desc-tags li {
+  font-family: 'Space Mono', monospace; font-size: 0.55rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--clay); border: 1px solid rgba(74,124,89,0.3);
+  padding: 0.25rem 0.55rem; border-radius: 2px;
+}
 .map-mobile-fallback { display: none; }
 
 /* ── HOBBIES ── */
@@ -862,6 +889,20 @@ footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 2rem
     <div class="map-embed-bar">
       <a href="#" class="back-link" onclick="hideProject(); return false;">← Back to Projects</a>
       <span class="map-embed-bar-title">National Territory Map · Live Demo</span>
+    </div>
+    <div class="map-embed-desc">
+      <div class="map-embed-desc-text">
+        <p class="map-embed-desc-cat">Data Visualization · Power BI</p>
+        <h3 class="map-embed-desc-heading">National Territory Map</h3>
+        <p class="map-embed-desc-body">A custom Power BI visual mapping 600+ dealer accounts across national sales divisions. Built from scratch with pure SVG — no third-party map library. Drill from national → division → state → rep with animated transitions, live attainment color-coding, and rep scorecards in a collapsible sidebar.</p>
+      </div>
+      <ul class="map-embed-desc-tags">
+        <li>Power BI Custom Visual</li>
+        <li>SVG / JavaScript</li>
+        <li>600+ Dealer Accounts</li>
+        <li>Drill-Down Navigation</li>
+        <li>Live Attainment Tracking</li>
+      </ul>
     </div>
     <iframe src="projects/territory-map.html" class="map-embed-frame" title="National Territory Map Demo" allowfullscreen></iframe>
   </div>
