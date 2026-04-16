@@ -340,6 +340,7 @@ padding-bottom: 0.2rem; transition: color 0.25s; margin-top: 3rem;
   letter-spacing: 0.18em; text-transform: uppercase; color: var(--flint);
 }
 .map-embed-frame { flex: 1; border: none; width: 100%; background: #0a1a0d; }
+.map-mobile-fallback { display: none; }
 
 /* ── HOBBIES ── */
 #hobbies { background: var(--charcoal); }
@@ -498,6 +499,8 @@ section { padding: 4.5rem 1.5rem; }
 .project-detail-hero { aspect-ratio: 16/9; }
 nav { padding: 1rem 1.5rem; }
 footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 2rem 1.5rem; }
+.map-desktop-only { display: none !important; }
+.map-mobile-fallback { display: block; }
 
 }
 </style>
@@ -854,12 +857,39 @@ footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 2rem
 <!-- TERRITORY MAP EMBED PAGE -->
 
 <div class="project-detail-page" id="project-territorymap">
-  <div class="map-embed-wrap">
+  <!-- Desktop: full iframe embed -->
+  <div class="map-embed-wrap map-desktop-only">
     <div class="map-embed-bar">
       <a href="#" class="back-link" onclick="hideProject(); return false;">← Back to Projects</a>
       <span class="map-embed-bar-title">National Territory Map · Live Demo</span>
     </div>
     <iframe src="projects/territory-map.html" class="map-embed-frame" title="National Territory Map Demo" allowfullscreen></iframe>
+  </div>
+  <!-- Mobile: fallback description -->
+  <div class="map-mobile-fallback project-detail-inner">
+    <div class="project-detail-hero">
+      <div class="ph-icon" style="font-size:3.5rem;opacity:0.25;">🗺️</div>
+      <p style="font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;color:var(--flint);opacity:0.5;margin-top:0.5rem;">Interactive demo</p>
+    </div>
+    <div class="project-detail-content">
+      <p class="project-detail-cat">Data Visualization · Power BI</p>
+      <h2>National Territory Map</h2>
+      <div class="project-detail-body">
+        <p>A custom Power BI visual mapping 600+ dealer accounts across national sales divisions. Built entirely from scratch — no third-party map library, pure SVG rendered in-browser.</p>
+        <h3>How it works</h3>
+        <ul>
+          <li>Drill from national → division → state → individual rep with animated transitions</li>
+          <li>Live attainment color-coding: green ≥85%, amber ≥50%, red below 50%</li>
+          <li>Bank-connected to real Plaid account data in production via Power BI dataflows</li>
+          <li>Sidebar panels show rep scorecards, dealer lists, and territory breakdowns</li>
+          <li>AI coach integration provides contextual spend verdicts based on live balance</li>
+        </ul>
+        <p style="font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;color:var(--clay);padding:1rem 1.2rem;border:1px solid rgba(74,124,89,0.25);border-radius:4px;">
+          ↗ Open on a desktop or tablet to interact with the live demo.
+        </p>
+      </div>
+      <a href="#" class="back-link" onclick="hideProject(); return false;">← Back to Projects</a>
+    </div>
   </div>
 </div>
 
