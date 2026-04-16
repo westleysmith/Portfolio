@@ -325,6 +325,22 @@ padding-bottom: 0.2rem; transition: color 0.25s; margin-top: 3rem;
 }
 .back-link:hover { color: var(--linen); }
 
+/* ── MAP EMBED ── */
+#project-territorymap { padding-top: 0; height: 100vh; overflow: hidden; display: none; }
+#project-territorymap.active { display: flex; flex-direction: column; }
+.map-embed-wrap { display: flex; flex-direction: column; flex: 1; overflow: hidden; padding-top: 5rem; }
+.map-embed-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.7rem 2rem; background: var(--charcoal);
+  border-bottom: 1px solid rgba(74,124,89,0.2); flex-shrink: 0;
+}
+.map-embed-bar .back-link { margin-top: 0; }
+.map-embed-bar-title {
+  font-family: 'Space Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--flint);
+}
+.map-embed-frame { flex: 1; border: none; width: 100%; background: #0a1a0d; }
+
 /* ── HOBBIES ── */
 #hobbies { background: var(--charcoal); }
 .hobbies-layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 5rem; align-items: start; }
@@ -572,6 +588,15 @@ footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 2rem
         <p class="project-name">Custom Ice Tray</p>
         <p class="project-desc">Designed from scratch in Autodesk Fusion 360. From concept to printable model.</p>
         <p class="project-view-link">View Project →</p>
+      </div>
+    </div>
+    <div class="project-card fade-up" onclick="showProject('territorymap')">
+      <div class="project-img"><div class="ph-icon">🗺️</div><p>Interactive map demo</p></div>
+      <div class="project-overlay">
+        <p class="project-cat">Data Visualization · Power BI</p>
+        <p class="project-name">National Territory Map</p>
+        <p class="project-desc">Custom Power BI visual mapping 600+ dealer accounts across national sales divisions. Drill from nation → division → state → rep with live attainment color-coding.</p>
+        <p class="project-view-link">View Live Demo →</p>
       </div>
     </div>
   </div>
@@ -825,6 +850,18 @@ footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 2rem
       </div>
       <a href="#" class="back-link" onclick="hideProject(); return false;">← Back to Projects</a>
     </div>
+  </div>
+</div>
+
+<!-- TERRITORY MAP EMBED PAGE -->
+
+<div class="project-detail-page" id="project-territorymap">
+  <div class="map-embed-wrap">
+    <div class="map-embed-bar">
+      <a href="#" class="back-link" onclick="hideProject(); return false;">← Back to Projects</a>
+      <span class="map-embed-bar-title">National Territory Map · Live Demo</span>
+    </div>
+    <iframe src="projects/territory-map.html" class="map-embed-frame" title="National Territory Map Demo" allowfullscreen></iframe>
   </div>
 </div>
 
