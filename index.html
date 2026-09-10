@@ -195,6 +195,9 @@
   .jobs .role { font-weight: 700; }
   .jobs .org { color: var(--muted); }
   .jobs p { margin: 4px 0 0; max-width: 40em; }
+  .jobs .points { margin: 8px 0 0; padding-left: 18px; max-width: 42em; }
+  .jobs .points li { display: list-item; padding: 0; border: 0; margin-bottom: 6px; }
+  .jobs .points li::marker { color: var(--muted); }
   .tools { margin-top: 28px; color: var(--muted); max-width: 44em; }
   .tools strong { color: var(--ink); font-weight: 600; }
 
@@ -252,7 +255,7 @@
   <header class="intro">
     <div>
       <h1>Westley Smith</h1>
-      <p>I'm a data analyst in California's Central Valley. At work I built our data warehouse in Microsoft Fabric and the Power BI reports that run on it.</p>
+      <p>I'm a data analyst in California's Central Valley. At work I co-built our data warehouse in Microsoft Fabric and the Power BI reports that run on it.</p>
       <p>Away from work I'm usually at the workbench, rebuilding a drone I crashed, soldering something, or 3D printing a part I couldn't find.</p>
       <p class="now">Currently learning to race FPV drones.</p>
       <p class="links">
@@ -276,7 +279,7 @@
           <img src="territory-map-preview.png" alt="US map shaded by sales region" loading="lazy">
         </a>
         <h3>National territory map</h3>
-        <p>A sales map you can drill into, from the whole country down to a region, a state, and a single rep, with every account colored by how it's tracking against goal. The demo runs on made-up data.</p>
+        <p>A sales map you can drill into, from the whole country down to a region, a state, and a single rep, with every account colored by how it's tracking against goal. It ships as a Power BI custom visual that inherits the warehouse's row-level security. The demo runs on made-up data.</p>
         <p><a href="projects/territory-map.html">Open the live demo</a></p>
         <span class="mono">D3.js, Power BI</span>
       </article>
@@ -320,7 +323,7 @@
           </svg>
         </div>
         <h3>Data lakehouse in Microsoft Fabric</h3>
-        <p>Replaced a pile of ODBC-to-Excel exports with a bronze, silver, gold warehouse. It feeds 41+ Power BI reports, packaged as one app that sales leadership opens every morning.</p>
+        <p>Replaced a pile of ODBC-to-Excel exports with a bronze, silver, gold warehouse. It feeds 41+ Power BI reports, packaged as one Power BI app used daily across the company.</p>
         <span class="mono">Microsoft Fabric, SQL, Power BI, DAX</span>
       </article>
 
@@ -388,15 +391,21 @@
         <div>
           <div class="role">Data Analyst / Report Developer</div>
           <div class="org">First Tactical, Ceres, CA</div>
-          <p>Co-leading the company's data modernization. Architected the Fabric lakehouse, built the Power BI app, and administer Shipwise, Elastic, and Shopify across 10,000+ SKUs.</p>
+          <ul class="points">
+            <li>First in-house data hire. Helped build the Systems &amp; Integrations function from the ground up, covering analytics, BI, and the business platforms that sit on top of the ERP.</li>
+            <li>Co-built a Microsoft Fabric lakehouse (medallion framework) that replaced legacy ODBC workflows. It feeds 41+ production Power BI dashboards, packaged as one app used daily across the company.</li>
+            <li>Built a custom geospatial mapping visual for Power BI that inherits the warehouse's row-level security and drills through 1,500+ dealers nationwide.</li>
+            <li>Defined the company's first market share methodology, sizing the market bottom-up from public regulatory data and layering competitor locations onto territories. Presented it to the CEO and CSO, who asked to scale it nationally.</li>
+            <li>Co-led the rollout of Zoho CRM, Fulcrum, and Power BI to a 50-person sales team with no prior CRM or BI. Built the training, ran onboarding, and administer all three, plus Shopify, Elastic, and Shipwise. Also contributed to an AI-powered reporting pipeline that sends daily, weekly, and monthly reports automatically.</li>
+          </ul>
         </div>
       </li>
       <li>
         <span class="mono">Feb to May 2025</span>
         <div>
           <div class="role">Data Analyst Intern</div>
-          <div class="org">Stanislaus County Behavioral Health, Modesto, CA</div>
-          <p>SQL and Power BI dashboards that gave leadership their first direct view of client demographics and program performance.</p>
+          <div class="org">Stanislaus County Behavioral Health &amp; Recovery Services, Modesto, CA</div>
+          <p>Wrote and optimized SQL against EHR data in SSMS and built Power BI dashboards that gave leadership visibility into client demographics and program performance.</p>
         </div>
       </li>
       <li>
@@ -404,34 +413,34 @@
         <div>
           <div class="role">Business Systems Analyst Intern</div>
           <div class="org">E&amp;J Gallo Winery, Modesto, CA</div>
-          <p>Took a ServiceNow ticketing workflow through QA to production and documented a legacy Finance Access database for developer handoff.</p>
+          <p>Built and deployed a ServiceNow ticketing workflow for yard management through ACC, QA, and production, and documented a Finance Access database to guide its replacement. Presented both to Gallo IT leadership.</p>
         </div>
       </li>
       <li>
         <span class="mono">Feb 2022 to Apr 2023</span>
         <div>
-          <div class="role">IT Analyst Intern</div>
+          <div class="role">IT Analyst</div>
           <div class="org">G3 Enterprises, Ceres, CA</div>
-          <p>Ran IT asset inventory for 300+ employees, saving $118K a year, and led the move to Microsoft Teams Phone.</p>
+          <p>Managed IT asset inventory for 300+ employees, saving $118,548 a year. Automated service management processes, provided Tier 2 support, and led the company-wide move to Microsoft Teams Phone.</p>
         </div>
       </li>
       <li>
         <span class="mono">Sep to Dec 2021</span>
         <div>
-          <div class="role">Manufacturing Operations Intern</div>
+          <div class="role">Manufacturing Operations Intern, Gateway to Industry</div>
           <div class="org">E&amp;J Gallo Winery, Modesto, CA</div>
-          <p>Rotated through 12+ departments, from supply chain and QA to bottling and warehouse logistics.</p>
+          <p>Rotated across 12+ departments at Gallo Spirits, including supply chain, QA, bottling, and warehouse logistics.</p>
         </div>
       </li>
       <li>
-        <span class="mono">2023 to 2025</span>
+        <span class="mono">Aug 2023 to May 2025</span>
         <div>
           <div class="role">B.S. Business Administration, Computer Information Systems</div>
-          <div class="org">California State University, Stanislaus</div>
+          <div class="org">California State University, Stanislaus, Turlock, CA</div>
         </div>
       </li>
     </ul>
-    <p class="tools"><strong>Tools:</strong> Microsoft Fabric, Power BI, DAX, SQL, Python, Power Automate, Azure, ServiceNow, Shopify. <strong>On the bench:</strong> soldering, Fusion 360, 3D printing, woodworking.</p>
+    <p class="tools"><strong>Tools:</strong> Microsoft Fabric, Power BI, DAX, SQL, Python, Power Automate, Azure, Zoho CRM, Fulcrum, ServiceNow, Shopify. <strong>On the bench:</strong> soldering, Fusion 360, 3D printing, woodworking.</p>
   </section>
 
   <section id="about">
