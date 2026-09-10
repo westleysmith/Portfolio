@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Westley Smith</title>
-<meta name="description" content="Westley Smith, data analyst in Modesto, California. Data warehouses and Power BI at work, drones and electronics at home.">
+<meta name="description" content="Westley Smith, data analyst in Modesto, California. Builds data warehouses, reporting, and sales operations tools for a manufacturer, and gets people to use them.">
 <meta name="google-site-verification" content="-k7SOYp9sEKKLAgPdEDIcjLQkJ5BGTlDHushTHqN7h8">
 <meta property="og:title" content="Westley Smith">
-<meta property="og:description" content="Data analyst in Modesto, California. Data warehouses and Power BI at work, drones and electronics at home.">
+<meta property="og:description" content="Data analyst in Modesto, California. Builds data warehouses, reporting, and sales operations tools for a manufacturer, and gets people to use them.">
 <meta property="og:image" content="https://westleybsmith.com/headshot.jpg">
 <meta property="og:url" content="https://westleybsmith.com/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232f6b3f'/><text x='16' y='22.5' font-family='Arial,sans-serif' font-weight='700' font-size='17' fill='white' text-anchor='middle'>W</text></svg>">
@@ -255,8 +255,9 @@
   <header class="intro">
     <div>
       <h1>Westley Smith</h1>
-      <p>I am a data analyst in California's Central Valley. I co-built a data warehouse in Microsoft Fabric and the Power BI reporting that runs on it, and I administer the sales team's CRM and field tools.</p>
-      <p>Outside of work I build and repair drones, work on electronics, and design and print parts in Fusion 360.</p>
+      <p>I am a data analyst at a manufacturer in California's Central Valley, and the company's first in-house data hire. My work sits between the business and the technology: someone has a problem, I work out what should exist, build or configure it, and train people to use it.</p>
+      <p>So far that has meant co-building a data warehouse and the reporting on top of it, rolling out a CRM to a sales organization that had never used one, redrawing sales territories, and now designing a sales operations function.</p>
+      <p>Outside of work I am building Pocket Check, a personal finance app, and I build and repair drones and design parts in Fusion 360.</p>
       <p class="links">
         <a href="https://www.linkedin.com/in/westleys/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/westleysmith" target="_blank" rel="noopener">GitHub</a>
@@ -278,9 +279,9 @@
           <img src="territory-map-preview.png" alt="US map shaded by sales region" loading="lazy">
         </a>
         <h3>National territory map</h3>
-        <p>A sales map you can drill into, from the whole country down to a region, a state, and a single rep, with every account colored by attainment against goal. It ships as a Power BI custom visual that inherits the warehouse's row-level security. The demo runs on made-up data.</p>
+        <p>A sales map you can drill into, from the whole country down to a region, a state, and a single rep, with every account colored by attainment against goal. I built it on my own as a Power BI custom visual; it inherits the warehouse's row-level security, so each rep sees only their territory. It replaced a static slide deck. The demo runs on made-up data.</p>
         <p><a href="projects/territory-map.html" target="_blank" rel="noopener">Open the live demo</a></p>
-        <span class="mono">D3.js, Power BI</span>
+        <span class="mono">Power BI custom visual</span>
       </article>
 
       <article class="project">
@@ -322,8 +323,8 @@
           </svg>
         </div>
         <h3>Data lakehouse in Microsoft Fabric</h3>
-        <p>Replaced a pile of ODBC-to-Excel exports with a bronze, silver, gold warehouse. It feeds 41+ Power BI reports, packaged as one Power BI app used daily across the company.</p>
-        <span class="mono">Microsoft Fabric, SQL, Power BI, DAX</span>
+        <p>Co-built with one partner to replace ODBC-to-Excel exports pulled straight off the ERP. Bronze, silver, and gold layers, scheduled pipelines, and a warehouse the company now runs its reporting on. It feeds 41+ Power BI reports, packaged as one app used across the company.</p>
+        <span class="mono">Microsoft Fabric, Power BI</span>
       </article>
 
       <article class="project">
@@ -391,11 +392,13 @@
           <div class="role">Data Analyst / Report Developer</div>
           <div class="org">First Tactical, Ceres, CA</div>
           <ul class="points">
-            <li>First in-house data hire. Helped build the Systems &amp; Integrations function from the ground up, covering analytics, BI, and the business platforms that sit on top of the ERP.</li>
-            <li>Co-built a Microsoft Fabric lakehouse (medallion framework) that replaced legacy ODBC workflows. It feeds 41+ production Power BI dashboards, packaged as one app used daily across the company.</li>
-            <li>Built a custom geospatial mapping visual for Power BI that inherits the warehouse's row-level security and drills through 1,500+ dealers nationwide.</li>
-            <li>Defined the company's first market share methodology, sizing the market bottom-up from public regulatory data and layering competitor locations onto territories. Presented it to the CEO and CSO, who asked to scale it nationally.</li>
-            <li>Co-led the rollout of Zoho CRM, Fulcrum, and Power BI to a 50-person sales team with no prior CRM or BI. Built the training, ran onboarding, and administer all three, plus Shopify, Elastic, and Shipwise. Also contributed to an AI-powered reporting pipeline that sends daily, weekly, and monthly reports automatically.</li>
+            <li>First in-house data hire. Helped build a Systems &amp; Integrations function from scratch with one partner, covering analytics, BI, data engineering, and the business platforms that sit on top of the ERP.</li>
+            <li>Co-built a Microsoft Fabric lakehouse (medallion architecture) that replaced ODBC-to-Excel workflows. It feeds 41+ production Power BI dashboards, packaged as one app used across the company.</li>
+            <li>Built a territory mapping application as a Power BI custom visual. It drills from national down to individual dealers across 1,500+ dealers and inherits the warehouse's row-level security.</li>
+            <li>Defined the company's first bottom-up market sizing model from public agency personnel counts and competitor store locations. Presented it to the CEO and CSO, who asked to scale it nationally. Redesigned several sales territories to support hiring decisions.</li>
+            <li>Co-led the rollout of Zoho CRM, Fulcrum, and Power BI to a 50-person sales organization with no prior CRM or BI. Built the training program, ran sessions in every region, and administer all three, plus Shopify, Elastic, and Shipwise.</li>
+            <li>Designing a new sales operations function (coordinators, inside sales, analysts) out of executive strategy sessions. Selected the route-planning tool, built a statewide dataset of about 3,600 public safety facilities, and am running the coordinator role in a pilot with a field rep before hiring for it.</li>
+            <li>Automated recurring reporting as scheduled Fabric notebooks, including an executive report that took most of a day by hand, and contributed to an AI reporting pipeline now in production.</li>
           </ul>
         </div>
       </li>
@@ -432,14 +435,30 @@
         </div>
       </li>
       <li>
+        <span class="mono">Jun to Sep 2021</span>
+        <div>
+          <div class="role">Maintenance Technician</div>
+          <div class="org">G3 Enterprises, Ceres, CA</div>
+          <p>Facility and safety work. Kept getting pulled into computer installs and user support, which is how I was brought back as an IT Analyst.</p>
+        </div>
+      </li>
+      <li>
         <span class="mono">Aug 2023 to May 2025</span>
         <div>
           <div class="role">B.S. Business Administration, Computer Information Systems</div>
           <div class="org">California State University, Stanislaus, Turlock, CA</div>
         </div>
       </li>
+      <li>
+        <span class="mono">2023</span>
+        <div>
+          <div class="role">Associate of Science</div>
+          <div class="org">Modesto Junior College, Modesto, CA</div>
+          <p>Started through concurrent enrollment in high school and finished while working as an IT Analyst.</p>
+        </div>
+      </li>
     </ul>
-    <p class="tools"><strong>Tools:</strong> Microsoft Fabric, Power BI, DAX, SQL, Python, Power Automate, Azure, Zoho CRM, Fulcrum, ServiceNow, Shopify. <strong>On the bench:</strong> soldering, Fusion 360, 3D printing, woodworking.</p>
+    <p class="tools"><strong>Daily:</strong> Power BI, Microsoft Fabric, Zoho CRM, Fulcrum, Excel. <strong>Working level:</strong> SQL, Python for automation, ServiceNow, Shopify, Elastic, Shipwise. <strong>On the bench:</strong> soldering, Fusion 360, 3D printing, woodworking.</p>
   </section>
 
   <section id="about">
@@ -448,7 +467,9 @@
       <img src="date-night.jpg" alt="Westley and his wife Rachelle" loading="lazy">
       <div>
         <p>My wife Rachelle and I live in Modesto, where I was born and raised.</p>
+        <p>I started in maintenance at a bottling plant, moved into IT, then business systems analysis, then data engineering, and now spend most of my time designing how a sales organization operates. That happened in about five years, working the whole time and finishing two degrees.</p>
         <p>I have always taken things apart to see how they work. As a kid that meant Arduinos and Raspberry Pis. Later it was airsoft and paintball gear, which taught me gearboxes, pneumatics, and patience. Now it is drones. I started by crashing them, then repairing them, then buying broken ones and repairing them for other people.</p>
+        <p>Outside of work I am building Pocket Check, a personal finance app that connects bank and investment accounts and categorizes spending automatically. I am also a partner in an early-stage guitar pedal company.</p>
         <p>Away from a screen I fish, camp, and play whatever rec sport is in season: racquetball, pickleball, softball.</p>
         <p>In 2023 and 2025 I volunteered at Alaskan Christian College in Soldotna, Alaska, helping with campus construction and getting to know students from remote villages.</p>
       </div>
