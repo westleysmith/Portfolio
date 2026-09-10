@@ -2330,7 +2330,7 @@ body{font-family:'Archivo',-apple-system,'Segoe UI',Roboto,Arial,sans-serif!impo
         <button class="tbar-btn dom-only" id="btn-color-visit" title="Green = visited in the last 45 days, red = not, gray = no visit on record">Visited</button>
       </div>
       <div class="tbar-sep"></div>
-      <button class="tbar-icon-btn labeled dom-only" id="btn-county-ps" title="Shade every county by its public-safety market value (TAM), with potential vs. captured rollups">Counties</button>
+      <button class="tbar-icon-btn labeled dom-only" id="btn-county-ps" title="Show county boundaries (state and region views)">Counties</button>
       <button class="tbar-icon-btn labeled active dom-only" id="btn-highways" title="Show interstate highways">Highways</button>
       <button class="tbar-icon-btn labeled" id="btn-solo" title="Solo view: hide every state except the one(s) selected - clean for screenshots">Solo view</button>
       <button class="tbar-icon-btn labeled" id="btn-hide-dealers" title="Hide all door dots to focus on the map and competitor overlays">Hide dots</button>
@@ -3478,8 +3478,11 @@ const zoom = d3.zoom().scaleExtent([0.5,20]).on('zoom', e => {
     el.attr('transform', `translate(${bx},${by}) scale(${1/k})`);
   });
 
+  mg.selectAll('path.world-country').attr('stroke-width', function(){ return (+this.getAttribute('data-base-sw') || 0.3) / k; });
+  mg.selectAll('text.intl-clabel').attr('font-size', 12/k).attr('stroke-width', 3/k);
+
   // Rescale dots to stay constant screen size
-  mg.selectAll('.dealer-dot').each(function(){
+  mg.selectAll('.dealer-dot, .intl-dot').each(function(){
     const g = d3.select(this);
     g.selectAll('circle').each(function(){
       const el = d3.select(this);
@@ -3533,6 +3536,7 @@ svg.on('click', function(event) {
   // Only fire if the click target is the SVG itself or the background rect
   // (not a state path, dot, or ellipse - those use stopPropagation)
   if(event.target === this || event.target.tagName === 'svg') {
+    if(MODE === 'international'){ intlBack(); return; }
     if(navStack.length > 1) navBack();
   }
 });
@@ -4192,6 +4196,26 @@ window.intlGoCountry = intlGoCountry;
 window.intlDrillDealer = intlDrillDealer;
 function intlBack(){ if(intlNav.length > 1){ intlNav.pop(); renderInternational(); } }
 window.intlBack = intlBack;
+function intlNavTo(i){ intlNav = intlNav.slice(0, i + 1); renderInternational(); }
+window.intlNavTo = intlNavTo;
+function intlUpdateBreadcrumb(all){
+  const bc = document.getElementById('breadcrumb'); if(!bc) return;
+  let html = '';
+  intlNav.forEach((s, i) => {
+    let label = 'International';
+    if(s.level === 'rep') label = s.rep;
+    else if(s.level === 'country') label = s.country;
+    else if(s.level === 'account'){
+      const d = (all || []).find(x => x.acctId === String(s.acctId) || x.name === s.acctId);
+      label = d ? d.name : 'Door';
+    }
+    if(i > 0) html += '<span class="sep">›</span>';
+    html += i === intlNav.length - 1
+      ? `<span class="active">${escHtml(label)}</span>`
+      : `<span onclick="intlNavTo(${i})">${escHtml(label)}</span>`;
+  });
+  bc.innerHTML = html;
+}
 
 // Dominant rep of a country = the rep with the most accounts there (colors it).
 function countryRep(country, all){
@@ -4231,6 +4255,8 @@ function renderInternational(){
   }
 
   if(HIDE_ALL_DEALERS) dotDealers = [];
+  intlUpdateBreadcrumb(all);
+  const mb = document.getElementById('mapback'); if(mb) mb.style.display = intlNav.length > 1 ? '' : 'none';
   drawIntlMap(all, dotDealers, fitCountries, focusCountries, cur);
 
   if(panel){
@@ -4248,11 +4274,16 @@ function drawIntlMap(all, dotDealers, fitCountries, focusCountries, cur){
   const feats = worldFeatures();
   if(mg) mg.remove();
   mg = svg.append('g');
-  let fitFeats = feats.filter(f => fitCountries.has(f.properties.name));
-  if(!fitFeats.length) fitFeats = feats;
-  proj = worldProjection().fitSize([W * 0.98, H * 0.92], {type:'FeatureCollection', features: fitFeats});
+  // Projection is fixed to the full account footprint; drilling ZOOMS (like the
+  // domestic map) instead of re-projecting, so strokes, dots and pan/scroll all
+  // behave the same at every level.
+  const acctFeats = feats.filter(f => all.some(d => d.country === f.properties.name));
+  proj = worldProjection().fitSize([W * 0.98, H * 0.92], {type:'FeatureCollection', features: acctFeats.length ? acctFeats : feats});
   pathFn = d3.geoPath(proj);
-  try { svg.call(zoom.transform, d3.zoomIdentity); } catch(e) {}
+  // Start from wherever the previous view was so the transition below is smooth.
+  const curT = d3.zoomTransform(svg.node());
+  mg.attr('transform', curT);
+  currentZoomK = curT.k;
 
   const acctCountries = new Set(all.map(d => d.country));
   const repOf = {}; acctCountries.forEach(c => { repOf[c] = countryRep(c, all); });
@@ -4266,7 +4297,8 @@ function drawIntlMap(all, dotDealers, fitCountries, focusCountries, cur){
     .attr('fill', d => acctCountries.has(d.properties.name)
       ? hexToRgba(mgrColor(repOf[d.properties.name]), focusCountries.has(d.properties.name) ? 0.55 : 0.30) : '#eef2f8')
     .attr('stroke', d => acctCountries.has(d.properties.name) ? mgrColor(repOf[d.properties.name]) : '#d5dbe6')
-    .attr('stroke-width', d => acctCountries.has(d.properties.name) ? 0.7 : 0.3)
+    .attr('data-base-sw', d => acctCountries.has(d.properties.name) ? 0.7 : 0.3)
+    .attr('stroke-width', d => (acctCountries.has(d.properties.name) ? 0.7 : 0.3) / curT.k)
     .style('cursor', d => acctCountries.has(d.properties.name) ? 'pointer' : 'default')
     .style('display', d => soloKeep && !soloKeep.has(d.properties.name) ? 'none' : null)
     .on('click', (ev, d) => { if(acctCountries.has(d.properties.name)) intlGoCountry(d.properties.name); });
@@ -4278,10 +4310,12 @@ function drawIntlMap(all, dotDealers, fitCountries, focusCountries, cur){
     const g = mg.append('g').attr('class','intl-dot').style('cursor','pointer')
       .on('click', () => intlDrillDealer(d.country, d.acctId || d.name));
     const repC = mgrColor(d.rep), attC = getAttainmentColor(d);
-    g.append('circle').attr('cx',pt[0]).attr('cy',pt[1]).attr('r', sel ? 7 : 5.5)
+    const baseR = sel ? 7 : 5.5, baseSW = sel ? 1.6 : 1;
+    g.append('circle').attr('cx',pt[0]).attr('cy',pt[1]).attr('r', baseR / curT.k)
+      .attr('data-base-r', baseR).attr('data-base-sw', baseSW)
       .attr('data-rep-color', repC).attr('data-att-color', attC)
       .attr('fill', COLOR_MODE === 'attainment' ? attC : repC).attr('fill-opacity', 0.92)
-      .attr('stroke', sel ? '#111' : '#fff').attr('stroke-width', sel ? 1.6 : 1);
+      .attr('stroke', sel ? '#111' : '#fff').attr('stroke-width', baseSW / curT.k);
     g.append('title').text(d.name + ' - ' + d.country + ' · ' + d.rep);
   });
 
@@ -4290,9 +4324,25 @@ function drawIntlMap(all, dotDealers, fitCountries, focusCountries, cur){
   mg.selectAll('text.intl-clabel').data(labelCountries).join('text')
     .attr('class','intl-clabel')
     .attr('transform', c => { const ll = countryCentroid(c); if(!ll) return 'translate(-9999,-9999)'; const p = proj(ll); return `translate(${p[0]},${p[1]-14})`; })
-    .attr('text-anchor','middle').attr('font-size',12).attr('font-weight',800).attr('fill','#2a2f36')
-    .attr('stroke','#fff').attr('stroke-width',3).style('paint-order','stroke').style('pointer-events','none')
+    .attr('text-anchor','middle').attr('font-size',12 / curT.k).attr('font-weight',800).attr('fill','#2a2f36')
+    .attr('stroke','#fff').attr('stroke-width',3 / curT.k).style('paint-order','stroke').style('pointer-events','none')
     .text(c => c);
+
+  // Zoom to the focus. Overview = whole footprint; a rep's countries fill ~70%
+  // of the pane; one country fills ~45% so there is still context around it,
+  // and the scale cap keeps small countries from filling the screen.
+  let target = d3.zoomIdentity;
+  const fitFeats = feats.filter(f => fitCountries.has(f.properties.name));
+  if(cur.level !== 'overview' && fitFeats.length){
+    const [[x0,y0],[x1,y1]] = pathFn.bounds({type:'FeatureCollection', features: fitFeats});
+    const dx = x1-x0, dy = y1-y0, x = (x0+x1)/2, y = (y0+y1)/2;
+    if(isFinite(dx) && isFinite(dy) && dx > 0 && dy > 0){
+      const pad = fitFeats.length > 1 ? 0.65 : 0.45;
+      const scale = Math.max(0.5, Math.min(4.5, pad / Math.max(dx/W, dy/H)));
+      target = d3.zoomIdentity.translate(W/2 - scale*x, H/2 - scale*y).scale(scale);
+    }
+  }
+  svg.transition().duration(ZOOM_DUR_LONG).call(zoom.transform, target);
 }
 
 // ── International sidebars (mirror domestic National/State/Rep/Dealer) ────────
@@ -6488,6 +6538,7 @@ function renderDealer(d){
 // NAVIGATION
 // ─────────────────────────────────────────────
 function navBack(){
+  if(MODE === 'international'){ intlBack(); return; }
   if(navStack.length>1){ navStack.pop(); renderAll(); }
 }
 
@@ -6616,7 +6667,7 @@ window.toggleSelectPremium = toggleSelectPremium;
 
 function toggleCounties(){
   SHOW_COUNTIES = !SHOW_COUNTIES;
-  document.getElementById('btn-counties').classList.toggle('active', SHOW_COUNTIES);
+  (document.getElementById('btn-county-ps') || document.getElementById('btn-counties') || {classList:{toggle(){}}}).classList.toggle('active', SHOW_COUNTIES);
   // Visibility depends on toggle + nav level (state/region only)
   refreshCounties();
 }
@@ -7359,7 +7410,7 @@ Promise.resolve(US_ATLAS_DATA).then(us => {
     // visitor drills into a state. buildDemo.js flips SHOW_COUNTIES at
     // declaration; we just mark the toolbar icon active and re-apply clip.
     try {
-      const cEl = document.getElementById('btn-counties');
+      const cEl = document.getElementById('btn-county-ps');
       if (cEl) cEl.classList.add('active');
       if (typeof refreshCounties === 'function') refreshCounties();
     } catch (e) { /* non-fatal */ }
@@ -7444,7 +7495,7 @@ bindClick('btn-highways',  () => toggleHighways());
 bindClick('btn-hide-dealers', () => toggleHideAllDealers());
 bindClick('btn-alldots',   () => toggleAllDots());
 bindClick('btn-ps-only',   () => toggleSelectPremium());
-bindClick('btn-county-ps',  () => toggleCountyPS());
+bindClick('btn-county-ps',  () => toggleCounties());
 bindClick('btn-solo',      () => toggleSolo());
 bindClick('btn-511',       () => toggle511());
 bindClick('btn-galls',     () => toggleGalls());
