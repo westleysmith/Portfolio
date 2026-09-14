@@ -1,0 +1,178 @@
+"""Builds projects/photos.html from the images in projects/photos/.
+
+Drop full-size JPEGs into projects/photos/originals/ and run:
+
+    python build_photos.py
+
+Each original is resized for the web (1600px on the long side), stripped of
+camera metadata (including GPS), and written to projects/photos/ with a 640px
+thumbnail beside it. Captions are optional: put them in
+projects/photos/captions.txt as "filename: caption", one per line.
+"""
+import os, sys, html
+from PIL import Image, ImageOps
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+SRC = os.path.join(ROOT, 'projects', 'photos', 'originals')
+OUT = os.path.join(ROOT, 'projects', 'photos')
+PAGE = os.path.join(ROOT, 'projects', 'photos.html')
+LONG, THUMB = 1600, 640
+
+def captions():
+    path = os.path.join(OUT, 'captions.txt')
+    if not os.path.exists(path):
+        return {}
+    out = {}
+    for line in open(path, encoding='utf-8'):
+        if ':' in line:
+            k, v = line.split(':', 1)
+            out[k.strip()] = v.strip()
+    return out
+
+def process(name):
+    """Web copy + thumbnail for one original. Returns (file, thumb, w, h)."""
+    im = ImageOps.exif_transpose(Image.open(os.path.join(SRC, name))).convert('RGB')
+    base = os.path.splitext(name)[0].lower().replace(' ', '-')
+    web, thumb = base + '.jpg', base + '-thumb.jpg'
+    big = im.copy(); big.thumbnail((LONG, LONG), Image.LANCZOS)
+    big.save(os.path.join(OUT, web), quality=84, optimize=True)      # no exif passed = metadata dropped
+    small = im.copy(); small.thumbnail((THUMB, THUMB), Image.LANCZOS)
+    small.save(os.path.join(OUT, thumb), quality=80, optimize=True)
+    return web, thumb, big.width, big.height
+
+def main():
+    os.makedirs(OUT, exist_ok=True)
+    if os.path.isdir(SRC):
+        names = sorted(n for n in os.listdir(SRC) if n.lower().endswith(('.jpg', '.jpeg', '.png')))
+        photos = [process(n) for n in names]
+    else:
+        # no originals folder yet: use whatever web-size files are already there
+        names = sorted(n for n in os.listdir(OUT) if n.endswith('.jpg') and not n.endswith('-thumb.jpg'))
+        photos = []
+        for n in names:
+            im = Image.open(os.path.join(OUT, n))
+            t = n[:-4] + '-thumb.jpg'
+            if not os.path.exists(os.path.join(OUT, t)):
+                s = im.copy(); s.thumbnail((THUMB, THUMB), Image.LANCZOS); s.save(os.path.join(OUT, t), quality=80, optimize=True)
+            photos.append((n, t, im.width, im.height))
+    caps = captions()
+
+    items = []
+    for i, (web, thumb, w, h) in enumerate(photos):
+        cap = caps.get(web, '')
+        items.append(
+            f'      <a class="ph" href="photos/{web}" data-i="{i}" data-cap="{html.escape(cap)}">'
+            f'<img src="photos/{thumb}" width="{w}" height="{h}" alt="{html.escape(cap) or "Photo " + str(i + 1)}" loading="lazy"></a>'
+        )
+
+    page = TEMPLATE.replace('{{ITEMS}}', '\n'.join(items)).replace('{{COUNT}}', str(len(photos)))
+    open(PAGE, 'w', encoding='utf-8', newline='\n').write(page)
+    print(f'{len(photos)} photos -> {os.path.relpath(PAGE, ROOT)}')
+
+TEMPLATE = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photos</title>
+<meta name="description" content="Photos by Westley Smith.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232f6b3f'/><text x='16' y='22.5' font-family='Arial,sans-serif' font-weight='700' font-size='17' fill='white' text-anchor='middle'>W</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: light; --bg: #f6f4ee; --ink: #1c1d1a; --muted: #66675f; --rule: #dcd9cf; --accent: #2f6b3f; --accent-soft: #b5cab9; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Archivo", -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: underline; text-decoration-color: var(--accent-soft); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+  a:hover { text-decoration-color: var(--accent); }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px 48px; }
+  .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 13.5px; color: var(--muted); }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; font-size: 15px; }
+  nav .me { font-weight: 700; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; font-size: 13px; }
+  nav .back { color: var(--muted); text-decoration: none; }
+  nav .back:hover { color: var(--ink); }
+  h1 { font-stretch: 108%; font-weight: 700; font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -0.01em; margin: 28px 0 8px; }
+  .lead { color: var(--muted); margin: 0 0 28px; max-width: 44em; }
+  .grid { columns: 3; column-gap: 14px; }
+  .ph { display: block; break-inside: avoid; margin: 0 0 14px; border-radius: 8px; overflow: hidden; background: var(--rule); }
+  .ph img { display: block; width: 100%; height: auto; transition: transform 0.25s ease; }
+  .ph:hover img { transform: scale(1.02); }
+  @media (max-width: 900px) { .grid { columns: 2; } }
+  @media (max-width: 560px) { .wrap { padding: 0 16px 40px; } .grid { columns: 2; column-gap: 8px; } .ph { margin-bottom: 8px; border-radius: 6px; } }
+
+  /* viewer */
+  .lb { position: fixed; inset: 0; background: rgba(28,29,26,0.92); display: none; z-index: 50; }
+  .lb.open { display: block; }
+  .lb img { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: min(1400px, 94vw); max-height: 86vh; border-radius: 6px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .lb .cap { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; color: #e8e6df; font-size: 14px; padding: 0 70px; }
+  .lb .cap .n { color: #9c9b92; margin-left: 10px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px; }
+  .lb button { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 0; background: rgba(246,244,238,0.14); color: #fff; font-size: 26px; line-height: 48px; cursor: pointer; }
+  .lb button:hover { background: rgba(246,244,238,0.28); }
+  .lb .prev { left: 14px; } .lb .next { right: 14px; }
+  .lb .close { top: 14px; right: 14px; transform: none; width: 40px; height: 40px; line-height: 40px; font-size: 22px; }
+  @media (max-width: 560px) { .lb button { width: 40px; height: 40px; line-height: 40px; font-size: 22px; } .lb .prev { left: 6px; } .lb .next { right: 6px; } .lb .cap { padding: 0 52px; font-size: 13px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="me" href="../">WS</a>
+    <a class="back" href="../#projects">Back to the site</a>
+  </nav>
+  <h1>Photos</h1>
+  <p class="lead">{{COUNT}} photos. Click one to view it large; arrow keys move through the set.</p>
+  <div class="grid" id="grid">
+{{ITEMS}}
+  </div>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-label="Photo viewer">
+  <button class="close" type="button" aria-label="Close">&times;</button>
+  <button class="prev" type="button" aria-label="Previous">&#8249;</button>
+  <button class="next" type="button" aria-label="Next">&#8250;</button>
+  <img alt="">
+  <div class="cap"><span class="t"></span><span class="n"></span></div>
+</div>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.ph'));
+  var lb = document.getElementById('lb'), pic = lb.querySelector('img'), capT = lb.querySelector('.cap .t'), capN = lb.querySelector('.cap .n');
+  var cur = -1;
+  function show(i){
+    cur = (i + links.length) % links.length;
+    var a = links[cur];
+    pic.src = a.getAttribute('href'); pic.alt = a.dataset.cap || '';
+    capT.textContent = a.dataset.cap || ''; capN.textContent = (cur + 1) + ' / ' + links.length;
+    lb.classList.add('open');
+    // warm the neighbours so arrows feel instant
+    [cur + 1, cur - 1].forEach(function(j){ var n = links[(j + links.length) % links.length]; new Image().src = n.getAttribute('href'); });
+  }
+  function close(){ lb.classList.remove('open'); pic.src = ''; cur = -1; }
+  links.forEach(function(a, i){ a.addEventListener('click', function(e){ e.preventDefault(); show(i); }); });
+  lb.querySelector('.prev').addEventListener('click', function(e){ e.stopPropagation(); show(cur - 1); });
+  lb.querySelector('.next').addEventListener('click', function(e){ e.stopPropagation(); show(cur + 1); });
+  lb.querySelector('.close').addEventListener('click', close);
+  lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape') close();
+    else if(e.key === 'ArrowRight') show(cur + 1);
+    else if(e.key === 'ArrowLeft') show(cur - 1);
+  });
+  // swipe on phones
+  var x0 = null;
+  lb.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive: true});
+  lb.addEventListener('touchend', function(e){
+    if(x0 === null) return; var dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if(Math.abs(dx) > 40) show(dx < 0 ? cur + 1 : cur - 1);
+  }, {passive: true});
+})();
+</script>
+</body>
+</html>
+'''
+
+if __name__ == '__main__':
+    main()
