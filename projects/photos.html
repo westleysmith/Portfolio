@@ -28,6 +28,8 @@
   .setup li { margin: 0 0 4px; }
   .setup li::marker { color: var(--muted); }
   .setup .mono { margin-left: 8px; }
+  .gear { display: grid; grid-template-columns: repeat(2, 220px); gap: 14px; margin: 22px 0 0; }
+  @media (max-width: 560px) { .gear { grid-template-columns: repeat(2, 1fr); } }
   .grid { columns: 3; column-gap: 14px; }
   /* the photos carry their own white print border, so show them as prints: square corners, hairline, soft shadow */
   .ph { display: block; break-inside: avoid; margin: 0 0 16px; background: #fff; outline: 1px solid rgba(28,29,26,0.08); box-shadow: 0 1px 2px rgba(28,29,26,0.08), 0 8px 22px rgba(28,29,26,0.10); transition: transform 0.25s ease, box-shadow 0.25s ease; }
@@ -69,9 +71,16 @@
     <li>Sony &alpha;6700 <span class="mono">APS-C mirrorless body</span></li>
     <li>Tamron 17-70mm F/2.8 Di III-A VC RXD <span class="mono">everyday zoom</span></li>
     <li>Sony E 70-350mm F4.5-6.3 G OSS <span class="mono">telephoto zoom</span></li>
+    <li>Sony E 20mm F2.8 <span class="mono">pancake</span></li>
     <li>GoPro HERO13 Black</li>
     <li>DJI Mini 5 Pro</li>
+    <li>DJI Mini 3 Pro <span class="mono">bought broken, repaired, still in the bag</span></li>
+    <li>Nomatic McKinnon Camera Pack 35L with the McKinnon Camera Cube</li>
   </ul>
+  <div class="gear">
+    <a class="ph" href="photos/gear/bag.jpg" data-cap="The bag, packed"><img src="photos/gear/bag-thumb.jpg" width="1200" height="1600" alt="Open camera backpack with the camera, lenses, and drone packed" loading="lazy"></a>
+    <a class="ph" href="photos/gear/mini-3-pro-repair.jpg" data-cap="The Mini 3 Pro, mid-repair"><img src="photos/gear/mini-3-pro-repair-thumb.jpg" width="1200" height="1600" alt="DJI Mini 3 Pro disassembled on a workbench" loading="lazy"></a>
+  </div>
 </div>
 
 <div class="lb" id="lb" role="dialog" aria-label="Photo viewer">
