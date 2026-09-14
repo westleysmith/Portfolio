@@ -99,7 +99,7 @@ TEMPLATE = '''<!DOCTYPE html>
   .setup li { margin: 0 0 4px; }
   .setup li::marker { color: var(--muted); }
   .setup .mono { margin-left: 8px; }
-  .gear { display: grid; grid-template-columns: repeat(2, 220px); gap: 14px; margin: 22px 0 0; }
+  .gear { display: grid; grid-template-columns: 220px; gap: 14px; margin: 22px 0 0; }
   @media (max-width: 560px) { .gear { grid-template-columns: repeat(2, 1fr); } }
   .grid { columns: 3; column-gap: 14px; }
   /* the photos carry their own white print border, so show them as prints: square corners, hairline, soft shadow */
@@ -145,7 +145,6 @@ TEMPLATE = '''<!DOCTYPE html>
   </ul>
   <div class="gear">
     <a class="ph" href="photos/gear/bag.jpg" data-cap="The bag, packed"><img src="photos/gear/bag-thumb.jpg" width="1200" height="1600" alt="Open camera backpack with the camera, lenses, and drone packed" loading="lazy"></a>
-    <a class="ph" href="photos/gear/mini-3-pro-repair.jpg" data-cap="The Mini 3 Pro, mid-repair"><img src="photos/gear/mini-3-pro-repair-thumb.jpg" width="1200" height="1600" alt="DJI Mini 3 Pro disassembled on a workbench" loading="lazy"></a>
   </div>
 </div>
 

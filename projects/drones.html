@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Drones</title>
-<meta name="description" content="Drones: DJI repairs, FPV, and the fleet.">
+<meta name="description" content="Drones: fixing and reselling DJI drones, then FPV.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232f6b3f'/><text x='16' y='22.5' font-family='Arial,sans-serif' font-weight='700' font-size='17' fill='white' text-anchor='middle'>W</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,18 +23,31 @@
   nav .back:hover { color: var(--ink); }
   h1 { font-stretch: 108%; font-weight: 700; font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -0.01em; margin: 28px 0 4px; }
   .when { margin: 0 0 24px; }
-  h2 { font-stretch: 112%; font-weight: 700; font-size: 22px; margin: 36px 0 12px; padding-top: 16px; border-top: 1px solid var(--rule); }
+  h2 { font-stretch: 112%; font-weight: 700; font-size: 22px; margin: 40px 0 12px; padding-top: 18px; border-top: 1px solid var(--rule); }
   p { margin: 0 0 14px; max-width: 40em; }
   ul { margin: 0 0 14px; padding-left: 20px; }
   li { margin: 0 0 4px; }
   li::marker { color: var(--muted); }
-  /* photos and videos, when they arrive, use these */
-  .grid { columns: 2; column-gap: 14px; margin: 8px 0 20px; }
-  .ph { display: block; break-inside: avoid; margin: 0 0 14px; background: #fff; outline: 1px solid rgba(28,29,26,0.08); box-shadow: 0 1px 2px rgba(28,29,26,0.08), 0 8px 22px rgba(28,29,26,0.10); }
+  /* photos as prints */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 6px 0 22px; }
+  .grid.two { grid-template-columns: repeat(2, 1fr); max-width: 480px; }
+  .ph { display: block; background: #fff; outline: 1px solid rgba(28,29,26,0.08); box-shadow: 0 1px 2px rgba(28,29,26,0.08), 0 8px 22px rgba(28,29,26,0.10); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .ph:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(28,29,26,0.08), 0 14px 30px rgba(28,29,26,0.14); }
   .ph img { display: block; width: 100%; height: auto; }
   .video { position: relative; aspect-ratio: 16 / 9; margin: 8px 0 20px; background: #111; border-radius: 8px; overflow: hidden; }
   .video iframe, .video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  @media (max-width: 560px) { .wrap { padding: 0 20px 40px; } .grid { columns: 1; } }
+  @media (max-width: 560px) { .wrap { padding: 0 20px 40px; } .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+
+  /* viewer */
+  .lb { position: fixed; inset: 0; background: rgba(28,29,26,0.92); display: none; z-index: 50; }
+  .lb.open { display: block; }
+  .lb img { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: min(1400px, 94vw); max-height: 86vh; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .lb .cap { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; color: #e8e6df; font-size: 14px; padding: 0 70px; }
+  .lb button { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 0; background: rgba(246,244,238,0.14); color: #fff; font-size: 26px; line-height: 48px; cursor: pointer; }
+  .lb button:hover { background: rgba(246,244,238,0.28); }
+  .lb .prev { left: 14px; } .lb .next { right: 14px; }
+  .lb .close { top: 14px; right: 14px; transform: none; width: 40px; height: 40px; line-height: 40px; font-size: 22px; }
+  @media (max-width: 560px) { .lb button { width: 40px; height: 40px; line-height: 40px; font-size: 22px; } .lb .prev { left: 6px; } .lb .next { right: 6px; } .lb .cap { padding: 0 52px; font-size: 13px; } }
 </style>
 </head>
 <body>
@@ -48,19 +61,95 @@
   <p class="when mono">2023 - Present</p>
 
   <p>I started by buying crashed DJI drones, fixing them, flying them for a while, and selling them. After nine or ten of those I got into FPV, spending 60+ hours in the simulator before buying my first one.</p>
+
+  <h2>Fixing DJI drones</h2>
+  <p>The first one was an original DJI Mini that I paid $100 for. It flew itself into a tree over a river near Dardanelle. I fixed the leg and the cracked glass on the gimbal, got it flying again, and sold it to a construction company that wanted it for AC repair work.</p>
+  <div class="grid two">
+    <a class="ph" href="drones/01-og-mini.jpg" data-cap="The original DJI Mini, back in its case"><img src="drones/01-og-mini-thumb.jpg" width="480" height="640" alt="Original DJI Mini in its case" loading="lazy"></a>
+  </div>
+
+  <p>Next was a bundle I drove to Sacramento to pick up: a smashed Air 2S and a Mini 2. The Air 2S came apart and went back together.</p>
+  <div class="grid">
+    <a class="ph" href="drones/02-air-2s-bundle.jpg" data-cap="The Sacramento bundle"><img src="drones/02-air-2s-bundle-thumb.jpg" width="480" height="640" alt="Air 2S bundle laid out on the floor" loading="lazy"></a>
+    <a class="ph" href="drones/03-air-2s.jpg" data-cap="Air 2S"><img src="drones/03-air-2s-thumb.jpg" width="480" height="640" alt="DJI Air 2S" loading="lazy"></a>
+    <a class="ph" href="drones/04-air-2s-internals.jpg" data-cap="Air 2S, opened up"><img src="drones/04-air-2s-internals-thumb.jpg" width="480" height="640" alt="Air 2S with the shell off, showing the internals" loading="lazy"></a>
+  </div>
+
+  <p>A couple more came and went after that, including a sealed DJI Mini 5 Pro that I sold for double what I paid. The one I fly now is a Mini 3 Pro I paid a few hundred dollars for, then replaced an arm and the broken gimbal.</p>
+  <div class="grid">
+    <a class="ph" href="drones/05-mini-5-pro.jpg" data-cap="Mini 5 Pro, still sealed"><img src="drones/05-mini-5-pro-thumb.jpg" width="480" height="640" alt="Sealed DJI Mini 5 Pro box" loading="lazy"></a>
+    <a class="ph" href="photos/gear/mini-3-pro-repair.jpg" data-cap="Mini 3 Pro, mid-repair"><img src="photos/gear/mini-3-pro-repair-thumb.jpg" width="480" height="640" alt="DJI Mini 3 Pro disassembled on a workbench" loading="lazy"></a>
+    <a class="ph" href="drones/06-mini-3-pro.jpg" data-cap="Mini 3 Pro, flying again"><img src="drones/06-mini-3-pro-thumb.jpg" width="480" height="640" alt="DJI Mini 3 Pro with its controller" loading="lazy"></a>
+  </div>
+
+  <h2>FPV</h2>
+  <p>After the simulator hours, the first real one was a BetaFPV Pavo20 Nightfire: goggles, radio, a pile of batteries, and a lot of crashing. It has been apart more than once.</p>
+  <div class="grid">
+    <a class="ph" href="drones/07-pavo20-setup.jpg" data-cap="The first Pavo20 kit"><img src="drones/07-pavo20-setup-thumb.jpg" width="607" height="640" alt="Pavo20 with goggles, radio, batteries, and chargers" loading="lazy"></a>
+    <a class="ph" href="drones/08-pavo20-board.jpg" data-cap="Pavo20 flight controller"><img src="drones/08-pavo20-board-thumb.jpg" width="480" height="640" alt="Pavo20 flight controller board held in a hand" loading="lazy"></a>
+    <a class="ph" href="drones/09-pavo20-teardown.jpg" data-cap="Pavo20, torn down"><img src="drones/09-pavo20-teardown-thumb.jpg" width="480" height="640" alt="Pavo20 stripped down to the frame and motors" loading="lazy"></a>
+  </div>
+  <p>There is a second Pavo20 now, along with a Pavo Pico 2, a Meteor 75 Pro, and three DJI FPVs.</p>
+  <div class="grid two">
+    <a class="ph" href="drones/10-pavo20-second.jpg" data-cap="The second Pavo20"><img src="drones/10-pavo20-second-thumb.jpg" width="480" height="640" alt="Second Pavo20 with a blue frame, held in a hand" loading="lazy"></a>
+  </div>
+
+  <h2>The fleet</h2>
   <ul>
-    <li>BetaFPV Pavo20 Nightfire</li>
+    <li>BetaFPV Pavo20 Nightfire &times;2</li>
     <li>BetaFPV Pavo Pico 2</li>
     <li>BetaFPV Meteor 75 Pro</li>
     <li>DJI FPV &times;3</li>
+    <li>DJI Mini 3 Pro</li>
   </ul>
   <p>Lots of tuning, crashing, repairing, and tinkering.</p>
 
   <!--
-    Photos: <div class="grid"><a class="ph" href="drones/x.jpg"><img src="drones/x-thumb.jpg" alt=""></a> ...</div>
     Video (YouTube): <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe></div>
     Video (file):    <div class="video"><video src="drones/x.mp4" controls playsinline></video></div>
   -->
 </div>
+
+<div class="lb" id="lb" role="dialog" aria-label="Photo viewer">
+  <button class="close" type="button" aria-label="Close">&times;</button>
+  <button class="prev" type="button" aria-label="Previous">&#8249;</button>
+  <button class="next" type="button" aria-label="Next">&#8250;</button>
+  <img alt="">
+  <div class="cap"><span class="t"></span></div>
+</div>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.ph'));
+  var lb = document.getElementById('lb'), pic = lb.querySelector('img'), capT = lb.querySelector('.cap .t');
+  var cur = -1;
+  function show(i){
+    cur = (i + links.length) % links.length;
+    var a = links[cur];
+    pic.src = a.getAttribute('href'); pic.alt = a.dataset.cap || '';
+    capT.textContent = a.dataset.cap || '';
+    lb.classList.add('open');
+    [cur + 1, cur - 1].forEach(function(j){ var n = links[(j + links.length) % links.length]; new Image().src = n.getAttribute('href'); });
+  }
+  function close(){ lb.classList.remove('open'); pic.src = ''; cur = -1; }
+  links.forEach(function(a, i){ a.addEventListener('click', function(e){ e.preventDefault(); show(i); }); });
+  lb.querySelector('.prev').addEventListener('click', function(e){ e.stopPropagation(); show(cur - 1); });
+  lb.querySelector('.next').addEventListener('click', function(e){ e.stopPropagation(); show(cur + 1); });
+  lb.querySelector('.close').addEventListener('click', close);
+  lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape') close();
+    else if(e.key === 'ArrowRight') show(cur + 1);
+    else if(e.key === 'ArrowLeft') show(cur - 1);
+  });
+  var x0 = null;
+  lb.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive: true});
+  lb.addEventListener('touchend', function(e){
+    if(x0 === null) return; var dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if(Math.abs(dx) > 40) show(dx < 0 ? cur + 1 : cur - 1);
+  }, {passive: true});
+})();
+</script>
 </body>
 </html>
