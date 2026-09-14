@@ -206,6 +206,14 @@
   .tools { margin-top: 28px; color: var(--muted); max-width: 44em; }
   .tools strong { color: var(--ink); font-weight: 600; }
 
+  /* hobbies */
+  .hobbies .jobs li { grid-template-columns: 170px 1fr; }
+  .hobbies .hname { font-weight: 700; padding-top: 1px; }
+  .hobbies p { margin: 0; max-width: 40em; }
+  @media (max-width: 560px) {
+    .hobbies .jobs li { grid-template-columns: 1fr; gap: 2px; }
+  }
+
   /* ventures */
   .ventures .lead { margin: 0 0 24px; max-width: 44em; color: var(--muted); }
   .ventures .name a { color: var(--ink); text-decoration-color: var(--accent-soft); }
@@ -288,6 +296,7 @@
       <li><a href="#home">Home</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#ventures">Ventures</a></li>
+      <li><a href="#hobbies">Hobbies</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#community">Community</a></li>
@@ -463,6 +472,36 @@
     </ul>
   </section>
 
+  <section id="hobbies" class="hobbies">
+    <h2>Hobbies</h2>
+    <ul class="jobs">
+      <li>
+        <span class="hname">Photography</span>
+        <div><p>I take a camera most places I go. A selection of photos will live here.</p></div>
+      </li>
+      <li>
+        <span class="hname">FPV drones</span>
+        <div><p>Building, repairing, and racing quads. I got into them by crashing them, then fixing them, then fixing other people's.</p></div>
+      </li>
+      <li>
+        <span class="hname">3D design and printing</span>
+        <div><p>Designing parts in Fusion 360 and printing them, from replacement parts around the house to the ice tray in Projects.</p></div>
+      </li>
+      <li>
+        <span class="hname">Smart home</span>
+        <div><p>Automating things around the house.</p></div>
+      </li>
+      <li>
+        <span class="hname">Fishing and camping</span>
+        <div><p>The mountains or the Delta whenever a weekend opens up.</p></div>
+      </li>
+      <li>
+        <span class="hname">Rec sports</span>
+        <div><p>Racquetball, pickleball, softball, whatever is in season.</p></div>
+      </li>
+    </ul>
+  </section>
+
   <section id="work">
     <h2>Work</h2>
     <ul class="jobs">
@@ -584,7 +623,7 @@
     (function(){
       var mq = window.matchMedia('(max-width: 560px)');
       var body = document.body, btn = document.getElementById('menu-btn'), menu = document.getElementById('menu');
-      var pages = ['home','projects','ventures','work','education','community','contact'];
+      var pages = ['home','projects','ventures','hobbies','work','education','community','contact'];
       function current(){ var h = location.hash.replace('#',''); return pages.indexOf(h) >= 0 ? h : 'home'; }
       function show(id){
         pages.forEach(function(p){ var el = document.getElementById(p); if(el) el.classList.toggle('is-active', p === id); });
