@@ -226,16 +226,6 @@
     .jobs li.with-photos .photos { grid-column: 1; }
   }
 
-  /* about */
-  .about {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 48px;
-    align-items: start;
-  }
-  .about img { width: 100%; border-radius: 12px; display: block; }
-  .about p { margin: 0 0 16px; max-width: 36em; }
-
   /* contact */
   .contact .big {
     font-stretch: 112%;
@@ -252,8 +242,6 @@
     .intro { grid-template-columns: 1fr; gap: 32px; padding-top: 24px; }
     .intro figure { max-width: 200px; order: -1; }
     .projects { grid-template-columns: 1fr; }
-    .about { grid-template-columns: 1fr; }
-    .about img { max-width: 360px; }
   }
   @media (max-width: 560px) {
     .wrap { padding: 0 20px; }
@@ -274,7 +262,7 @@
       <li><a href="#ventures">Ventures</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#education">Education</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="#community">Community</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -282,9 +270,10 @@
   <header class="intro">
     <div>
       <h1>Westley Smith</h1>
-      <p>I am a data analyst at a manufacturer in California's Central Valley, and the company's first in-house data hire. My work sits between the business and the technology: someone has a problem, I work out what should exist, build or configure it, and train people to use it.</p>
-      <p>So far that has meant co-building a data warehouse and the reporting on top of it, rolling out a CRM to a sales organization that had never used one, redrawing sales territories, and now designing a sales operations function.</p>
-      <p>Outside of work I am building <a href="#ventures">Pocket Check</a>, a personal finance app, and I build and repair drones and design parts in Fusion 360.</p>
+      <p>I build systems for businesses. My work sits between operations, data, and technology: figuring out how something should work, building it, and getting people to actually use it.</p>
+      <p>Outside of work, I have always been a tinkerer. I grew up taking apart computers, electronics, and anything else I thought I could put back together. I still tend to learn by building things and figuring out how they work.</p>
+      <p>My wife Rachelle and I live in Modesto, where I was born and raised. My family is here, and when I am not working on something, I would rather be outside fishing, camping, on the water, or heading toward the mountains. Modesto makes a pretty good home base for all of it.</p>
+      <p>I am also building <a href="#ventures">Pocket Check</a>, a personal finance app for web and iOS.</p>
       <p class="links">
         <a href="https://www.linkedin.com/in/westleys/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/westleysmith" target="_blank" rel="noopener">GitHub</a>
@@ -540,18 +529,18 @@
     </ul>
   </section>
 
-  <section id="about">
-    <h2>About</h2>
-    <div class="about">
-      <img src="date-night.jpg" alt="Westley and his wife Rachelle" loading="lazy">
-      <div>
-        <p>My wife Rachelle and I live in Modesto, where I was born and raised.</p>
-        <p>I started in maintenance at a bottling plant, moved into IT, then business systems analysis, then data engineering, and now spend most of my time designing how a sales organization operates. That happened in about five years, working the whole time and finishing two degrees.</p>
-        <p>I have always taken things apart to see how they work. As a kid that meant Arduinos and Raspberry Pis. Later it was airsoft and paintball gear, which taught me gearboxes, pneumatics, and patience. Now it is drones. I started by crashing them, then repairing them, then buying broken ones and repairing them for other people.</p>
-        <p>Away from a screen I fish, camp, and play whatever rec sport is in season: racquetball, pickleball, softball.</p>
-        <p>In 2023 and 2025 I volunteered at Alaskan Christian College in Soldotna, Alaska, helping with campus construction and getting to know students from remote villages.</p>
-      </div>
-    </div>
+  <section id="community">
+    <h2>Community</h2>
+    <ul class="jobs">
+      <li>
+        <span class="mono">2023 &amp; 2025</span>
+        <div>
+          <div class="role">Alaska Christian College</div>
+          <div class="org">Soldotna, Alaska</div>
+          <p>Volunteered on campus construction projects and spent time getting to know students from remote communities across Alaska. I returned in 2025 after my first trip in 2023.</p>
+        </div>
+      </li>
+    </ul>
   </section>
 
   <section id="contact" class="contact">
