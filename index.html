@@ -176,7 +176,9 @@
 
   .prop { transform-box: fill-box; transform-origin: center; }
   .project:hover .prop { animation: spin 0.6s linear infinite; }
+  .project:hover .prop.ccw { animation-name: spin-ccw; }
   @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes spin-ccw { to { transform: rotate(-360deg); } }
   @media (prefers-reduced-motion: reduce) {
     .project:hover .prop { animation: none; }
   }
@@ -364,7 +366,7 @@
             </g>
             <g>
               <circle cx="370" cy="70" r="62" class="faint" stroke-dasharray="4 5"/>
-              <g class="prop"><ellipse class="blade" cx="370" cy="70" rx="52" ry="8"/></g>
+              <g class="prop ccw"><ellipse class="blade" cx="370" cy="70" rx="52" ry="8"/></g>
               <circle cx="370" cy="70" r="15" class="box"/>
             </g>
             <g>
@@ -374,7 +376,7 @@
             </g>
             <g>
               <circle cx="370" cy="230" r="62" class="faint" stroke-dasharray="4 5"/>
-              <g class="prop"><ellipse class="blade" cx="370" cy="230" rx="52" ry="8"/></g>
+              <g class="prop ccw"><ellipse class="blade" cx="370" cy="230" rx="52" ry="8"/></g>
               <circle cx="370" cy="230" r="15" class="box"/>
             </g>
             <!-- callouts -->
