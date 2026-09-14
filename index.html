@@ -332,44 +332,43 @@
 
       <article class="project">
         <div class="mat">
-          <svg class="draw" viewBox="0 0 480 300" role="img" aria-label="Diagram: legacy Excel exports flow into bronze, silver, and gold layers, which feed 41 reports">
+          <svg class="draw" viewBox="0 0 480 300" role="img" aria-label="Diagram: ERP and CRM feed pipelines into a lakehouse and warehouse with bronze, silver, and gold layers, which feed a reporting layer of notebooks and AI and the Power BI app">
             <defs>
               <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                 <path class="arrowhead" d="M0,0 L10,5 L0,10 z"/>
               </marker>
             </defs>
-            <!-- source -->
-            <rect class="box" x="22" y="112" width="96" height="76" rx="6"/>
-            <text x="70" y="145" text-anchor="middle">Legacy</text>
-            <text x="70" y="163" text-anchor="middle">Excel exports</text>
-            <path class="arrow" d="M118,150 H140 V68 H160" marker-end="url(#ah)"/>
-            <!-- layers -->
-            <rect class="box" x="164" y="42" width="136" height="52" rx="6"/>
-            <rect x="164" y="42" width="7" height="52" rx="2" fill="var(--bronze)"/>
-            <text x="184" y="64">Bronze</text><text class="small" x="184" y="81">raw copies</text>
-            <path class="arrow" d="M232,94 V118" marker-end="url(#ah)"/>
-            <rect class="box" x="164" y="122" width="136" height="52" rx="6"/>
-            <rect x="164" y="122" width="7" height="52" rx="2" fill="var(--silver)"/>
-            <text x="184" y="144">Silver</text><text class="small" x="184" y="161">cleaned, joined</text>
-            <path class="arrow" d="M232,174 V198" marker-end="url(#ah)"/>
-            <rect class="box" x="164" y="202" width="136" height="52" rx="6"/>
-            <rect x="164" y="202" width="7" height="52" rx="2" fill="var(--gold)"/>
-            <text x="184" y="224">Gold</text><text class="small" x="184" y="241">report-ready</text>
-            <path class="arrow" d="M300,228 H322 V168 H340" marker-end="url(#ah)"/>
-            <!-- reports -->
-            <text x="400" y="92" text-anchor="middle">41+ reports</text>
-            <g class="faint">
-              <rect x="344" y="104" width="24" height="18" rx="2"/><rect x="374" y="104" width="24" height="18" rx="2"/><rect x="404" y="104" width="24" height="18" rx="2"/><rect x="434" y="104" width="24" height="18" rx="2"/>
-              <rect x="344" y="128" width="24" height="18" rx="2"/><rect x="374" y="128" width="24" height="18" rx="2"/><rect x="404" y="128" width="24" height="18" rx="2"/><rect x="434" y="128" width="24" height="18" rx="2"/>
-              <rect x="344" y="152" width="24" height="18" rx="2"/><rect x="374" y="152" width="24" height="18" rx="2"/><rect x="404" y="152" width="24" height="18" rx="2"/><rect x="434" y="152" width="24" height="18" rx="2"/>
-              <rect x="344" y="176" width="24" height="18" rx="2"/><rect x="374" y="176" width="24" height="18" rx="2"/><rect x="404" y="176" width="24" height="18" rx="2"/><rect x="434" y="176" width="24" height="18" rx="2"/>
-              <rect x="344" y="200" width="24" height="18" rx="2"/><rect x="374" y="200" width="24" height="18" rx="2"/><rect x="404" y="200" width="24" height="18" rx="2"/><rect x="434" y="200" width="24" height="18" rx="2"/>
-            </g>
-            <text class="small" x="400" y="238" text-anchor="middle">one Power BI app</text>
+            <!-- sources -->
+            <rect class="box" x="18" y="92" width="80" height="44" rx="6"/>
+            <text x="58" y="119" text-anchor="middle">ERP</text>
+            <rect class="box" x="18" y="164" width="80" height="44" rx="6"/>
+            <text x="58" y="191" text-anchor="middle">CRM</text>
+            <path class="arrow" d="M98,114 H114 V142 H130" marker-end="url(#ah)"/>
+            <path class="arrow" d="M98,186 H114 V158 H130" marker-end="url(#ah)"/>
+            <!-- pipelines -->
+            <rect class="box" x="134" y="122" width="88" height="56" rx="6"/>
+            <text x="178" y="146" text-anchor="middle">Pipelines</text>
+            <text class="small" x="178" y="163" text-anchor="middle">scheduled</text>
+            <path class="arrow" d="M222,150 H246" marker-end="url(#ah)"/>
+            <!-- lakehouse + warehouse -->
+            <text class="small" x="313" y="72" text-anchor="middle">Lakehouse + warehouse</text>
+            <rect class="box" x="250" y="82" width="126" height="136" rx="6"/>
+            <rect x="262" y="96" width="10" height="26" rx="2" fill="var(--bronze)"/><text x="280" y="114">Bronze</text>
+            <rect x="262" y="137" width="10" height="26" rx="2" fill="var(--silver)"/><text x="280" y="155">Silver</text>
+            <rect x="262" y="178" width="10" height="26" rx="2" fill="var(--gold)"/><text x="280" y="196">Gold</text>
+            <path class="arrow" d="M376,150 H392 V116 H408" marker-end="url(#ah)"/>
+            <path class="arrow" d="M376,150 H392 V184 H408" marker-end="url(#ah)"/>
+            <!-- outputs -->
+            <rect class="box" x="412" y="90" width="56" height="52" rx="6"/>
+            <text class="small" x="440" y="112" text-anchor="middle">Reports</text>
+            <text class="small" x="440" y="127" text-anchor="middle">notebooks, AI</text>
+            <rect class="box" x="412" y="158" width="56" height="52" rx="6"/>
+            <text class="small" x="440" y="180" text-anchor="middle">Power BI</text>
+            <text class="small" x="440" y="195" text-anchor="middle">app</text>
           </svg>
         </div>
-        <div class="ptitle"><h3>Data lakehouse in Microsoft Fabric</h3><span class="mono">2025</span></div>
-        <p>Co-built with one partner to replace ODBC-to-Excel exports pulled straight off the ERP. Bronze, silver, and gold layers, scheduled pipelines, and a warehouse the company now runs its reporting on. It feeds 41+ Power BI reports, packaged as one app used across the company.</p>
+        <div class="ptitle"><h3>Data platform</h3><span class="mono">2025</span></div>
+        <p>Co-built with one partner. Pipelines pull from the ERP and CRM into a lakehouse and warehouse laid out in medallion layers. From there, a reporting layer of scheduled notebooks and AI produces the recurring reports, and the same data feeds the Power BI models behind a single app used across the company.</p>
         <span class="mono">Microsoft Fabric, Power BI</span>
       </article>
 
