@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Westley Smith</title>
-<meta name="description" content="Westley Smith, data analyst in Modesto, California. Builds data warehouses, reporting, and sales operations tools for a manufacturer, and gets people to use them.">
+<meta name="description" content="Westley Smith, Modesto, California. Things I have built, started, and learned: business systems and data at work, ventures and projects outside of it.">
 <meta name="google-site-verification" content="-k7SOYp9sEKKLAgPdEDIcjLQkJ5BGTlDHushTHqN7h8">
 <meta property="og:title" content="Westley Smith">
-<meta property="og:description" content="Data analyst in Modesto, California. Builds data warehouses, reporting, and sales operations tools for a manufacturer, and gets people to use them.">
-<meta property="og:image" content="https://westleybsmith.com/headshot.jpg">
+<meta property="og:description" content="Things I have built, started, and learned: business systems and data at work, ventures and projects outside of it.">
+<meta property="og:image" content="https://westleybsmith.com/date-night.jpg">
 <meta property="og:url" content="https://westleybsmith.com/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232f6b3f'/><text x='16' y='22.5' font-family='Arial,sans-serif' font-weight='700' font-size='17' fill='white' text-anchor='middle'>W</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -98,8 +98,9 @@
   .intro img {
     display: block;
     width: 100%;
-    aspect-ratio: 1;
+    aspect-ratio: 4 / 5;
     object-fit: cover;
+    object-position: center 22%;
     border-radius: 14px;
   }
   .intro figcaption { margin-top: 10px; }
@@ -240,13 +241,13 @@
 
   @media (max-width: 820px) {
     .intro { grid-template-columns: 1fr; gap: 32px; padding-top: 24px; }
-    .intro figure { max-width: 200px; order: -1; }
+    .intro figure { max-width: 220px; order: -1; }
     .projects { grid-template-columns: 1fr; }
   }
   @media (max-width: 560px) {
     .wrap { padding: 0 20px; }
-    nav ul { gap: 14px; }
-    nav ul li:nth-child(n+3) { display: none; }
+    nav { align-items: flex-start; }
+    nav ul { gap: 10px 14px; flex-wrap: wrap; justify-content: flex-end; max-width: 75%; }
     .jobs li { grid-template-columns: 1fr; gap: 2px; }
   }
 </style>
@@ -270,10 +271,10 @@
   <header class="intro">
     <div>
       <h1>Westley Smith</h1>
-      <p>I build systems for businesses. My work sits between operations, data, and technology: figuring out how something should work, building it, and getting people to actually use it.</p>
-      <p>Outside of work, I have always been a tinkerer. I grew up taking apart computers, electronics, and anything else I thought I could put back together. I still tend to learn by building things and figuring out how they work.</p>
-      <p>My wife Rachelle and I live in Modesto, where I was born and raised. My family is here, and when I am not working on something, I would rather be outside fishing, camping, on the water, or heading toward the mountains. Modesto makes a pretty good home base for all of it.</p>
-      <p>I am also building <a href="#ventures">Pocket Check</a>, a personal finance app for web and iOS.</p>
+      <p>My wife Rachelle and I live in Modesto, where I was born and raised.</p>
+      <p>I spend a lot of my time building things and figuring out how things work. Professionally, that usually means some combination of business, data, systems, and operations. Outside of work, it has meant everything from computers and electronics to small businesses, side projects, and whatever else catches my interest.</p>
+      <p>I also like being outside. Fishing, camping, the mountains, the Delta, and getting away for a weekend are a big part of why I still like calling Modesto home.</p>
+      <p>Right now, I am building <a href="#ventures">Pocket Check</a>, a personal finance app for web and iOS.</p>
       <p class="links">
         <a href="https://www.linkedin.com/in/westleys/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/westleysmith" target="_blank" rel="noopener">GitHub</a>
@@ -281,7 +282,7 @@
       </p>
     </div>
     <figure>
-      <img src="headshot.jpg" alt="Portrait of Westley Smith">
+      <img src="date-night.jpg" alt="Westley and Rachelle">
       <figcaption class="mono">Modesto, CA</figcaption>
     </figure>
   </header>
@@ -542,6 +543,12 @@
       </li>
     </ul>
   </section>
+
+  <!--
+    Adding a section: copy any <section> block above, give it a new id, add a
+    matching <li> to the nav, done. The page is one flat list of sections, so
+    Now, Writing, Reading, Travel, and the like slot in anywhere in the order.
+  -->
 
   <section id="contact" class="contact">
     <h2>Contact</h2>
