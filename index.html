@@ -153,11 +153,12 @@
   }
   a.mat { display: block; }
 
+  .ptitle { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 18px 0 6px; }
   .project h3 {
     font-stretch: 108%;
     font-size: 20px;
     font-weight: 700;
-    margin: 18px 0 6px;
+    margin: 0;
     line-height: 1.3;
   }
   .project p { margin: 0 0 8px; }
@@ -303,7 +304,7 @@
         <a class="mat" href="projects/territory-map.html" aria-label="Open the territory map demo" target="_blank" rel="noopener">
           <img src="territory-map-preview.png" alt="US map shaded by sales region" loading="lazy">
         </a>
-        <h3>National territory map</h3>
+        <div class="ptitle"><h3>National territory map</h3><span class="mono">2026</span></div>
         <p>A sales map you can drill into, from the whole country down to a region, a state, and a single rep, with every account colored by attainment against goal. I built it on my own as a Power BI custom visual; it inherits the warehouse's row-level security, so each rep sees only their territory. It replaced a static slide deck. The demo runs on made-up data.</p>
         <p><a href="projects/territory-map.html" target="_blank" rel="noopener">Open the live demo</a></p>
         <span class="mono">Power BI custom visual</span>
@@ -347,7 +348,7 @@
             <text class="small" x="400" y="238" text-anchor="middle">one Power BI app</text>
           </svg>
         </div>
-        <h3>Data lakehouse in Microsoft Fabric</h3>
+        <div class="ptitle"><h3>Data lakehouse in Microsoft Fabric</h3><span class="mono">2025</span></div>
         <p>Co-built with one partner to replace ODBC-to-Excel exports pulled straight off the ERP. Bronze, silver, and gold layers, scheduled pipelines, and a warehouse the company now runs its reporting on. It feeds 41+ Power BI reports, packaged as one app used across the company.</p>
         <span class="mono">Microsoft Fabric, Power BI</span>
       </article>
@@ -390,7 +391,7 @@
           </svg>
           <span class="hint mono">hover to spin up</span>
         </div>
-        <h3>5-inch FPV quad</h3>
+        <div class="ptitle"><h3>5-inch FPV quad</h3><span class="mono">2025</span></div>
         <p>Built from a bare frame. Soldered the stack, flashed the firmware, tuned the PIDs, then crashed it, rebuilt it, and flew it again.</p>
         <span class="mono">Soldering, firmware, PID tuning</span>
       </article>
@@ -400,7 +401,7 @@
           <model-viewer src="ice-tray.glb?v=2" alt="3D model of a custom ice tray" camera-controls auto-rotate disable-zoom disable-tap interaction-prompt="none" camera-orbit="-30deg 62deg auto" field-of-view="20deg" environment-image="neutral" exposure="1.1" shadow-intensity="0.7" loading="lazy"></model-viewer>
           <span class="hint mono">drag to rotate</span>
         </div>
-        <h3>Custom ice tray</h3>
+        <div class="ptitle"><h3>Custom ice tray</h3><span class="mono">2024</span></div>
         <p>Designed from scratch in Fusion 360, then 3D printed. The model above is the real file, so go ahead and spin it around.</p>
         <span class="mono">Fusion 360, 3D printing</span>
       </article>
@@ -413,7 +414,7 @@
     <p class="lead">Things I have started on my own.</p>
     <ul class="jobs">
       <li>
-        <span class="mono">2026</span>
+        <span class="mono">2025 to now</span>
         <div>
           <div class="role name"><a href="https://pocketcheck.app/" target="_blank" rel="noopener">Pocket Check</a></div>
           <div class="org">Personal finance app, web and iOS. Solo build.</div>
