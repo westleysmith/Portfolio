@@ -72,6 +72,7 @@
   nav .me { font-weight: 700; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; font-size: 13px; }
   nav .me:hover { color: var(--accent); }
   nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }
+  .menu-btn { display: none; }
   nav ul a { color: var(--muted); text-decoration: none; }
   nav ul a:hover { color: var(--ink); }
 
@@ -246,19 +247,32 @@
   @media (max-width: 560px) {
     .wrap { padding: 0 20px; }
     body { font-size: 16px; line-height: 1.55; }
-    /* phone hero: small photo beside the name, text flows underneath */
-    .intro { display: block; padding: 8px 0 40px; }
-    .intro figure { float: right; width: 112px; margin: 0 0 8px 16px; }
+    /* phone hero: name, then the photo, then the paragraphs */
+    .intro { display: flex; flex-direction: column; padding: 8px 0 40px; }
+    .intro > div { display: contents; }
+    .intro h1 { order: 1; margin-bottom: 18px; }
+    .intro figure { order: 2; width: 200px; margin: 0 0 20px; }
     .intro img { aspect-ratio: 4 / 5; border-radius: 10px; }
     .intro figcaption { font-size: 11px; }
-    .intro p { font-size: 16px; margin: 0 0 12px; }
-    .intro .links { clear: both; margin-top: 18px; }
+    .intro p { order: 3; font-size: 16px; margin: 0 0 12px; }
+    .intro .links { margin-top: 10px; }
     .intro .links a { margin-right: 14px; }
     section { padding: 16px 0 48px; }
     h2 { font-size: 24px; margin-bottom: 20px; }
     .project p, .jobs p, .jobs .points li { font-size: 15.5px; }
-    nav { align-items: flex-start; }
-    nav ul { gap: 10px 14px; flex-wrap: wrap; justify-content: flex-end; max-width: 75%; }
+    nav { position: relative; }
+    nav ul { display: none; }
+    .menu-btn { display: inline-flex; align-items: center; gap: 8px; background: none; border: 1px solid var(--rule); border-radius: 8px; padding: 6px 10px; font: inherit; font-size: 14px; color: var(--ink); cursor: pointer; }
+    .menu-btn .bars { display: inline-block; width: 16px; height: 12px; background: linear-gradient(var(--ink) 0 2px, transparent 2px 5px, var(--ink) 5px 7px, transparent 7px 10px, var(--ink) 10px 12px); }
+    body.menu-open nav ul { display: flex; flex-direction: column; gap: 0; position: absolute; right: 0; top: calc(100% - 8px); background: var(--bg); border: 1px solid var(--rule); border-radius: 10px; padding: 6px 0; min-width: 180px; box-shadow: 0 12px 30px rgba(0,0,0,0.12); z-index: 40; }
+    body.menu-open nav ul a { display: block; padding: 10px 16px; font-size: 16px; color: var(--ink); }
+    body.menu-open nav ul a.current { color: var(--accent); font-weight: 600; }
+    /* paged mode: only the chosen section shows */
+    body.paged .intro, body.paged section { display: none; }
+    body.paged .intro.is-active { display: flex; }
+    body.paged section.is-active { display: block; padding-top: 8px; }
+    body.paged section.is-active h2 { border-top: 0; padding-top: 0; }
+    body.paged footer { margin-top: 24px; }
     .jobs li { grid-template-columns: 1fr; gap: 2px; }
   }
 </style>
@@ -269,7 +283,9 @@
 
   <nav>
     <a class="me" href="#" aria-label="Top of page">WS</a>
-    <ul>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span> Menu</button>
+    <ul id="menu">
+      <li><a href="#home">Home</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#ventures">Ventures</a></li>
       <li><a href="#work">Work</a></li>
@@ -279,7 +295,7 @@
     </ul>
   </nav>
 
-  <header class="intro">
+  <header class="intro" id="home">
     <figure>
       <img src="date-night.jpg" alt="Westley and Rachelle">
       <figcaption class="mono">Modesto, CA</figcaption>
@@ -573,6 +589,45 @@
 
   <div class="lightbox" id="lightbox" role="dialog" aria-label="Larger photo"><img alt=""></div>
   <script>
+    // Phone mode: the page becomes one section at a time behind a menu.
+    // Desktop keeps the single long page. The URL hash is the page, so the
+    // browser back button moves between sections.
+    (function(){
+      var mq = window.matchMedia('(max-width: 560px)');
+      var body = document.body, btn = document.getElementById('menu-btn'), menu = document.getElementById('menu');
+      var pages = ['home','projects','ventures','work','education','community','contact'];
+      function current(){ var h = location.hash.replace('#',''); return pages.indexOf(h) >= 0 ? h : 'home'; }
+      function show(id){
+        pages.forEach(function(p){ var el = document.getElementById(p); if(el) el.classList.toggle('is-active', p === id); });
+        menu.querySelectorAll('a').forEach(function(a){ a.classList.toggle('current', a.getAttribute('href') === '#' + id); });
+        window.scrollTo(0, 0);
+      }
+      function apply(){
+        if(mq.matches){ body.classList.add('paged'); show(current()); }
+        else { body.classList.remove('paged', 'menu-open'); btn.setAttribute('aria-expanded', 'false'); }
+      }
+      btn.addEventListener('click', function(){
+        var open = body.classList.toggle('menu-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('click', function(e){
+        if(!body.classList.contains('menu-open')) return;
+        if(e.target.closest('#menu') || e.target.closest('#menu-btn')) return;
+        body.classList.remove('menu-open'); btn.setAttribute('aria-expanded', 'false');
+      });
+      document.addEventListener('click', function(e){
+        var a = e.target.closest('a[href^="#"]'); if(!a || !mq.matches) return;
+        var id = a.getAttribute('href').replace('#','');
+        if(id === '') id = 'home';
+        if(pages.indexOf(id) < 0) return;
+        e.preventDefault();
+        body.classList.remove('menu-open'); btn.setAttribute('aria-expanded', 'false');
+        if(('#' + id) !== location.hash) location.hash = id; else show(id);
+      });
+      window.addEventListener('hashchange', function(){ if(mq.matches) show(current()); });
+      mq.addEventListener ? mq.addEventListener('change', apply) : mq.addListener(apply);
+      apply();
+    })();
     document.querySelectorAll('model-viewer').forEach(function(mv){
       mv.addEventListener('dblclick', function(e){ e.preventDefault(); e.stopPropagation(); }, true);
     });
