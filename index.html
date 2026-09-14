@@ -332,7 +332,7 @@
 
       <article class="project">
         <div class="mat">
-          <svg class="draw" viewBox="0 0 480 300" role="img" aria-label="Diagram: ERP and CRM feed pipelines into a lakehouse and warehouse with bronze, silver, and gold layers, which feed a reporting layer of notebooks and AI and the Power BI app">
+          <svg class="draw" viewBox="0 0 480 300" role="img" aria-label="Diagram: ERP and CRM feed pipelines into a lakehouse and warehouse with bronze, silver, and gold layers, which feed an AI layer of notebooks and 40+ Power BI reports packaged into one app">
             <defs>
               <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                 <path class="arrowhead" d="M0,0 L10,5 L0,10 z"/>
@@ -356,19 +356,24 @@
             <rect x="240" y="96" width="10" height="26" rx="2" fill="var(--bronze)"/><text x="258" y="114">Bronze</text>
             <rect x="240" y="137" width="10" height="26" rx="2" fill="var(--silver)"/><text x="258" y="155">Silver</text>
             <rect x="240" y="178" width="10" height="26" rx="2" fill="var(--gold)"/><text x="258" y="196">Gold</text>
-            <path class="arrow" d="M342,150 H356 V116 H366" marker-end="url(#ah)"/>
-            <path class="arrow" d="M342,150 H356 V184 H366" marker-end="url(#ah)"/>
-            <!-- outputs -->
-            <rect class="box" x="370" y="90" width="88" height="52" rx="6"/>
-            <text class="small" x="414" y="112" text-anchor="middle">Reports</text>
-            <text class="small" x="414" y="127" text-anchor="middle">notebooks, AI</text>
-            <rect class="box" x="370" y="158" width="88" height="52" rx="6"/>
-            <text class="small" x="414" y="180" text-anchor="middle">Power BI</text>
-            <text class="small" x="414" y="195" text-anchor="middle">app</text>
+            <path class="arrow" d="M342,150 H356 V99 H366" marker-end="url(#ah)"/>
+            <path class="arrow" d="M342,150 H356 V159 H366" marker-end="url(#ah)"/>
+            <!-- AI layer -->
+            <rect class="box" x="370" y="76" width="88" height="46" rx="6"/>
+            <text class="small" x="414" y="95" text-anchor="middle">AI layer</text>
+            <text class="small" x="414" y="110" text-anchor="middle">notebooks</text>
+            <!-- Power BI: reports, then the app on top of them -->
+            <rect class="box" x="370" y="136" width="88" height="46" rx="6"/>
+            <text class="small" x="414" y="155" text-anchor="middle">Power BI</text>
+            <text class="small" x="414" y="170" text-anchor="middle">40+ reports</text>
+            <path class="arrow" d="M414,182 V192" marker-end="url(#ah)"/>
+            <rect class="box" x="370" y="196" width="88" height="46" rx="6"/>
+            <text class="small" x="414" y="215" text-anchor="middle">Power BI</text>
+            <text class="small" x="414" y="230" text-anchor="middle">app</text>
           </svg>
         </div>
         <div class="ptitle"><h3>Data platform</h3><span class="mono">2025</span></div>
-        <p>Co-built with one partner. Pipelines pull from the ERP and CRM into a lakehouse and warehouse laid out in medallion layers. From there, a reporting layer of scheduled notebooks and AI produces the recurring reports, and the same data feeds the Power BI models behind a single app used across the company.</p>
+        <p>Co-built with one partner. Pipelines pull from the ERP and CRM into a lakehouse and warehouse laid out in medallion layers. On top of that sit an AI layer of scheduled notebooks that produce the recurring reports, and 40+ Power BI reports packaged into a single app used across the company.</p>
         <span class="mono">Microsoft Fabric, Power BI</span>
       </article>
 
