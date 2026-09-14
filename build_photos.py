@@ -106,7 +106,6 @@ TEMPLATE = '''<!DOCTYPE html>
   .lb.open { display: block; }
   .lb img { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: min(1400px, 94vw); max-height: 86vh; border-radius: 6px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
   .lb .cap { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; color: #e8e6df; font-size: 14px; padding: 0 70px; }
-  .lb .cap .n { color: #9c9b92; margin-left: 10px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px; }
   .lb button { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 0; background: rgba(246,244,238,0.14); color: #fff; font-size: 26px; line-height: 48px; cursor: pointer; }
   .lb button:hover { background: rgba(246,244,238,0.28); }
   .lb .prev { left: 14px; } .lb .next { right: 14px; }
@@ -121,7 +120,7 @@ TEMPLATE = '''<!DOCTYPE html>
     <a class="back" href="../#projects">Back to the site</a>
   </nav>
   <h1>Photos</h1>
-  <p class="lead">{{COUNT}} photos. Click one to view it large; arrow keys move through the set.</p>
+  <p class="lead">Some photos I like that I have taken. Click one to view it large; arrow keys move through the set.</p>
   <div class="grid" id="grid">
 {{ITEMS}}
   </div>
@@ -132,19 +131,19 @@ TEMPLATE = '''<!DOCTYPE html>
   <button class="prev" type="button" aria-label="Previous">&#8249;</button>
   <button class="next" type="button" aria-label="Next">&#8250;</button>
   <img alt="">
-  <div class="cap"><span class="t"></span><span class="n"></span></div>
+  <div class="cap"><span class="t"></span></div>
 </div>
 
 <script>
 (function(){
   var links = Array.prototype.slice.call(document.querySelectorAll('.ph'));
-  var lb = document.getElementById('lb'), pic = lb.querySelector('img'), capT = lb.querySelector('.cap .t'), capN = lb.querySelector('.cap .n');
+  var lb = document.getElementById('lb'), pic = lb.querySelector('img'), capT = lb.querySelector('.cap .t');
   var cur = -1;
   function show(i){
     cur = (i + links.length) % links.length;
     var a = links[cur];
     pic.src = a.getAttribute('href'); pic.alt = a.dataset.cap || '';
-    capT.textContent = a.dataset.cap || ''; capN.textContent = (cur + 1) + ' / ' + links.length;
+    capT.textContent = a.dataset.cap || '';
     lb.classList.add('open');
     // warm the neighbours so arrows feel instant
     [cur + 1, cur - 1].forEach(function(j){ var n = links[(j + links.length) % links.length]; new Image().src = n.getAttribute('href'); });
