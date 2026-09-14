@@ -397,7 +397,7 @@
 
       <article class="project">
         <div class="mat">
-          <model-viewer src="ice-tray.glb" alt="3D model of a custom ice tray" camera-controls auto-rotate disable-zoom interaction-prompt="none" camera-orbit="-30deg 62deg auto" field-of-view="20deg" environment-image="neutral" exposure="1.1" shadow-intensity="0.7" loading="lazy"></model-viewer>
+          <model-viewer src="ice-tray.glb?v=2" alt="3D model of a custom ice tray" camera-controls auto-rotate disable-zoom disable-tap interaction-prompt="none" camera-orbit="-30deg 62deg auto" field-of-view="20deg" environment-image="neutral" exposure="1.1" shadow-intensity="0.7" loading="lazy"></model-viewer>
           <span class="hint mono">drag to rotate</span>
         </div>
         <h3>Custom ice tray</h3>
@@ -558,6 +558,9 @@
 
   <div class="lightbox" id="lightbox" role="dialog" aria-label="Larger photo"><img alt=""></div>
   <script>
+    document.querySelectorAll('model-viewer').forEach(function(mv){
+      mv.addEventListener('dblclick', function(e){ e.preventDefault(); e.stopPropagation(); }, true);
+    });
     (function(){
       var box = document.getElementById('lightbox'), pic = box.querySelector('img');
       document.querySelectorAll('.photos img').forEach(function(img){
