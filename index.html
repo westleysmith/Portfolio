@@ -201,6 +201,17 @@
   .tools { margin-top: 28px; color: var(--muted); max-width: 44em; }
   .tools strong { color: var(--ink); font-weight: 600; }
 
+  /* ventures */
+  .ventures .lead { margin: 0 0 24px; max-width: 44em; color: var(--muted); }
+  .ventures .name a { color: var(--ink); text-decoration-color: var(--accent-soft); }
+  .ventures .name a:hover { text-decoration-color: var(--accent); }
+  .ventures .note { color: var(--muted); font-size: 15.5px; margin: 6px 0 0; max-width: 40em; }
+  .photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0 4px; max-width: 560px; }
+  .photos img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 8px; display: block; }
+  .photos figcaption { margin-top: 4px; }
+  .photos figure { margin: 0; }
+  @media (max-width: 560px) { .photos { grid-template-columns: repeat(3, 1fr); gap: 6px; } }
+
   /* about */
   .about {
     display: grid;
@@ -246,6 +257,7 @@
     <a class="me" href="#" aria-label="Top of page">WS</a>
     <ul>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#ventures">Ventures</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -257,7 +269,7 @@
       <h1>Westley Smith</h1>
       <p>I am a data analyst at a manufacturer in California's Central Valley, and the company's first in-house data hire. My work sits between the business and the technology: someone has a problem, I work out what should exist, build or configure it, and train people to use it.</p>
       <p>So far that has meant co-building a data warehouse and the reporting on top of it, rolling out a CRM to a sales organization that had never used one, redrawing sales territories, and now designing a sales operations function.</p>
-      <p>Outside of work I am building Pocket Check, a personal finance app, and I build and repair drones and design parts in Fusion 360.</p>
+      <p>Outside of work I am building <a href="#ventures">Pocket Check</a>, a personal finance app, and I build and repair drones and design parts in Fusion 360.</p>
       <p class="links">
         <a href="https://www.linkedin.com/in/westleys/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/westleysmith" target="_blank" rel="noopener">GitHub</a>
@@ -383,6 +395,47 @@
     </div>
   </section>
 
+  <section id="ventures" class="ventures">
+    <h2>Ventures</h2>
+    <p class="lead">Things I started on my own. Each one was carried all the way through, whatever the result.</p>
+    <ul class="jobs">
+      <li>
+        <span class="mono">2026</span>
+        <div>
+          <div class="role name"><a href="https://pocketcheck.app/" target="_blank" rel="noopener">Pocket Check</a></div>
+          <div class="org">Personal finance app, web and iOS. Solo build.</div>
+          <p>Connects bank accounts and investment accounts in one place, categorizes every transaction automatically, and shows where the money is actually going. Built the product, the website, the billing, and the company behind it. Nearing public launch.</p>
+        </div>
+      </li>
+      <li>
+        <span class="mono">2023</span>
+        <div>
+          <div class="role name">WindowWorx</div>
+          <div class="org">Residential window cleaning, one season</div>
+          <p>Designed and printed the flyers and business cards, set up the website and email, listed the business on Yelp, and went door to door. Learned lead generation and follow-up the hard way, with Yelp inquiries turning into real customers. Did the cleaning myself. About $5,000 in revenue.</p>
+          <!-- WINDOWWORX_PHOTOS -->
+        </div>
+      </li>
+      <li>
+        <span class="mono">2021</span>
+        <div>
+          <div class="role name">Sirlight</div>
+          <div class="org">Online store, mini projectors</div>
+          <p>The second attempt at a store of my own, same model as the first. Built the store on Shopify, set up the domain, email, and business accounts, worked with the supplier on ordering and shipping, and ran Meta ads. A few sales.</p>
+        </div>
+      </li>
+      <li>
+        <span class="mono">2020</span>
+        <div>
+          <div class="role name">Blendlabs</div>
+          <div class="org">Online store, portable blenders</div>
+          <p>My first attempt at a business of my own, started in high school when dropshipping and TikTok were taking off. A Shopify store selling portable blenders sourced from a supplier in China. Bought one unit to shoot my own product photos, built the site and the branding, and ran ads. No sales.</p>
+          <p class="note">Between the two stores I learned the whole job of a small online business: finding and ordering from suppliers, branding, building the website, setting up the business accounts, running ads, and watching how customers actually behave.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
   <section id="work">
     <h2>Work</h2>
     <ul class="jobs">
@@ -469,7 +522,6 @@
         <p>My wife Rachelle and I live in Modesto, where I was born and raised.</p>
         <p>I started in maintenance at a bottling plant, moved into IT, then business systems analysis, then data engineering, and now spend most of my time designing how a sales organization operates. That happened in about five years, working the whole time and finishing two degrees.</p>
         <p>I have always taken things apart to see how they work. As a kid that meant Arduinos and Raspberry Pis. Later it was airsoft and paintball gear, which taught me gearboxes, pneumatics, and patience. Now it is drones. I started by crashing them, then repairing them, then buying broken ones and repairing them for other people.</p>
-        <p>Outside of work I am building Pocket Check, a personal finance app that connects bank and investment accounts and categorizes spending automatically. I am also a partner in an early-stage guitar pedal company.</p>
         <p>Away from a screen I fish, camp, and play whatever rec sport is in season: racquetball, pickleball, softball.</p>
         <p>In 2023 and 2025 I volunteered at Alaskan Christian College in Soldotna, Alaska, helping with campus construction and getting to know students from remote villages.</p>
       </div>
