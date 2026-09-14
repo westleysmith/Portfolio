@@ -140,7 +140,6 @@ TEMPLATE = '''<!DOCTYPE html>
     <li>Sony E 70-350mm F4.5-6.3 G OSS <span class="mono">telephoto zoom</span></li>
     <li>Sony E 20mm F2.8 <span class="mono">pancake</span></li>
     <li>GoPro HERO13 Black</li>
-    <li>DJI Mini 5 Pro</li>
     <li>DJI Mini 3 Pro <span class="mono">bought broken, repaired, still in the bag</span></li>
     <li>Nomatic McKinnon Camera Pack 35L with the McKinnon Camera Cube</li>
   </ul>
