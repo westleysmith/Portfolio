@@ -95,16 +95,17 @@ TEMPLATE = '''<!DOCTYPE html>
   h1 { font-stretch: 108%; font-weight: 700; font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -0.01em; margin: 28px 0 8px; }
   .lead { color: var(--muted); margin: 0 0 28px; max-width: 44em; }
   .grid { columns: 3; column-gap: 14px; }
-  .ph { display: block; break-inside: avoid; margin: 0 0 14px; border-radius: 8px; overflow: hidden; background: var(--rule); }
-  .ph img { display: block; width: 100%; height: auto; transition: transform 0.25s ease; }
-  .ph:hover img { transform: scale(1.02); }
+  /* the photos carry their own white print border, so show them as prints: square corners, hairline, soft shadow */
+  .ph { display: block; break-inside: avoid; margin: 0 0 16px; background: #fff; outline: 1px solid rgba(28,29,26,0.08); box-shadow: 0 1px 2px rgba(28,29,26,0.08), 0 8px 22px rgba(28,29,26,0.10); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .ph:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(28,29,26,0.08), 0 14px 30px rgba(28,29,26,0.14); }
+  .ph img { display: block; width: 100%; height: auto; }
   @media (max-width: 900px) { .grid { columns: 2; } }
-  @media (max-width: 560px) { .wrap { padding: 0 16px 40px; } .grid { columns: 2; column-gap: 8px; } .ph { margin-bottom: 8px; border-radius: 6px; } }
+  @media (max-width: 560px) { .wrap { padding: 0 16px 40px; } .grid { columns: 2; column-gap: 10px; } .ph { margin-bottom: 10px; } }
 
   /* viewer */
   .lb { position: fixed; inset: 0; background: rgba(28,29,26,0.92); display: none; z-index: 50; }
   .lb.open { display: block; }
-  .lb img { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: min(1400px, 94vw); max-height: 86vh; border-radius: 6px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .lb img { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: min(1400px, 94vw); max-height: 86vh; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
   .lb .cap { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; color: #e8e6df; font-size: 14px; padding: 0 70px; }
   .lb button { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 0; background: rgba(246,244,238,0.14); color: #fff; font-size: 26px; line-height: 48px; cursor: pointer; }
   .lb button:hover { background: rgba(246,244,238,0.28); }

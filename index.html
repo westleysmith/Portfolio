@@ -145,7 +145,8 @@
     height: 100%;
   }
   .mat img { object-fit: contain; padding: 18px; }
-  .mat.photo img { object-fit: cover; padding: 0; }
+  /* a print lying on the mat: whole photo visible, its own white border, a soft shadow */
+  .mat.photo img { object-fit: contain; padding: 16px; filter: drop-shadow(0 6px 14px rgba(28,29,26,0.28)); }
   .mat model-viewer { background: transparent; --poster-color: transparent; }
   .mat .hint {
     position: absolute;
