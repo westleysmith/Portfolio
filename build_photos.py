@@ -94,6 +94,11 @@ TEMPLATE = '''<!DOCTYPE html>
   nav .back:hover { color: var(--ink); }
   h1 { font-stretch: 108%; font-weight: 700; font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -0.01em; margin: 28px 0 8px; }
   .lead { color: var(--muted); margin: 0 0 28px; max-width: 44em; }
+  h2 { font-stretch: 112%; font-weight: 700; font-size: 22px; margin: 40px 0 12px; padding-top: 18px; border-top: 1px solid var(--rule); }
+  .setup { margin: 0; padding-left: 20px; max-width: 40em; }
+  .setup li { margin: 0 0 4px; }
+  .setup li::marker { color: var(--muted); }
+  .setup .mono { margin-left: 8px; }
   .grid { columns: 3; column-gap: 14px; }
   /* the photos carry their own white print border, so show them as prints: square corners, hairline, soft shadow */
   .ph { display: block; break-inside: avoid; margin: 0 0 16px; background: #fff; outline: 1px solid rgba(28,29,26,0.08); box-shadow: 0 1px 2px rgba(28,29,26,0.08), 0 8px 22px rgba(28,29,26,0.10); transition: transform 0.25s ease, box-shadow 0.25s ease; }
@@ -125,6 +130,15 @@ TEMPLATE = '''<!DOCTYPE html>
   <div class="grid" id="grid">
 {{ITEMS}}
   </div>
+
+  <h2>Setup</h2>
+  <ul class="setup">
+    <li>Sony &alpha;6700 <span class="mono">APS-C mirrorless body</span></li>
+    <li>Tamron 17-70mm F/2.8 Di III-A VC RXD <span class="mono">everyday zoom</span></li>
+    <li>Sony E 70-350mm F4.5-6.3 G OSS <span class="mono">telephoto zoom</span></li>
+    <li>GoPro HERO13 Black</li>
+    <li>DJI Mini 5 Pro</li>
+  </ul>
 </div>
 
 <div class="lb" id="lb" role="dialog" aria-label="Photo viewer">
