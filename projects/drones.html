@@ -19,6 +19,8 @@
   .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 13.5px; color: var(--muted); }
   nav { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; font-size: 15px; }
   nav .me { font-weight: 700; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; font-size: 13px; }
+  nav .me:hover { color: var(--ink); }
+  nav .me .arr { color: var(--accent); font-size: 16px; letter-spacing: 0; margin-right: 4px; }
   nav .back { color: var(--muted); text-decoration: none; }
   nav .back:hover { color: var(--ink); }
   h1 { font-stretch: 108%; font-weight: 700; font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -0.01em; margin: 28px 0 4px; }
@@ -53,14 +55,13 @@
 <body>
 <div class="wrap">
   <nav>
-    <a class="me" href="../">WS</a>
-    <a class="back" href="../#projects">Back to the site</a>
+    <a class="me" href="../#projects" aria-label="Back to the site"><span class="arr">&larr;</span> WS</a>
   </nav>
 
   <h1>Drones</h1>
   <p class="when mono">2023 - Present</p>
 
-  <p>Two hobbies that happen to share a word. The first is buying crashed DJI drones, fixing them, flying them for a while, and selling them. The second is FPV.</p>
+  <p>I have two drone hobbies. The first is buying crashed DJI drones, fixing them, flying them for a while, and selling them. The second is FPV drone racing (First Person View).</p>
 
   <h2>DJI drones</h2>
   <p>Nine or ten of them so far. The first one was a DJI Mini SE that I paid $100 for. It flew itself into a tree over a river near Dardanelle. I fixed the leg and the cracked glass on the gimbal, got it flying again, and sold it to a construction company that wanted it for AC repair work.</p>

@@ -90,6 +90,8 @@ TEMPLATE = '''<!DOCTYPE html>
   .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 13.5px; color: var(--muted); }
   nav { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; font-size: 15px; }
   nav .me { font-weight: 700; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; font-size: 13px; }
+  nav .me:hover { color: var(--ink); }
+  nav .me .arr { color: var(--accent); font-size: 16px; letter-spacing: 0; margin-right: 4px; }
   nav .back { color: var(--muted); text-decoration: none; }
   nav .back:hover { color: var(--ink); }
   h1 { font-stretch: 108%; font-weight: 700; font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -0.01em; margin: 28px 0 8px; }
@@ -124,8 +126,7 @@ TEMPLATE = '''<!DOCTYPE html>
 <body>
 <div class="wrap">
   <nav>
-    <a class="me" href="../">WS</a>
-    <a class="back" href="../#projects">Back to the site</a>
+    <a class="me" href="../#projects" aria-label="Back to the site"><span class="arr">&larr;</span> WS</a>
   </nav>
   <h1>Photos</h1>
   <p class="lead">Some photos I like that I have taken. Click one to view it large; arrow keys move through the set.</p>
