@@ -198,11 +198,12 @@
   .whoop .screw { fill: #9aa0a6; }
   .whoop .nut { fill: #c9ccd0; stroke: #1c1d1a; stroke-width: 1; }
   .whoop .blades path { fill: #5d6368; }
-  .whoop .blades { transform-box: fill-box; transform-origin: center; opacity: 0.9; transition: opacity 0.5s; }
+  /* each prop's group is translated to its motor, so 0 0 is the motor shaft */
+  .whoop .blades { transform-box: view-box; transform-origin: 0px 0px; opacity: 0.9; transition: opacity 0.5s; }
   .whoop .disc { fill: #5d6368; opacity: 0; transition: opacity 0.6s 0.4s; }
   .whoop .shadow { fill: #1c1d1a; opacity: 0.08; transform-box: fill-box; transform-origin: center; transition: transform 0.6s ease, opacity 0.6s ease; }
-  .whoop .drone { transform-box: fill-box; transform-origin: center; transition: transform 0.6s ease; }
-  .project:hover .whoop .drone { transform: translateY(-5px) scale(1.015); }
+  .whoop .drone { transition: transform 0.6s ease; }
+  .project:hover .whoop .drone { transform: translateY(-5px); }
   .project:hover .whoop .shadow { transform: translate(4px, 7px) scale(1.06); opacity: 0.05; }
   .project:hover .whoop .disc { opacity: 0.16; }
   .project:hover .whoop .blades { opacity: 0.45; animation: whoop-cw 0.9s cubic-bezier(0.5, 0, 1, 0.55) 1, whoop-cw 0.2s linear 0.9s infinite; }
@@ -407,7 +408,8 @@
 
       <article class="project">
         <a class="mat" href="projects/drones.html" aria-label="Open the drones page" target="_blank" rel="noopener">
-          <svg class="whoop" viewBox="125 22 310 256" role="img" aria-label="Top-down drawing of a ducted FPV drone; the propellers spin on hover">
+          <svg class="whoop" viewBox="0 0 310 256" role="img" aria-label="Top-down drawing of a ducted FPV drone; the propellers spin on hover">
+            <g transform="translate(-125 -22)">
             <ellipse class="shadow" cx="284" cy="158" rx="116" ry="106"/>
             <g class="drone">
             <!-- frame arms -->
@@ -419,22 +421,22 @@
             <!-- props: front-left and rear-right clockwise, the other pair counter-clockwise -->
             <g transform="translate(226 98)">
               <circle class="disc" r="43"/>
-              <g class="blades"><circle r="44" fill="none"/><g transform="rotate(18)"><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(0)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(120)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(240)"/></g></g>
+              <g class="blades"><g transform="rotate(18)"><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(0)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(120)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(240)"/></g></g>
               <circle class="nut" r="4.5"/>
             </g>
             <g transform="translate(334 98)">
               <circle class="disc" r="43"/>
-              <g class="blades ccw"><circle r="44" fill="none"/><g transform="rotate(52) scale(-1,1)"><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(0)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(120)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(240)"/></g></g>
+              <g class="blades ccw"><g transform="rotate(52) scale(-1,1)"><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(0)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(120)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(240)"/></g></g>
               <circle class="nut" r="4.5"/>
             </g>
             <g transform="translate(226 202)">
               <circle class="disc" r="43"/>
-              <g class="blades ccw"><circle r="44" fill="none"/><g transform="rotate(84) scale(-1,1)"><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(0)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(120)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(240)"/></g></g>
+              <g class="blades ccw"><g transform="rotate(84) scale(-1,1)"><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(0)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(120)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(240)"/></g></g>
               <circle class="nut" r="4.5"/>
             </g>
             <g transform="translate(334 202)">
               <circle class="disc" r="43"/>
-              <g class="blades"><circle r="44" fill="none"/><g transform="rotate(37)"><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(0)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(120)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(240)"/></g></g>
+              <g class="blades"><g transform="rotate(37)"><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(0)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(120)"/><path d="M3,-3 C12,-13 30,-13 43,-4 C36,3 16,5 3,3 Z" transform="rotate(240)"/></g></g>
               <circle class="nut" r="4.5"/>
             </g>
             <!-- body -->
@@ -447,6 +449,7 @@
             <rect class="ink" x="266" y="82" width="28" height="24" rx="7"/>
             <circle class="lens" cx="280" cy="92" r="8"/><circle class="glint" cx="280" cy="92" r="3.2"/>
             </g>
+          </g>
           </svg>
           <span class="hint mono">hover to spin up</span>
         </a>
