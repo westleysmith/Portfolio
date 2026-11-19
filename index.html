@@ -145,8 +145,32 @@
     height: 100%;
   }
   .mat img { object-fit: contain; padding: 18px; }
-  /* a print lying on the mat: whole photo visible, its own white border, a soft shadow */
-  .mat.photo img { object-fit: contain; padding: 16px; filter: drop-shadow(0 6px 14px rgba(28,29,26,0.28)); }
+  /* a print lying on the mat: whole photo visible, a white border, a soft shadow.
+     The birds are cut out of the photo and laid back on top, so at rest it is the photo exactly. */
+  .mat.photo .print { position: absolute; top: 16px; bottom: 16px; left: 50%; aspect-ratio: 1; transform: translateX(-50%); background: #fff; box-shadow: 0 6px 28px rgba(28, 29, 26, 0.28); }
+  .mat.photo .shot { position: absolute; inset: 2.156%; overflow: hidden; }
+  .mat.photo .print, .mat.photo .shot { display: block; }
+  .mat.photo img { padding: 0; object-fit: cover; }
+  .mat.photo canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; }
+  .mat.photo .flock, .mat.photo .bob, .mat.photo .flap { transform-box: view-box; transform-origin: 0px 0px; }
+  .mat.photo.live .flock { animation: flock-lap 10s linear infinite; }
+  .mat.photo.live .bob { animation: bird-bob 3s ease-in-out infinite; }
+  .mat.photo.live .flap { animation: bird-flap 0.45s ease-in-out infinite; }
+  .mat.photo.live .flap.b1 { animation-duration: 0.4545s; }
+  .mat.photo.live .flap.b2 { animation-duration: 0.5000s; }
+  .mat.photo.live .flap.b3 { animation-duration: 0.4348s; }
+  .mat.photo.live .flap.b4 { animation-duration: 0.4762s; }
+  .mat.photo.live .flap.b5 { animation-duration: 0.4167s; }
+  .mat.photo.live .flap.b6 { animation-duration: 0.5263s; }
+  .mat.photo.live .bob.b1 { animation-duration: 3.3333s; --lift: -7px; }
+  .mat.photo.live .bob.b2 { animation-duration: 2.5000s; --lift: 6px; }
+  .mat.photo.live .bob.b3 { animation-duration: 2.0000s; --lift: -5px; }
+  .mat.photo.live .bob.b4 { animation-duration: 3.3333s; --lift: 7px; }
+  .mat.photo.live .bob.b5 { animation-duration: 2.5000s; --lift: -6px; }
+  .mat.photo.live .bob.b6 { animation-duration: 2.0000s; --lift: 5px; }
+  @keyframes flock-lap { to { transform: translateX(-1024px); } }
+  @keyframes bird-bob { 50% { transform: translateY(var(--lift)); } }
+  @keyframes bird-flap { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(-0.55); } }
   .mat model-viewer { background: transparent; --poster-color: transparent; }
   .mat .hint {
     position: absolute;
@@ -547,7 +571,40 @@
 
       <article class="project">
         <a class="mat photo" href="projects/photos.html" aria-label="Open the photo gallery" target="_blank" rel="noopener">
-          <img src="projects/photos/01-sunset-thumb.jpg" alt="Sunset over the water" loading="lazy">
+          <span class="print"><span class="shot">
+            <img src="projects/photos/card/sunset.webp" alt="Sunset over the water" loading="lazy">
+            <canvas aria-hidden="true"></canvas>
+            <svg class="birds" viewBox="0 0 1024 1024" aria-hidden="true">
+              <defs>
+                <image id="bd1b" href="data:image/webp;base64,UklGRqQBAABXRUJQVlA4WAoAAAAQAAAANAAAKgAAQUxQSP8AAAANkCRJkiJJEZlR0DzM8/8v0YmZG5IChmeOtCsSERMA373o0TmqAMxUjQWcp7qta+8APRqgqZjk6STqR6iu2+7cQqdC5lwmIfnuYHlhqVtXDDVIU7ITDXd7+2fxIyUoe+W2obZXtXNzZD6n2TTL2HcjUkIqXrGdBrWPAJT8OA6pACpVnbmNDtQAMyd9jiwANSJNBzIUzj6p6TsAVmYzVmEonAoIrmwvJCrdVCumCDW3OpqbQ4uew8PY3nktamBaxuPMiTbWHZo2GiWLZmsaHC0tqwGV2ePth94vKYSTnWvHyMU1QCZITmywUI2IqDfXwlfrzcFxYAMQeNsY3lb4XyAAVlA4IH4AAACQBACdASo1ACsAPjEWikOiISESvARoIAMEtIA/FAHN0Bz/4A9cg60Mks550AAA/v3u1HlsmiMNYLhFIE/1ZLxwHD5E/1IA8ms4sv1JkUCGGr/J7pd8uX8DBJ8K+L0uYiaG5miWpvn5PR//yQQup8cQgTH/AE+vrwBuDzoAAAA=" x="541.42" y="474.03" width="26.44" height="21.51" preserveAspectRatio="none"/>
+                <image id="bd1w" href="data:image/webp;base64,UklGRpQCAABXRUJQVlA4WAoAAAAQAAAANAAAKgAAQUxQSLcBAAANkGPbjiJJX1JAZnfhkEVm7385Y43ZDAVZkQochhhyI2IC8E9vhNBi60bsmTBZYy3lGGeNJf8MEUJtmetXZLkanHEACzkqSWvS6U5/xBljGbWVrBlg7wCwkVZLLJE9GwEi7doPxKxzwberhsPj4WGaUDTlhv96fnFxsR6oFBv1/vaUKwmXcIgNps2H089yq5fvVr4OAdPd+0sUqRha5VSykLX1Z41oMRXxZabd1FomlDCOBEDx881AcmilljMNyqKoQEv4xbTgVZ1izqHV+rga0OcwjP4YQvaZDzeyNn3YpVnS3Tw7Pdm48w5d8spu6D6capbhbo9z24dfLJanh2OyNaLE5LkPWa3TIZe5Jtaoo0efxS1zVCallo7hhemkRitCKgXT8bg8Q6ekxlUA7Wkf+IXppdVsG5cjHz8Mr87Rq3Ch1IxMtyfZUjdjVXLa4iGtUkW3shhuI0yUR49+ncAEpDrtxlVH8Jt9SSmm3eh6IlNyoxTUmZ5YitYUhQQds6NZQ2Dr+rJpp5NKeO17MnT7uCfGS0td6X2aR0nbhp6n+hQd1mqoK70H2yymoO9HLcYweq+54p8SAFZQOCC2AAAA0AUAnQEqNQArAD4xEoZDIiEN/HAQAYJaQDO5EszTcBtm+e69HIA2jKdUnasCeD3ALr+8IxbmMAD+/kRz//xAJvN5JefFgQ/gP4xl7RNeyb1ybe08lYSaY2tZf+Wza8sun17VIzoUdHRS73hvNWomfQ3w8gpqigXyFz//ofuxxAyvPeS2Pwwp3SOIhHcqZirOm0L6+mn/irDKnPMi5Ts6b1n+AH94RjeBeK2qaTX6RpQJOAAAAAA=" x="541.42" y="474.03" width="26.44" height="21.51" preserveAspectRatio="none"/>
+                <image id="bd2b" href="data:image/webp;base64,UklGRnIBAABXRUJQVlA4WAoAAAAQAAAAMQAAKAAAQUxQSOkAAAANgGPbttrmicHMzHbrJLPPVDgtimx/6YP+e53SYhEREwD/qVuu5zcmvWbLzdklS1PlBN35tlsLbMsEQ/P327v0/AUtS4mcnBA77dG44Z1L10JWSIMc7hYuBdZjRFgNQCM7FdzwX4Xbvjk2Qv6a8LwkUJ5G2wnW3SjOcqJKAKCLHGeNKGKqOxDK0DwMCzQ8stCD7qGlooRJXhJWAaALX7v8Er8ITlq0x3W/roCCUlE7HI7qdM6V5AVTVeDy+l736TPKHcM04o8LCgsRDTBtt17vTga1wLVsB6oLCUBaAyGAujApUQIgAMH3IQBWUDggYgAAAPAEAJ0BKjIAKQA+MRSJQqIhIRVaBnwgAwS0gCEq2/+AN9tN7457Uxhx6OauCYO2UAD+/nyVWb6X2j3rKIODuoucwZ7/p+Qgz1OEZIxf5tltwCj6rUQJCoJ2QJWAX5pFPAAA" x="585.74" y="471.7" width="25.14" height="20.73" preserveAspectRatio="none"/>
+                <image id="bd2w" href="data:image/webp;base64,UklGRqwCAABXRUJQVlA4WAoAAAAQAAAAMQAAKAAAQUxQSMkBAAANkGXbdtpIV2jLXNXcPf+RMQQMsSxWM6jhOyImAP/xtKLcuFzUoBDocSuqEjyAYsvlCE5FdFzErRzJBJARk83F9KqrMksftIulNJIPgxKn0yWgUDHKymqX952SQkgnJ3Gy4bxLiUJr1cnZan8yvShE1HLy70NIhxUok3StYrc92tR4n4sgD6tGXV9L6+uFSRTZN0NjP9igySxpGWys7/y8x5U6ZxteREN7ttkcmY+r6UkJpFPTGq6aZm13MaHEvlJpMSAupo/uEUqsGtFswdoQj9kMbQmkFxNOq+chLUt+wEuo1SN5nunh/enKR4kC2agafbUe5Hi/dCMpgIy1ohcXN6Z3QxqC305EK1Q1ex2ZxzI/cPh50UietE/Zf0MMSkq1nrUJIuRMGfmJqqFC0lpIbvfjuEUIVVXDIOb3s5bB84/6UZt+wtscD6NdErWSNacI9rie3716OevoGcSLh63ET6aYUwohJnw3p+gP43zOEf/npAYyZYyQGGXz4HF/X0Xk6Jwxm2MpkXRs2/xj2QBIGTkT5BACS6pN3nsgUYAQ1A1D+rFvpwgA3q03o4/IOK8YV3UAQXKU47dmZ5z1lBN8MwJARIkx4R8NAFZQOCC8AAAAkAYAnQEqMgApAD4xGIlEIiGIqowQAYJaQDQsHIIByuXqA56/TIN5xAKmLgTenQuN/TTDZQ/Ny4OE+JnuoAD+/nyWe8AMyRJWfMqkIxyiE7naD4mBy+1QTky+NiFRzuPLTm92Z3/7yImfACP6AvnWhAKNdujrD7yeYYfrScolOB81CaczF5oHv2ISTDPafz2BFfHt1tUrxuHts/pWmq/8bzalVBp/U97+ujx35FMA+UqiB4FzDYAkkLgAAAA=" x="585.74" y="471.7" width="25.14" height="20.73" preserveAspectRatio="none"/>
+                <image id="bd3b" href="data:image/webp;base64,UklGRsgBAABXRUJQVlA4WAoAAAAQAAAANAAARAAAQUxQSEMBAAANkCRJkiJJkVg1zMw8c5r/f4DnA7zMzV2QWRmwvHeUiJgA+O9bY7R2Woz13lpgZ6w1WrQCJaAUS4zDIgBHS64x1Q9E58pnYKyfWNheGM3tRAZWa80atTVNSO9fvW0/zfbLyV6aakX+DqeKarFDXfYHvH86rSsEZELLVmPyuRudGS1e9MfdxzkoZkzxnW85EFQGi9anxZMJQiUKGNACg1g/PpUvzF1WNtLble5y/InvIjjE0oxrzwRlRkQi7BT40UnZX3/5plvPv5vrml8BNToxF18FEdEIw1Il8kLoHeerze7MODzWYbwY+ZV8bmwZu596qhbp2Wfv2i4XN9ATzZSMrYddPjhIZ2H81S9MjGer2ftOmwOmiO9agVIDMkN+mmKiORj1i4ub9e3oLwxbb26uPrzHAD/JBAzviwqGdVsgtOA3bQBWUDggXgAAAPAEAJ0BKjUARQA+MRiKQ6IhoRGsBYwgAwS0gAAGbtCVDsaw7fQwKvQkECVQbTzwAAD+/nyUFZvpeAlGFLG2hNHdJz3sKQB4zu8eX5cFTDJCLHvi2EqV2qTEGhoAAAA=" x="620.98" y="467.81" width="26.44" height="34.47" preserveAspectRatio="none"/>
+                <image id="bd3w" href="data:image/webp;base64,UklGRsYFAABXRUJQVlA4WAoAAAAQAAAANAAARAAAQUxQSI8EAAABV8cgkqQ49OBfNeSPgIjI4U+5nZVtIkVOc8h5+U+CYSNJbZYct/+CAbuFiP4LCIpYUyM/LRAIjKM4BmGrm/Dk3tdHAKX//9O2z/cnsGQZgi53zb9jZmbeTsxwZHhgu+5h0JkZC2mauok59iDNHA+PETEB+DsUf40CEKx5AAejvwAxRzSNAdxCkznAoCAJjeWtUgWKgBQAGDVCUmvHldsXawBQaCh3bN51QFr9AVw1A1BMdwSYnAPeFIA7BCbmNZtDkE+NE8zqDa4zTQOo3b0kqEtCdd05vE9iMShOqJ1zGHe96xO1mK0XW6b0TY8X43NVlTHW9ZoiOLnXIefbR5mAS6IZDNKyWuE5a6I3N7gL0wSyCMysTdbZpLUaXisB1QTRkbTK3WB6Uad9Uly9y8BrEbCCQw46A0TkBBeZgcIvXf/uXbfbq8HmxrTs0wH0It72tRdsrImu1SuevDII/BoMWDeg7CLFzwKce19xu8JQHyevXmETalzlldrq8DsuctQ8gfyXMVv3qyop7ezdi6WuY8WaxV5/59EbAppDnEx8nHXiIg3SafTWjqOohoDPUjKbD1674kgCryonOdnnIScWFzylt1ZBWzW0LSoqtXLfQ7d7GzZQJSlXTHjj5HQS/7Q/frTnaKsG2Fxxu/fYc49c7WhOghl3YAsxaeXhcZL/dDFD7QQSgjPA8AoX7q71217qj/hqMJRXArBqOlO7BJod6J6rnG7c4aWz+u0dgoGWs3WVxSPhwvMBMfO4inP3RR/LvjW393O7ZclCURXNUHHKH9fLsgfl+jFnBWNJyQvkxhX4vkest5zLp7bYaLEWF6qsBBVRRSttZfr9pagrT6N4d92DKsMqY46jo8NSCNumJbQ8+1spN2zuZyhkYqRVUFlGka/4EpRL2bjwBn1t5CzHeDIe5frk4KDqecTq4yVjFXPXz2ljK/ru4y9R7aX7zM2ZUKibFCthK7+1wrhUxmyF739wmJhRVrp9X9bGZF4CwVbgaJbCzSrbfu+HbqqZO+4a1EyyACB564JtVpJU6czLtvc/GQfr+AEk6pElCFIRb2+ueIrPShQmK4+u/GXsErojLEyS2AyZBQaOVHLLtLZ3/HJmqBDgLP9h74ZYjAgLW9JhoqQcSZoih9LKD7YClxPKQkjMUnFs7xut2fQMSwqp/Y5xdRVn07xKKq3sYPW8rW4541QqxGLGsyM9XJ+6Y5zptMh2Vlb1LNcOGelNKmaC89f6LjgVBIBVeTKa8POQKG8czZOKC8vxErIy01XaaVfaM2kxPRmNxmE4OgrDUbx3GqmAVRPbXtNz/memRaqGmHNX7F627lhWmWXDvR8/+fD7ah4NAmrHMKGJW1X68/FCtLa7GQxPkmQKOQ5/inzC2bSjO23rUOZOdCScLxaye+cHVhjLfLr3k/ZyiYWVGrQpo3i4PY0m1WKbq44s8tP49JfjyFP4s8JVECAxmw35Qu1BG1ZCo5Ow1Gisf5FrmZAdFNPcRWNlf2CoiofhiCk0lmxKquyUhqEv0eAkG0bTPZIuodm8rzKrR2g6Q0n4TwgAVlA4IBABAADQBgCdASo1AEUAPjEUiUMiISEVmk04IAMEs4Bfte8CauL243PY+fhfPwByy7tn8LvBIZzeeDXZcFgGqsChqpgA/v3uwkd4NFvgwzgrbgSu3Ptf/+ajw61tYkg5wPf///9D2iqxXoXdTKFknDm2OxnYij/AFDkiNPq2DS9qy6EfeAdQ3v5sqGRVwAwApsTwcnOem9/vfwmGiFL56nXGdFthhnKRwV3elQA5C8k9DCC64J7gRyOFTtiYxh9AjaKP4///XSwn1/ELGyQCFQTdkTjshVuSnQUkxtw/XFHBsvjqZTiEKMl55hqaaYGqr6p2K7q88FF5nF6hqkCU5FAA3MAKTPDepfAvDgK7LiAAAAAAAA==" x="620.98" y="467.81" width="26.44" height="34.47" preserveAspectRatio="none"/>
+                <image id="bd4b" href="data:image/webp;base64,UklGRhgCAABXRUJQVlA4WAoAAAAQAAAANAAANQAAQUxQSHgBAAANkGRbe9pI3//LjmVIqpqZmXndPe1pr4GZwmQImST9jSvoHkTEBOD//3thvd/jw77uTunQx2i69uvk+tnkeKQSIoKQ2F2d9Z8qLKteVf2pe/rMNtDRGZfL4V2S+tm22ymtbmxkAIJg57fDtJLBPleVJvlDujVy6LxO1cne0B2nIyd2a1fvtlsjjXKOWVgF5Zf0tD+Njs1KFpAAnDfZcL47aey1XhPEfJ6P5ZuNUmI9IVii0HUO3Z18NVKlpFqSoAYqbsV9zEbl4bZJWkpOPFStNiJifKPAaJxP+uyTKy8GzzUC67FtdGUqUVsOFjR427NLZ5Zn715VnkjLXHvE8EjgrU8fv1+6Sd/7UoJgOr7T8cxvJfmmSiXHV9+K4FASKPKcCaRRMKUrD7GoAzdPpPGz/fxIH8a1jlPILl5qZwpMumr2fpaaVsDClWPPUy13Vu4oDh690Dtr/D7YAcgBaxs0sIDdtP3P3wsLAAKgbgFgDTQo8FeHf1ABVlA4IHoAAACwBACdASo1ADYAPjEWikMiISEUCgWoIAMEtIAagDn/wBSCG2mDNw8Q1u6hXMAAAP7+fJ0u5h//yQq+FJR7Bh3ekXsbr+pkAarYDcgJR+P7//ju/kzeNzDHG/uAc4JKBY8BhWRUrgWYCyjpqDGn66hrMthdFXBeWAAAAA==" x="653.64" y="472.22" width="26.44" height="27.21" preserveAspectRatio="none"/>
+                <image id="bd4w" href="data:image/webp;base64,UklGRroFAABXRUJQVlA4WAoAAAAQAAAANAAANQAAQUxQSKwEAAABCbRt2wZEp6Dq/wenR0T0P6DOTrPnv2UqO4QHhoK2bSSHP+3tHgYRMQFQoaG/wKhtI0HhT3l3794ugogJmAA6t7ankaRPZEu2i5t5mJkpXIz2527IvBsxQzMUg8XSQtNMtGFETEAzWpjouEpsgFeWqwx3AUCBITNUvCoajEmrjR5CYzs26BVB1HtM8in//dp4iPPkFcEMeH6Rr6ulX8sJswj4K+ElZp4vFpW0Q5ofYQDxSoiiFyBZ5Garu+IH8z40yILGyWDx+tcwK/bmiFq0o1gfmKKyKv6yS21Br+yun10GkMqVpdB670doM9+q6kH/VsEFeDLxJKDxSDJiC5Tj5YZEmKHoZNjdbosh1l5bNqliEFxRkrOU4wJ4anVRwuZ2P6/6oHCT2STdHEnlYi6LEjhSEkXEmI1gZxAkzEkGpclk1eYNZLLpXSRtZ6K5I5YEHzVewLJvEgOQ+7wGjb7pWEodSihJBCqERzQfrB/8jBQEHJGuehlDRKMIsuLYMEN+tJckgoTorS8r3XQFef9SEuGsu+DbPWkRDpFimewPJp6l8DJF0Y6k8oYaEaojRpK4bluytZTS0yMhZwMhp648o6hECEBQO/Dl8GK/ruPpcUOIpa3ai3c0kOiMMbDxcSxWCaPhtAgjhuBI+e3V1x7RECLGvKyHnUmLs2AFPh2UWJrSAV+qPnzt+gKPlgUU2DfjKweaMWqEAgDuMCFCOePTbMxrYyuhEYeY1N8mN2+fa4AHh50cTbZZvepMze0CQEpAkYoCRIeUqCkpsUtp6nOz+vzK5XPTFAKi3XH/Rzmu0RrVfQoAgGMSXXQ15pS+9GOiMFV1Ty7xpdXHN2YIiz5GMOrLdx/gViozqeCQpuk0yrxCKTtwtc2Eqmp7bvH8pXNLZ12dcDcpqMWlqH+BYBwNHD4BYMIjliurUwDNFJfNBqlDWkTsCHIUudi3bQE9QEe92g7+p8Q4QFYpAGg9Wz7TqFIAiBDUKEnBqSGyE9ISE8Un5f53FoAfAgDRmQLSNF17eEkCRgAQOuavcRyYMGY9TVarrO54tknekxN/VDCKxVHNLMntHGIMAOVuG9bbzcI0NFrtJj24uGhXl67jbyE7ilc0Ktzkyk5n4BxxOqjg9ndW0ZALly/8urANLBcGz4XVepRHcCUQyc/W8dS+VI76jFiT696IjKttyMZ1p30AxsulLs4QOUI0XalobW1lvVSe2xgBbX/jRsMhZkhVPB1n2gJKTE6BJf3DGKlfrAWUzTI7VoTFSTlQOg5xQZhOZXNi4lTPcwU4h3wHwX8Rs9V9m9cbi4ULxE62ONp6773vOjkYA8dFEQBjBfEQlhjfKdvNnAUupYbhZql/+EuBDfASEwiZCo2DPS7SSMvu+mg3XOlrjQEB8aeWp0OE0dRiWnXC96T5na+oLDQzQ1CMcOo0SelcffYMjDp7e6GtW7ouTFk6iBFeZu3qRdW/fyeJlcFW/7edHzdjyPI7YnHNPhBqtnUW/TbcH26HUYmU+BzBlJo8hJWKWvgTdqKzLdtDaTip930zqKw3HQ0aUwWk1XcOgEMAn2bDc729iFPNAPQCQD5JRJm4aKDVQx5eOlZQOCDoAAAA8AYAnQEqNQA2AD4xFopDoiEhFAoErCADBLOAY5cJrU8sRY2unqA2y3mA88bTdN6CAHw1zSJewJwI3tya0MCh4AD+/nyUe+ljwEhWXr+CG2FHz5m0b9twtZpPbKZ0qO7jB1Tbwx23en/XHgNnk3//5Hch/qwyK6pzT2pxwCHcIQv+sEMQPzdVpCrWbVVT0VS7cJgPG4j03mKCjhz7Zjtkt6/1lI02yZMh5pWBL8nPltqZILi2wLjkmaT6ULDl2ljR/fGqlLAm3GXEWqtoiDClCY2wenNi4TdE1T3cMdEv/Nt8ctAAAAAAAA==" x="653.64" y="472.22" width="26.44" height="27.21" preserveAspectRatio="none"/>
+                <image id="bd5b" href="data:image/webp;base64,UklGRgYCAABXRUJQVlA4WAoAAAAQAAAANgAAKgAAQUxQSHQBAAANkHTb1iFJ933hiCzbtmf9zzmze2Y7zYjI0Pd9r5U1bq4VEROA/wS6qc/zJg2tmOnM9KyeaBlyRDuGwUQDdPj08seOn2iGJaSyrIQ9FGYse0EilWHVj9bW8olhUSRMlNsAMQtABMO9N+1nBfm5Uuwk0k+MSNimDCOn9KhYEGV/xZ6SyvQ1s80aA8XChSAqGpn3thZ02GIzi2Cr0GApm8Np2YuXA8rJZtIAKQMAMQGFmNuZmxsuf1myH5Q/JU4MQAooYKHRKBW97sv1jdgFQTALUgYLCUGwFNOsKdZ8HlF0vVUIBWQMwK8Qgd38TvNsPnaJlKBaEmQjtlMkVi/Kuxty2lTD/qfRifCLKDCwrwAx8y4vXXRP5nVuili3ym+nMKp871PcmpLN+WR4MhX9rHFk9+18wI9RaLIqX01LyjZICr+rq1Qf7/HwmF8M1fu221XO0oEYASTOzQoqxONrz7VOGT/t6hY0gAzohKkqUmQAoM/3yxdWUDggbAAAAPAEAJ0BKjcAKwA+MRSJQyIhIRK8BswgAwSzgGmu3/q/wBvtqA4maCvSlID9J744AAD+/nyUEz1OxtRjCxSgIb2N1/SYbZzztpa22/nhzEYCXMmVUauKyMdQXwVAqUBqiTdPEver/hLqiAAAAA==" x="678.26" y="456.41" width="27.73" height="21.25" preserveAspectRatio="none"/>
+                <image id="bd5w" href="data:image/webp;base64,UklGRs4EAABXRUJQVlA4WAoAAAAQAAAANgAAKgAAQUxQSNgDAAANoKxte9pmeiXZlimcNPmZmfnMZzdnwMxUhrixY5ZsfUMFdzXLiJgAXGS7IUhtAG5wcbkl8oEpi/40Sa7tmYvAnUq0YKGueMWm20sbO6O6O+5lktw04IcmlO6sjipvCWU6slqiEoUTs4rJRWh5XM7++FnrGh1zaYyXypRN524TXNLrPg4Gv26XTHbCUTUDNwrC5GY9DPq8hYn/nEW5KWvWBQMIWWBub30o7kfp1fS4clRBZW+xTJ0uiAjWtLiM4XwY16qgpqm1l5O1yVB3gbBi08FtbZw/7GIljEGrM3OsnNkiy7uwU/T868HNWBSxcdGWMlkdLUc3qrCB3QVzjNx84iW20ZLIlEG0e5yL0cjqZTLrQmmu7x/rHpEFkOlFuweK39JsYy9YoUuLWDZkbms4AIa82Nq5cTVz3eUkQZdcaDdclouaOAfATVTc/92epcJaoVNWonGm/YMBCCBUibV2be30Vwyd2ghTT0zUmhgAGNHuLvi82vZhutHQw/JOcEAEMozzap0aeSXjGh0z3np9O1MEMA6q1tXAZ1FPGeqEuXatw0tB2hIIALP05lZoi0Tg1MLnpYKsT7Lm2Q719aKfpD7+M/9ucMO3w5U6jcVYVnFpJ8x39RqAQ9sW5lzMo5IBaBmrfnaWnif3cFovc5QUJmsnaWrNM67Awsrc3Zq8OIwzlwBRcST7G3BDmbQnyFpB9xNr3NYJR5ZasMS6eGD/MXuRxIoAgCRFWXALq6XNcaKv+s66nN3+fZzUG2Wukn5i9/Dn1Wfzg8M1QEaAKVpGltPXaHFyfTWxR+E195Zy17tHm1kxXOqhP7rXsF8Ti0AMIGPyo/lis5cLfZJ1KwtnA+/Xxp5M2sHUfPXRHbceztf5jtMS4T/tnBbLwuE8TOgE8d2sNsy4gW057M7Ivzv+7eAKP0xVaYhAjBFxUW5NpLRhiqBuRfuvVVmWx/u/NHGuWtc49u0bE/bzQbylhSL8mxix4aMxDGpoDsbMvwDTqDrPKtItYgPUgC60NiCcTPhPAxhQg/9FGSOCvHRNhjZX7eqPzJhqmDMuFDcFOIMr0ZbqbK72Mq8ePJq86fX91feffMFLwd1KuCtmmKsE83mkAwWB9nReoSeRu/txL74ZSh4KYUm3ULJufOPWVciSxA78yqaa4/THaHuqjNrmq7Iqx4/vD2MW7tvcWQmmgcGhW65lwzgFSp8OYJFttU4SHR/Nlv41y2I1C2LwBk6LPQDQnoc8x5k5DatS/u7+aVW25W+IOEGMBjAaoH+h1IRzbLXpy31oplv32M2FwIXNygCwQ3NkUEHh/AFWUDgg0AAAAFAGAJ0BKjcAKwA+MRSJQyIhIRapnSQgAwSzgGVzqGSn+vQr1HbZ7xYPXT0zPejgClzzKJmtxYRP09TAAP7+fJ6PH//86VbX5n04a45FqXx/ON+AqiYYBt9UhAQY8APG6KP8AQvGkQo3k1ZPRhWBlHKLGK+Ogxgj6eIPQmjxCQUzT4hl6BNADB8wg8wVh7iQ6gTbW/epp26Ppa3QTD4n//0PHgzrEtDMWGE/CztBjK/Zb3lOjsE0lC0BUBnEnPknvvddqzHhkdRS/Ny/ontIAAA=" x="678.26" y="456.41" width="27.73" height="21.25" preserveAspectRatio="none"/>
+                <image id="bd6b" href="data:image/webp;base64,UklGRgICAABXRUJQVlA4WAoAAAAQAAAANAAAKwAAQUxQSGgBAAANkGXbtmk7c+1jPtv6enFqnaLYtq91cM/ZWnEB0vIREROAfxDzOlRtjuWFUi8XejRzIjcL1pazZNHNwfQL2+bjXdm187QS8UwIT8rDfnOBFzajNXTmofug5eHhxknkNSZsXR/EYP2p7n17cfY1VE7jq/Wh1nxwEPZWt8YCRq3E2fWbne3evFMrMszM2gFgi0/FRjZeMf3Im4oBGO2H5nwKA14MEkqrpfP1+QsUmpkAQAAg7r5d2VgsyIYNhNEAguLrx8UJd5ab9Uy8uLTlrnuRYWbCrwQAwV78cnAwlw2n7tRTAIxv5qp90ryN57y6+cbb3T1KLIMABuFXwvZZ+uq5MmuDCfmOUIAuBNsaAtNO21vWfT++vAQI/MrEEMwiWj1ZuVvSe09YXxliIGgDFfnTSlFKzzbH9YSDwBoCCGAmWAEn2T84aN4ILXUZC68FKig1B9BiDAxR3L3xWQIWv2eGZfx1C4v/LQNWUDggdAAAAJAEAJ0BKjUALAA+MRSJQyIhIRQKrjggAwSzgBqAOf/AGutQhDeOF8j21QIO4AD+/kRz//xcM97sbSf4nu0ywC0wIDIQewVWAoEBzOtvL9jOOo+T7JCYd79VRu8zQhWTzn1ywDigHYhfwDQAY6Bo3GnHAAAA" x="687.33" y="484.14" width="26.44" height="21.77" preserveAspectRatio="none"/>
+                <image id="bd6w" href="data:image/webp;base64,UklGRswEAABXRUJQVlA4WAoAAAAQAAAANAAAKwAAQUxQSPwDAAABr+agjSRHOlcff9LhI4GIyMN/5jHI6UVeR5gXiUFuJZIa5L4YIpor99wjHyQUtG3k+O734s/4MUT0P8tc4jxERLjn3sda8IovKGvbtraN3u/7SdIvWWBbdpmZV8MM+zkFPodZz9kxM0+wATsmWTxUsFezjIgJwPp6ZdOEWdno5KBcG8O9DUEt4qwdSbsqF9CWDmHDrY0GJO2pvbZpylXZKEuOlio3UKLtj+4W6Jkd0o+NGTAKJNvOuFXDiZ6cGPOJOBu1AUb0OAhM6Bg5ZKkcUx1vJm6Qhwh7ZThstvqTKBv/BxFIEAD5H35Suw6GrPxTl2BOSyTtkGWi9GIZ19PFOAYU4BrrugCRIkjClFoOXRk+ceG5N8PAOtZRWTitZVHub317kMlCAl5koIwjhRfDQpJSRg/8SWxuDy7GbOOi8Jr7vD3n3zamP88PYLUkGOmETmo7njEcsHDP2N7dp89Ww/iEHiS5J7lYHo42fp9Mj37JerPmsJNZqQ2Enw6DwEL3AyN0xx/eeNpzZSobRstoc4z2RtOpaUeNl+VwiwP838sMYgBMVEFrty/54dq2FQ3BRatLKgHwv6SAEEwgknDbJ+89H2kCGqprQdRwUbXeojXDfv9Eht8Ms/Ov/ySNrNE4py9cikQtCEVT5ssluUXVwThsHe4OvFSq8TDFw+agzv2LPx+/HC+ENkA+977bcwoBqu9Pe4j0tgrZP3YYRPJBpEqXDxxci4wbMgCo/Nul3FOCJ06nrveKneKPWTKf14GDh4wKPU0Vn5wHHtUCJc127Hg0CDaPTixmJ/5wmnJnPP4921DgYw9wBsrsiVTc+K6RAkDL7STfvWDGs3TwQ0aLjv+dt3CPMqfqGtADOLaK3TPDjtKSmYBx/sEbaZj6FNgBdZ3QCMW9QZRA+h08+Jjni8JNegpNS01TU/HeCx0RKDBJSCIGlEdCKAXxoE7kFt2BVUKgApXL6eHOU2GYaikJD08CD8tSQPgDzSxli7o8ms5jfTcVCqtkuPhq0om8ugWmk5397z7/k5BAY4UMx2oJNYekinDwyQ8/jfdchpVYpdEkjl0pKsUkiFv+7MPdJFMKAiv1Dankar5dAs1i0SZ29vsucQC1msy3fXNqfJADXFbvv3q9bwDAYqWn93NRDE9n2ayCMvT6qUimSQ+rHvvL4OLtuHazAjlHiQkB4pVVLumLvlc5RrLbRi7O6q7B6sMzHNpimk+LyS5ZQJIUqxNN4nje7Me9P+oeVX2POBFYvVep7t7M+XPrhyO3PFhKQ4w1LOqRnc4Wv/z4zVYrSbkWa2m6qnvh6nOnbL8XC0hiWgtAUJo67An8m7GeOjRSK0BYw1hjqfi4EgoQWF9WUDggqgAAABAFAJ0BKjUALAA+MRiLQ6IhoRFUuCADBLOAZewEWFRAPUBtmufZAGpMaEptF76H0wAA/v3uxshG/DEt2fLwORm/fKI+e2CvYMQiDnq3Tkl3o1893GnzIzbSR0qsqTaHfF233Hbch/uORlSO8GKPq40BdOy8nqRKiYpsN0Tin28zYkDd9ducNr7hmWHpg59zcPE2pAbvgsKpvsrhUPD4RxQZuZv75DEAAAAA" x="687.33" y="484.14" width="26.44" height="21.77" preserveAspectRatio="none"/>
+              </defs>
+              <g class="flock">
+                <g transform="translate(554.64 478.83)"><g class="bob b1"><use href="#bd1b" x="-554.64" y="-478.83"/><g class="flap b1"><use href="#bd1w" x="-554.64" y="-478.83"/></g></g></g>
+                <g transform="translate(1578.64 478.83)"><g class="bob b1"><use href="#bd1b" x="-554.64" y="-478.83"/><g class="flap b1"><use href="#bd1w" x="-554.64" y="-478.83"/></g></g></g>
+                <g transform="translate(598.31 487.77)"><g class="bob b2"><use href="#bd2b" x="-598.31" y="-487.77"/><g class="flap b2"><use href="#bd2w" x="-598.31" y="-487.77"/></g></g></g>
+                <g transform="translate(1622.31 487.77)"><g class="bob b2"><use href="#bd2b" x="-598.31" y="-487.77"/><g class="flap b2"><use href="#bd2w" x="-598.31" y="-487.77"/></g></g></g>
+                <g transform="translate(634.2 493.47)"><g class="bob b3"><use href="#bd3b" x="-634.2" y="-493.47"/><g class="flap b3"><use href="#bd3w" x="-634.2" y="-493.47"/></g></g></g>
+                <g transform="translate(1658.2 493.47)"><g class="bob b3"><use href="#bd3b" x="-634.2" y="-493.47"/><g class="flap b3"><use href="#bd3w" x="-634.2" y="-493.47"/></g></g></g>
+                <g transform="translate(666.86 488.8)"><g class="bob b4"><use href="#bd4b" x="-666.86" y="-488.8"/><g class="flap b4"><use href="#bd4w" x="-666.86" y="-488.8"/></g></g></g>
+                <g transform="translate(1690.86 488.8)"><g class="bob b4"><use href="#bd4b" x="-666.86" y="-488.8"/><g class="flap b4"><use href="#bd4w" x="-666.86" y="-488.8"/></g></g></g>
+                <g transform="translate(692.12 472.22)"><g class="bob b5"><use href="#bd5b" x="-692.12" y="-472.22"/><g class="flap b5"><use href="#bd5w" x="-692.12" y="-472.22"/></g></g></g>
+                <g transform="translate(1716.12 472.22)"><g class="bob b5"><use href="#bd5b" x="-692.12" y="-472.22"/><g class="flap b5"><use href="#bd5w" x="-692.12" y="-472.22"/></g></g></g>
+                <g transform="translate(700.55 491.14)"><g class="bob b6"><use href="#bd6b" x="-700.55" y="-491.14"/><g class="flap b6"><use href="#bd6w" x="-700.55" y="-491.14"/></g></g></g>
+                <g transform="translate(1724.55 491.14)"><g class="bob b6"><use href="#bd6b" x="-700.55" y="-491.14"/><g class="flap b6"><use href="#bd6w" x="-700.55" y="-491.14"/></g></g></g>
+              </g>
+            </svg>
+          </span></span>
         </a>
         <div class="ptitle"><h3><a href="projects/photos.html" target="_blank" rel="noopener">Photography<span class="arr">&rarr;</span></a></h3><span class="mono">2026</span></div>
         <p>Some photos I like that I have taken.</p>
@@ -753,7 +810,104 @@
       }, {threshold: 0.7});
       io.observe(rug);
     })();
-    document.querySelectorAll('model-viewer').forEach(function(mv){
+    // The sunset print: on hover the birds fly a lap, the water moves, and the sun glows.
+    // The moving picture is one small shader over the photo; without WebGL the birds still fly.
+    (function(){
+      var card = document.querySelector('.mat.photo'); if(!card) return;
+      var shot = card.querySelector('.shot'); if(!shot) return;
+      var art = card.closest('.project'), img = shot.querySelector('img'), cv = shot.querySelector('canvas'), flock = shot.querySelector('.flock');
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var gl, uT, uA, raf = 0, t0 = 0, last = 0, amp = 0, want = 0, leaving = false, once = false;
+      var VS = 'attribute vec2 p;varying vec2 v;void main(){v=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}';
+      var FS = [
+        '#ifdef GL_FRAGMENT_PRECISION_HIGH',
+        'precision highp float;',
+        '#else',
+        'precision mediump float;',
+        '#endif',
+        'uniform sampler2D T; uniform float t, a; varying vec2 v;',
+        'float h(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }',
+        'float n(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3. - 2. * f);',
+        'return mix(mix(h(i), h(i + vec2(1., 0.)), f.x), mix(h(i + vec2(0., 1.)), h(i + vec2(1., 1.)), f.x), f.y); }',
+        'void main(){',
+        'const float H = .542;',
+        'float d = clamp((v.y - H) / (1. - H), 0., 1.);',
+        'float wet = smoothstep(H - .03, H + .004, v.y);',
+        'vec2 p = vec2((v.x - .5) / (d + .22), 1. / (d + .22));',
+        'float s1 = n(p * vec2(5., 3.) + vec2(t * .35, t * .9)) - .5;',
+        'float s2 = n(p * vec2(11., 7.) + vec2(-t * .5, t * 1.5)) - .5;',
+        'vec2 q = v + vec2(s2 * .5, s1 + s2 * .6) * (.006 + .016 * d) * wet * a;',
+        'float hz = smoothstep(H - .17, H - .01, v.y) * (1. - smoothstep(H - .004, H + .012, v.y));',
+        'q += vec2(n(vec2(v.x * 6., v.y * 70. - t * 2.6)) - .5, n(vec2(v.x * 22. + 7., v.y * 40. - t * 1.9)) - .5) * vec2(.008, .004) * hz * a;',
+        'float ph = fract(t * .11);',
+        'vec2 dir = vec2(-.012, .05) * d * d * a;',
+        'vec3 c = mix(texture2D(T, q - dir * (ph - .5)).rgb, texture2D(T, q - dir * (fract(ph + .5) - .5)).rgb, abs(1. - 2. * ph));',
+        'vec2 sc = (v - vec2(.533, .505)) * vec2(1., 1.25);',
+        'float pulse = .55 + .25 * sin(t * 1.9) + .2 * sin(t * 3.1 + 1.3);',
+        'float sky = 1. - .55 * smoothstep(H - .005, H + .02, v.y);',
+        'c += vec3(1., .46, .12) * exp(-dot(sc, sc) / .016) * (.10 + .08 * pulse) * sky * a;',
+        'c += c * smoothstep(.55, .9, dot(c, vec3(.299, .587, .114))) * .10 * pulse * a;',
+        'gl_FragColor = vec4(c, 1.);',
+        '}'
+      ].join('\n');
+      function init(){
+        try {
+          var g = cv.getContext('webgl', {alpha: false, antialias: false}); if(!g) return null;
+          var pr = g.createProgram();
+          [[g.VERTEX_SHADER, VS], [g.FRAGMENT_SHADER, FS]].forEach(function(s){
+            var sh = g.createShader(s[0]); g.shaderSource(sh, s[1]); g.compileShader(sh); g.attachShader(pr, sh);
+          });
+          g.linkProgram(pr); if(!g.getProgramParameter(pr, g.LINK_STATUS)) return null;
+          g.useProgram(pr);
+          g.bindBuffer(g.ARRAY_BUFFER, g.createBuffer());
+          g.bufferData(g.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), g.STATIC_DRAW);
+          var loc = g.getAttribLocation(pr, 'p'); g.enableVertexAttribArray(loc); g.vertexAttribPointer(loc, 2, g.FLOAT, false, 0, 0);
+          g.bindTexture(g.TEXTURE_2D, g.createTexture());
+          g.texImage2D(g.TEXTURE_2D, 0, g.RGB, g.RGB, g.UNSIGNED_BYTE, img);
+          g.generateMipmap(g.TEXTURE_2D);
+          g.texParameteri(g.TEXTURE_2D, g.TEXTURE_MIN_FILTER, g.LINEAR_MIPMAP_LINEAR);
+          g.texParameteri(g.TEXTURE_2D, g.TEXTURE_WRAP_S, g.CLAMP_TO_EDGE);
+          g.texParameteri(g.TEXTURE_2D, g.TEXTURE_WRAP_T, g.CLAMP_TO_EDGE);
+          uT = g.getUniformLocation(pr, 't'); uA = g.getUniformLocation(pr, 'a');
+          return g;
+        } catch(e){ return null; }
+      }
+      function frame(now){
+        var dt = Math.min(0.05, (now - last) / 1000); last = now;
+        amp += (want - amp) * Math.min(1, dt * 3);
+        if(!want && amp < 0.004){ amp = 0; raf = 0; cv.style.opacity = 0; return; }
+        gl.uniform1f(uT, (now - t0) / 1000); gl.uniform1f(uA, amp);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+        cv.style.opacity = Math.min(1, amp * 5);
+        raf = requestAnimationFrame(frame);
+      }
+      function start(){
+        want = 1; leaving = false; card.classList.add('live');
+        if(gl === undefined && img.complete && img.naturalWidth) gl = init();
+        if(!gl || raf) return;
+        var w = Math.round(shot.clientWidth * Math.min(2, window.devicePixelRatio || 1));
+        if(cv.width !== w){ cv.width = cv.height = w; gl.viewport(0, 0, w, w); }
+        last = performance.now(); if(!amp) t0 = last;
+        raf = requestAnimationFrame(frame);
+      }
+      function stop(){ want = 0; leaving = true; }
+      // the birds finish the lap they are on, so they land back where the photo has them
+      flock.addEventListener('animationiteration', function(e){
+        if(e.target !== flock) return;
+        if(once){ once = false; stop(); }
+        if(leaving){ leaving = false; card.classList.remove('live'); }
+      });
+      art.addEventListener('mouseenter', start);
+      art.addEventListener('mouseleave', stop);
+      // phones have no hover: play one lap when the print scrolls into view
+      if(window.matchMedia('(hover: none)').matches && 'IntersectionObserver' in window){
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(en){ if(en.isIntersecting){ once = true; start(); io.disconnect(); } });
+        }, {threshold: 0.7});
+        io.observe(card);
+      }
+    })();
+document.querySelectorAll('model-viewer').forEach(function(mv){
       mv.addEventListener('dblclick', function(e){ e.preventDefault(); e.stopPropagation(); }, true);
     });
     (function(){
