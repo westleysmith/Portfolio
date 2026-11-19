@@ -206,8 +206,8 @@
   @keyframes rug-cloth { 0% { opacity: 0; } 6%, 88% { opacity: 1; } 100% { opacity: 0; } }
   @keyframes rug-pen {
     0%, 6% { opacity: 1; stroke-dashoffset: 1; }
-    26%, 50% { opacity: 1; stroke-dashoffset: 0; }
-    56%, 100% { opacity: 0; stroke-dashoffset: 0; }
+    26%, 86% { opacity: 1; stroke-dashoffset: 0; }
+    92%, 100% { opacity: 0; stroke-dashoffset: 0; }
   }
   @keyframes rug-base {
     0%, 27% { stroke-dashoffset: 1; stroke-width: 30; }
@@ -530,9 +530,9 @@
             <g transform="translate(-81 -50)">
             <!-- 2. the design traced in marker -->
             <g class="pens"><use href="#rug-sil" class="pen"/><use href="#rug-band" class="pen"/><use href="#rug-sand" class="pen"/></g>
-            <!-- 3. the rug itself: real photo pixels, revealed one yarn color at a time -->
+            <!-- 3. the rug itself: real photo pixels, one yarn color at a time (light green, dark green, sand) -->
             <g class="rug">
-              <image href="projects/rug/art-green.webp" x="0" y="0" width="803" height="900" mask="url(#rug-m-base)"/>
+              <image href="projects/rug/art-lightgreen.webp" x="0" y="0" width="803" height="900" mask="url(#rug-m-base)"/>
               <image href="projects/rug/art-band.webp" x="0" y="0" width="803" height="900" mask="url(#rug-m-band)"/>
               <image href="projects/rug/art-sand.webp" x="0" y="0" width="803" height="900" mask="url(#rug-m-sand)"/>
             </g>
