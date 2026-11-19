@@ -262,6 +262,7 @@
   .whoop .fin { fill: none; stroke: #45494c; stroke-width: 1.6; stroke-linecap: round; }
   .whoop .lens { fill: #2b2f33; stroke: #777c81; stroke-width: 1.5; }
   .whoop .glint { fill: #4f7896; }
+  .whoop .collar { fill: none; stroke: #45494c; stroke-width: 1.2; stroke-linecap: round; }
   .whoop .screw { fill: #9aa0a6; }
   .whoop .nut { fill: #c9ccd0; stroke: #1c1d1a; stroke-width: 1; }
   .whoop .blades path { fill: #5d6368; }
@@ -513,8 +514,11 @@
             <rect class="strap" x="254" y="174" width="52" height="10" rx="2"/>
             <rect class="ink" x="264" y="120" width="32" height="46" rx="5"/>
             <path class="fin" d="M269,130 H291 M269,138 H291 M269,146 H291 M269,154 H291"/>
-            <rect class="ink" x="266" y="82" width="28" height="24" rx="7"/>
-            <circle class="lens" cx="280" cy="92" r="8"/><circle class="glint" cx="280" cy="92" r="3.2"/>
+            <!-- camera: tipped forward instead of staring straight up, so from above the lens is an oval at the nose -->
+            <rect class="ink" x="266" y="83" width="28" height="23" rx="7"/>
+            <path class="ink" d="M270.5,92 V84 Q280,78 289.5,84 V92 Z"/>
+            <path class="collar" d="M271.5,89.8 Q280,94.6 288.5,89.8"/>
+            <ellipse class="lens" cx="280" cy="84.2" rx="8.6" ry="5.3"/><ellipse class="glint" cx="280" cy="83.5" rx="3.6" ry="2.1"/>
             </g>
           </g>
           </svg>
